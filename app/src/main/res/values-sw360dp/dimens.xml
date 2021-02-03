@@ -1,0 +1,401 @@
+<resources>
+  <dimen name="text_1">
+    1.0sp
+  </dimen>
+  <dimen name="text_2">
+    2.0sp
+  </dimen>
+  <dimen name="text_3">
+    3.0sp
+  </dimen>
+  <dimen name="text_4">
+    4.0sp
+  </dimen>
+  <dimen name="text_5">
+    5.0sp
+  </dimen>
+  <dimen name="text_6">
+    6.0sp
+  </dimen>
+  <dimen name="text_7">
+    7.0sp
+  </dimen>
+  <dimen name="text_8">
+    8.0sp
+  </dimen>
+  <dimen name="text_9">
+    9.0sp
+  </dimen>
+  <dimen name="text_10">
+    10.0sp
+  </dimen>
+  <dimen name="text_11">
+    11.0sp
+  </dimen>
+  <dimen name="text_12">
+    12.0sp
+  </dimen>
+  <dimen name="text_13">
+    13.0sp
+  </dimen>
+  <dimen name="text_14">
+    14.0sp
+  </dimen>
+  <dimen name="text_15">
+    15.0sp
+  </dimen>
+  <dimen name="text_16">
+    16.0sp
+  </dimen>
+  <dimen name="text_17">
+    17.0sp
+  </dimen>
+  <dimen name="text_18">
+    18.0sp
+  </dimen>
+  <dimen name="text_19">
+    19.0sp
+  </dimen>
+  <dimen name="text_20">
+    20.0sp
+  </dimen>
+  <dimen name="text_21">
+    21.0sp
+  </dimen>
+  <dimen name="text_22">
+    22.0sp
+  </dimen>
+  <dimen name="text_23">
+    23.0sp
+  </dimen>
+  <dimen name="text_24">
+    24.0sp
+  </dimen>
+  <dimen name="text_25">
+    25.0sp
+  </dimen>
+  <dimen name="text_26">
+    26.0sp
+  </dimen>
+  <dimen name="text_27">
+    27.0sp
+  </dimen>
+  <dimen name="text_28">
+    28.0sp
+  </dimen>
+  <dimen name="text_29">
+    29.0sp
+  </dimen>
+  <dimen name="text_30">
+    30.0sp
+  </dimen>
+  <dimen name="text_31">
+    31.0sp
+  </dimen>
+  <dimen name="text_32">
+    32.0sp
+  </dimen>
+  <dimen name="space_0">
+    0.0dp
+  </dimen>
+  <dimen name="space_1">
+    1.0dp
+  </dimen>
+  <dimen name="space_2">
+    2.0dp
+  </dimen>
+  <dimen name="space_3">
+    3.0dp
+  </dimen>
+  <dimen name="space_4">
+    4.0dp
+  </dimen>
+  <dimen name="space_5">
+    5.0dp
+  </dimen>
+  <dimen name="space_6">
+    6.0dp
+  </dimen>
+  <dimen name="space_7">
+    7.0dp
+  </dimen>
+  <dimen name="space_8">
+    8.0dp
+  </dimen>
+  <dimen name="space_9">
+    9.0dp
+  </dimen>
+  <dimen name="space_10">
+    10.0dp
+  </dimen>
+  <dimen name="space_11">
+    11.0dp
+  </dimen>
+  <dimen name="space_12">
+    12.0dp
+  </dimen>
+  <dimen name="space_13">
+    13.0dp
+  </dimen>
+  <dimen name="space_14">
+    14.0dp
+  </dimen>
+  <dimen name="space_15">
+    15.0dp
+  </dimen>
+  <dimen name="space_16">
+    16.0dp
+  </dimen>
+  <dimen name="space_17">
+    17.0dp
+  </dimen>
+  <dimen name="space_18">
+    18.0dp
+  </dimen>
+  <dimen name="space_19">
+    19.0dp
+  </dimen>
+  <dimen name="space_20">
+    20.0dp
+  </dimen>
+  <dimen name="space_21">
+    21.0dp
+  </dimen>
+  <dimen name="space_22">
+    22.0dp
+  </dimen>
+  <dimen name="space_23">
+    23.0dp
+  </dimen>
+  <dimen name="space_24">
+    24.0dp
+  </dimen>
+  <dimen name="space_25">
+    25.0dp
+  </dimen>
+  <dimen name="space_26">
+    26.0dp
+  </dimen>
+  <dimen name="space_27">
+    27.0dp
+  </dimen>
+  <dimen name="space_28">
+    28.0dp
+  </dimen>
+  <dimen name="space_29">
+    29.0dp
+  </dimen>
+  <dimen name="space_30">
+    30.0dp
+  </dimen>
+  <dimen name="space_31">
+    31.0dp
+  </dimen>
+  <dimen name="space_32">
+    32.0dp
+  </dimen>
+  <dimen name="space_33">
+    33.0dp
+  </dimen>
+  <dimen name="space_34">
+    34.0dp
+  </dimen>
+  <dimen name="space_35">
+    35.0dp
+  </dimen>
+  <dimen name="space_36">
+    36.0dp
+  </dimen>
+  <dimen name="space_37">
+    37.0dp
+  </dimen>
+  <dimen name="space_38">
+    38.0dp
+  </dimen>
+  <dimen name="space_39">
+    39.0dp
+  </dimen>
+  <dimen name="space_40">
+    40.0dp
+  </dimen>
+  <dimen name="space_41">
+    41.0dp
+  </dimen>
+  <dimen name="space_42">
+    42.0dp
+  </dimen>
+  <dimen name="space_43">
+    43.0dp
+  </dimen>
+  <dimen name="space_44">
+    44.0dp
+  </dimen>
+  <dimen name="space_45">
+    45.0dp
+  </dimen>
+  <dimen name="space_46">
+    46.0dp
+  </dimen>
+  <dimen name="space_47">
+    47.0dp
+  </dimen>
+  <dimen name="space_48">
+    48.0dp
+  </dimen>
+  <dimen name="space_49">
+    49.0dp
+  </dimen>
+  <dimen name="space_50">
+    50.0dp
+  </dimen>
+  <dimen name="space_51">
+    51.0dp
+  </dimen>
+  <dimen name="space_52">
+    52.0dp
+  </dimen>
+  <dimen name="space_53">
+    53.0dp
+  </dimen>
+  <dimen name="space_54">
+    54.0dp
+  </dimen>
+  <dimen name="space_55">
+    55.0dp
+  </dimen>
+  <dimen name="space_56">
+    56.0dp
+  </dimen>
+  <dimen name="space_57">
+    57.0dp
+  </dimen>
+  <dimen name="space_58">
+    58.0dp
+  </dimen>
+  <dimen name="space_59">
+    59.0dp
+  </dimen>
+  <dimen name="space_60">
+    60.0dp
+  </dimen>
+  <dimen name="space_61">
+    61.0dp
+  </dimen>
+  <dimen name="space_62">
+    62.0dp
+  </dimen>
+  <dimen name="space_63">
+    63.0dp
+  </dimen>
+  <dimen name="space_64">
+    64.0dp
+  </dimen>
+  <dimen name="space_65">
+    65.0dp
+  </dimen>
+  <dimen name="space_66">
+    66.0dp
+  </dimen>
+  <dimen name="space_67">
+    67.0dp
+  </dimen>
+  <dimen name="space_68">
+    68.0dp
+  </dimen>
+  <dimen name="space_69">
+    69.0dp
+  </dimen>
+  <dimen name="space_70">
+    70.0dp
+  </dimen>
+  <dimen name="space_71">
+    71.0dp
+  </dimen>
+  <dimen name="space_72">
+    72.0dp
+  </dimen>
+  <dimen name="space_73">
+    73.0dp
+  </dimen>
+  <dimen name="space_74">
+    74.0dp
+  </dimen>
+  <dimen name="space_75">
+    75.0dp
+  </dimen>
+  <dimen name="space_76">
+    76.0dp
+  </dimen>
+  <dimen name="space_77">
+    77.0dp
+  </dimen>
+  <dimen name="space_78">
+    78.0dp
+  </dimen>
+  <dimen name="space_79">
+    79.0dp
+  </dimen>
+  <dimen name="space_80">
+    80.0dp
+  </dimen>
+  <dimen name="space_81">
+    81.0dp
+  </dimen>
+  <dimen name="space_82">
+    82.0dp
+  </dimen>
+  <dimen name="space_83">
+    83.0dp
+  </dimen>
+  <dimen name="space_84">
+    84.0dp
+  </dimen>
+  <dimen name="space_85">
+    85.0dp
+  </dimen>
+  <dimen name="space_86">
+    86.0dp
+  </dimen>
+  <dimen name="space_87">
+    87.0dp
+  </dimen>
+  <dimen name="space_88">
+    88.0dp
+  </dimen>
+  <dimen name="space_89">
+    89.0dp
+  </dimen>
+  <dimen name="space_90">
+    90.0dp
+  </dimen>
+  <dimen name="space_91">
+    91.0dp
+  </dimen>
+  <dimen name="space_92">
+    92.0dp
+  </dimen>
+  <dimen name="space_93">
+    93.0dp
+  </dimen>
+  <dimen name="space_94">
+    94.0dp
+  </dimen>
+  <dimen name="space_95">
+    95.0dp
+  </dimen>
+  <dimen name="space_96">
+    96.0dp
+  </dimen>
+  <dimen name="space_97">
+    97.0dp
+  </dimen>
+  <dimen name="space_98">
+    98.0dp
+  </dimen>
+  <dimen name="space_99">
+    99.0dp
+  </dimen>
+  <dimen name="space_100">
+    100.0dp
+  </dimen>
+</resources>
