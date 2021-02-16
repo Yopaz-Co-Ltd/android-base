@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         activityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+        manageActionBarFollowFragment()
 
         openScreen(LoginFragment.TAG)
     }
@@ -51,12 +52,15 @@ class MainActivity : AppCompatActivity() {
                     val currentFragmentTag = currentFragment::class.java.simpleName
                     if (fragmentTag == currentFragmentTag) return
                     hide(currentFragment)
-                    fragment?.let {
-                        add(R.id.container, it, it::class.java.simpleName)
-                            .addToBackStack(null)
-                            .commit()
-                        return
-                    }
+                }
+                fragment?.let {
+                    add(R.id.container, it, it::class.java.simpleName)
+                        .addToBackStack(null)
+                        .commit()
+                    setPrimaryNavigationFragment(it)
+                        .addToBackStack(null)
+                        .commit()
+                    return
                 }
             }
 
@@ -83,6 +87,19 @@ class MainActivity : AppCompatActivity() {
                 LoginFragment()
             }
             else -> null
+        }
+    }
+
+    private fun manageActionBarFollowFragment() {
+        supportFragmentManager.addOnBackStackChangedListener {
+            when (supportFragmentManager.primaryNavigationFragment) {
+                is LoginFragment -> {
+                    supportActionBar?.hide()
+                }
+                else -> {
+                    supportActionBar?.show()
+                }
+            }
         }
     }
 }
