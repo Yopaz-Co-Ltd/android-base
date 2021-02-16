@@ -14,7 +14,8 @@ buildscript {
                 rxandroid: '2.1.1',
                 moshi    : '1.8.0',
                 room     : '2.2.5',
-                loading  : '1.4.0'
+                loading  : '1.4.0',
+                glide    : '4.12.0'
         ]
     }
     repositories {
