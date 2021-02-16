@@ -24,6 +24,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
     }
 
     override fun handleObservables() {
+        super.handleObservables()
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
             (viewDataBinding as FragmentLoginBinding?)?.loginResponse = it
             LoadingDialog.dismiss()

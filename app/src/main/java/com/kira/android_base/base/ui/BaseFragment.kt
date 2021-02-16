@@ -41,5 +41,5 @@ abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
 
     abstract fun initViews()
 
-    abstract fun handleObservables()
+    open fun handleObservables() {}
 }
