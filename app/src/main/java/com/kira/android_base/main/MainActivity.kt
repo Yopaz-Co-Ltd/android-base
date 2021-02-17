@@ -19,6 +19,7 @@ import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.ActivityMainBinding
 import com.kira.android_base.main.fragments.login.LoginFragment
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private var activityMainBinding: ActivityMainBinding? = null
@@ -136,8 +137,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun hideStatusBar() {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+    fun hideStatusBar(isFitsSystemWindows: Boolean = true) {
+        WindowCompat.setDecorFitsSystemWindows(window, isFitsSystemWindows)
         WindowInsetsControllerCompat(
             window,
             activityMainBinding?.root ?: return
@@ -148,8 +149,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showStatusBar() {
-        WindowCompat.setDecorFitsSystemWindows(window, true)
+    fun showStatusBar(isFitsSystemWindows: Boolean = false) {
+        WindowCompat.setDecorFitsSystemWindows(window, isFitsSystemWindows)
         WindowInsetsControllerCompat(
             window,
             activityMainBinding?.root ?: return
