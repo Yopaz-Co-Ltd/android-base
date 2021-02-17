@@ -45,6 +45,14 @@ class MainActivity : AppCompatActivity() {
         return isConsumed
     }
 
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun initViews() {
         activityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
