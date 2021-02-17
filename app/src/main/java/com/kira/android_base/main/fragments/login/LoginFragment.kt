@@ -21,6 +21,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
 
     override fun initViews() {
         (viewDataBinding as FragmentLoginBinding?)?.onClickListener = this
+        mainActivity?.makeStatusBarTransparent()
+        mainActivity?.marginTopAfterFullScreen(viewDataBinding?.root)
     }
 
     override fun handleObservables() {

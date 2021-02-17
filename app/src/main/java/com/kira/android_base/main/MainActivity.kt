@@ -1,10 +1,14 @@
 package com.kira.android_base.main
 
+import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.kira.android_base.R
@@ -100,6 +104,32 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.show()
                 }
             }
+        }
+    }
+
+    fun makeStatusBarTransparent(isLightStatusBar: Boolean = true) {
+        window?.apply {
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            decorView.systemUiVisibility =
+                if (isLightStatusBar) View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                else View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            statusBarColor = Color.TRANSPARENT
+        }
+    }
+
+    fun marginTopAfterFullScreen(view: View?) {
+        ViewCompat.setOnApplyWindowInsetsListener(
+            activityMainBinding?.container ?: return
+        ) { _, insets ->
+            view?.apply {
+                setPadding(
+                    paddingLeft,
+                    paddingTop + insets.systemWindowInsetTop,
+                    paddingRight,
+                    paddingBottom
+                )
+            }
+            insets.consumeSystemWindowInsets()
         }
     }
 }
