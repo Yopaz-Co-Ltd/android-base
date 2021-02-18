@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.ActivityMainBinding
@@ -164,4 +165,18 @@ class MainActivity : AppCompatActivity() {
             activityMainBinding?.root ?: return
         ).show(WindowInsetsCompat.Type.statusBars())
     }
+
+    fun addOneTimeBackStackListener(onBackStackChange: () -> Unit) {
+        supportFragmentManager.apply {
+            addOnBackStackChangedListener(object :
+                FragmentManager.OnBackStackChangedListener {
+                override fun onBackStackChanged() {
+                    onBackStackChange()
+                    removeOnBackStackChangedListener(this)
+                }
+            })
+        }
+    }
+
+    fun popBackStack() = supportFragmentManager.popBackStack()
 }
