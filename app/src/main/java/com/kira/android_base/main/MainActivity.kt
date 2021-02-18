@@ -62,8 +62,19 @@ class MainActivity : AppCompatActivity() {
         openScreen(LoginFragment.TAG)
     }
 
-    fun openScreen(fragmentTag: String, fragment: BaseFragment? = null) {
+    fun openScreen(
+        fragmentTag: String,
+        fragment: BaseFragment? = null,
+        isAddToBackStack: Boolean = true,
+        backStackName: String? = null
+    ) {
         val transaction = supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.enter_from_right,
+                R.anim.exit_to_left,
+                R.anim.enter_from_left,
+                R.anim.exit_to_right
+            )
             .apply {
                 supportFragmentManager.primaryNavigationFragment?.let { currentFragment ->
                     val currentFragmentTag = currentFragment::class.java.simpleName
@@ -72,10 +83,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 fragment?.let {
                     add(R.id.container, it, it::class.java.simpleName)
-                        .addToBackStack(null)
-                        .commit()
-                    setPrimaryNavigationFragment(it)
-                        .addToBackStack(null)
+                        .setPrimaryNavigationFragment(it)
+                        .apply {
+                            if (isAddToBackStack) addToBackStack(backStackName)
+                        }
                         .commit()
                     return
                 }
@@ -94,7 +105,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         transaction.setPrimaryNavigationFragment(destinationFragment)
-            .addToBackStack(null)
+            .apply {
+                if (isAddToBackStack) addToBackStack(backStackName)
+            }
             .commit()
     }
 
