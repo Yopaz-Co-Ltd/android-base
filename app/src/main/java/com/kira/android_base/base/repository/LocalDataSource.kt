@@ -6,11 +6,13 @@ import com.kira.android_base.base.database.daos.BaseDao
 import com.kira.android_base.base.database.entities.User
 import com.kira.android_base.base.datahandling.Result
 import com.kira.android_base.base.reactivex.AppReactivexSchedulers
+import com.kira.android_base.base.sharedpreference.SharedPreferences
 import com.kira.android_base.base.supports.extensions.TAG
 import io.reactivex.Observable
 
 class LocalDataSource(
     private val appDatabase: AppDatabase,
+    val sharedPreferences: SharedPreferences,
     private val appReactivexSchedulers: AppReactivexSchedulers
 ) {
 
@@ -35,6 +37,11 @@ class LocalDataSource(
 
     private fun <T> delete(dao: BaseDao<T>, vararg t: T): Observable<Result<Int>> =
         runTask { dao.delete(*t) }
+
+    fun saveSharedPreferencesData(key: String, value: Any) = sharedPreferences.saveData(key, value)
+
+    inline fun <reified T> getSharedPreferencesData(key: String, defaultValue: T? = null) =
+        sharedPreferences.getData<T>(key, defaultValue)
 
     fun insertUser(user: User) = insert(appDatabase.userDao(), user)
 }
