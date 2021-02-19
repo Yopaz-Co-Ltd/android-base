@@ -123,6 +123,10 @@ dependencies {
     //Loading Indicator https://github.com/ybq/Android-SpinKit
     implementation "com.github.ybq:Android-SpinKit:$rootProject.ext.lib_versions.loading"
 
+    //Glide
     implementation "com.github.bumptech.glide:glide:$rootProject.ext.lib_versions.glide"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.lib_versions.glide"
+
+    //Android Browser
+    implementation "androidx.browser:browser:$rootProject.ext.lib_versions.browser"
 }
