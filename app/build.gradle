@@ -129,4 +129,7 @@ dependencies {
 
     //Android Browser
     implementation "androidx.browser:browser:$rootProject.ext.lib_versions.browser"
+
+    //Swipe Refresh Layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.ext.lib_versions.swipe_refresh_layout"
 }

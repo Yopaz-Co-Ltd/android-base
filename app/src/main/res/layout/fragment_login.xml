@@ -26,11 +26,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@{loginResponse.name}"
             android:textColor="@android:color/black"
             app:layout_constraintTop_toBottomOf="@id/b_login" />
+
+        <com.kira.android_base.base.ui.widgets.recyclerview.BaseRecyclerView
+            android:id="@+id/brv_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

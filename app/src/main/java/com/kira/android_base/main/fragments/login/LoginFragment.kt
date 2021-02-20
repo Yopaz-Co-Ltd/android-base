@@ -20,7 +20,17 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
     private val viewModel: LoginViewModel by currentScope.viewModel(this)
 
     override fun initViews() {
-        (viewDataBinding as FragmentLoginBinding?)?.onClickListener = this
+        (viewDataBinding as FragmentLoginBinding?)?.apply {
+            onClickListener = this@LoginFragment
+            brvLogin.apply {
+                setAdapter(LoginRecyclerViewAdapter().apply {
+                    list.addAll((1..10).map { "$it" })
+                })
+                setOnRefreshListener {
+                    Log.d(TAG, "initViews: setOnRefreshListener")
+                }
+            }
+        }
         mainActivity?.hideStatusBar()
     }
 
