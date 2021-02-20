@@ -1,6 +1,7 @@
 package com.kira.android_base.base.ui
 
 import android.graphics.drawable.ColorDrawable
+import android.view.View
 import android.widget.ImageView
 import android.widget.NumberPicker
 import androidx.databinding.BindingAdapter
@@ -39,4 +40,9 @@ fun setUpNumberPicker(
             }
         }
     }
+}
+
+@BindingAdapter("enable")
+fun setEnable(view: View, enable: Boolean = true) {
+    view.isEnabled = enable
 }

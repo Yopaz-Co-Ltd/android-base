@@ -32,6 +32,7 @@ class BaseRecyclerView : FrameLayout {
         addView(binding.root)
         binding.rvBaseRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.srlBaseRecyclerView.isEnabled = false
     }
 
     fun setLayoutManager(layoutManager: RecyclerView.LayoutManager) {
