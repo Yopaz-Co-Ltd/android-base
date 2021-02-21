@@ -11,6 +11,7 @@ abstract class BaseRecyclerViewAdapter<T>(
 ) : RecyclerView.Adapter<BaseRecyclerViewAdapter.ViewHolder>() {
 
     var list = mutableListOf<T>()
+    var listener: Listener<T>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -29,4 +30,9 @@ abstract class BaseRecyclerViewAdapter<T>(
 
     class ViewHolder(val viewDataBinding: ViewDataBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root)
+
+    interface Listener<T> {
+        fun onItemClick(position: Int, t: T) {}
+        fun onItemLongClick(position: Int, t: T) {}
+    }
 }
