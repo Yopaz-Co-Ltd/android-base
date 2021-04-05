@@ -192,4 +192,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun popBackStack() = supportFragmentManager.popBackStack()
+
+    fun setTransparentStatusBar(isTransparent: Boolean) {
+        if (isTransparent) {
+            window?.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.statusBarColor = Color.TRANSPARENT
+        } else {
+            window?.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.statusBarColor = Color.WHITE
+        }
+    }
 }
