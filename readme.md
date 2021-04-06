@@ -11,4 +11,9 @@
         https://medium.com/default-to-open/smooth-loading-animations-in-android-11dcae4ecfd0
     - Được khuyên lựa chọn 1 data source làm single truth source, thường là local database luôn, còn các nguồn
         khác đều coi thành nguồn phụ
+
 2. Yêu cầu đọc: https://developer.android.com/jetpack/guide
+
+3. Best libs
+ - Carousel View: https://github.com/yarolegovich/DiscreteScrollView
+ - Loading Indicator: https://github.com/ybq/Android-SpinKit
