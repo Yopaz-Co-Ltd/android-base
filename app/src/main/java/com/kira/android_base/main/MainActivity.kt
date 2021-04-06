@@ -113,9 +113,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun generateNewFragmentWithTag(fragmentTag: String): Fragment? {
         return when (fragmentTag) {
-            LoginFragment.TAG -> {
-                LoginFragment()
-            }
+            LoginFragment.TAG -> LoginFragment()
             else -> null
         }
     }

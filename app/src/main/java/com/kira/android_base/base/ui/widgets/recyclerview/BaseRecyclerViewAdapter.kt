@@ -24,6 +24,14 @@ abstract class BaseRecyclerViewAdapter<T>(
         )
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.setOnClickListener { listener?.onItemClick(position, list[position]) }
+        holder.itemView.setOnLongClickListener {
+            listener?.onItemClick(position, list[position])
+            false
+        }
+    }
+
     override fun getItemCount(): Int {
         return list.size
     }
