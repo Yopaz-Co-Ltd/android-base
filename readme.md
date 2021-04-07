@@ -17,3 +17,4 @@
 3. Best libs
  - Carousel View: https://github.com/yarolegovich/DiscreteScrollView
  - Loading Indicator: https://github.com/ybq/Android-SpinKit
+ - Skeleton View: https://github.com/ethanhua/Skeleton (to replace loading)
