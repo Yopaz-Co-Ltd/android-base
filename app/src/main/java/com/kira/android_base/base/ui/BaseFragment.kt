@@ -32,14 +32,26 @@ abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
         }
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+
+        if (!hidden) onViewCreatedOrShow()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        onViewCreatedOrShow()
         handleObservables()
     }
 
     abstract fun initViews()
 
     open fun handleObservables() {}
+
+    /*
+    * this function is call onViewCreated and onHiddenChanged (hidden = false)
+    * */
+    open fun onViewCreatedOrShow() {}
 }

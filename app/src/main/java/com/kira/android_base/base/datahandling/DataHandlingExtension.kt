@@ -70,3 +70,24 @@ private fun parseErrorMessageFromServer(
         defaultMessage
     )
 }
+
+class ResultObserverWithFullCallback<T>(
+    private val callback: (Result<T>) -> Unit
+) : ResultObserver<T>() {
+    override fun onSuccess(success: T) {
+        callback(success.asResult())
+    }
+
+    override fun onError(error: Error) {
+        super.onError(error)
+        callback(error.asResult())
+    }
+}
+
+class ResultObserverWithOnlySuccessCallback<T>(
+    private val callback: (Result<T>) -> Unit
+) : ResultObserver<T>() {
+    override fun onSuccess(success: T) {
+        callback(success.asResult())
+    }
+}

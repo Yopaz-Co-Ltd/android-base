@@ -9,6 +9,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_base_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:splitMotionEvents="false" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

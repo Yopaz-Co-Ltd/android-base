@@ -14,7 +14,7 @@ class LoadingDialog {
     companion object {
         private var loadingDialog: LoadingDialog? = null
         fun show(
-            context: Context,
+            context: Context?,
             minTime: Long? = null,
             loadingTypeSprite: Sprite? = null,
             loadingColor: Int? = null
@@ -35,7 +35,7 @@ class LoadingDialog {
     private var markedTime = 0L
 
     fun show(
-        context: Context,
+        context: Context?,
         minTime: Long? = null,
         loadingTypeSprite: Sprite? = null,
         loadingColor: Int? = null
@@ -44,13 +44,15 @@ class LoadingDialog {
             dialogLoadingBinding = DialogLoadingBinding.inflate(LayoutInflater.from(context))
         }
         if (dialog == null) {
-            dialog = Dialog(context).apply {
-                requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialogLoadingBinding?.let {
-                    setContentView(it.root)
+            dialog = context?.let {
+                Dialog(it).apply {
+                    requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    dialogLoadingBinding?.let {
+                        setContentView(it.root)
+                    }
+                    window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    setCancelable(false)
                 }
-                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                setCancelable(false)
             }
         }
         loadingTypeSprite?.let {

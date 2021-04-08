@@ -11,7 +11,7 @@ abstract class ResultObserver<T> : DisposableObserver<Result<T>>() {
         }
     }
 
-    final override fun onError(e: Throwable) {
+    open override fun onError(e: Throwable) {
         onError(convertError(e))
     }
 

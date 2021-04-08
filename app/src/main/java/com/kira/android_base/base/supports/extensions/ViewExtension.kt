@@ -27,6 +27,14 @@ fun View.show(isShow: Boolean) {
     if (isShow) visible() else gone()
 }
 
+fun View.setHeight(newHeight: Int) {
+    (layoutParams as ViewGroup.LayoutParams).apply { height = newHeight }
+}
+
+fun View.setWidth(newWidth: Int) {
+    (layoutParams as ViewGroup.LayoutParams).apply { width = newWidth }
+}
+
 fun View.setMargin(
     left: Int = marginLeft,
     top: Int = marginTop,
@@ -36,6 +44,15 @@ fun View.setMargin(
     val marginLayoutParams = this.layoutParams as ViewGroup.MarginLayoutParams
     marginLayoutParams.setMargins(left, top, right, bottom)
     this.layoutParams = marginLayoutParams
+}
+
+fun View.setOnlyPadding(
+    left: Int = paddingStart,
+    top: Int = paddingTop,
+    right: Int = paddingEnd,
+    bottom: Int = paddingBottom
+) {
+    setPadding(left, top, right, bottom)
 }
 
 fun View.goneWithTranslationAnimation(

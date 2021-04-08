@@ -16,7 +16,7 @@ class LocalDataSource(
     private val appReactivexSchedulers: AppReactivexSchedulers
 ) {
 
-    private fun <T> runTask(handle: () -> T): Observable<Result<T>> {
+    fun <T> runTask(handle: () -> T): Observable<Result<T>> {
         return Observable.create<Result<T>> { emitter ->
             try {
                 emitter.onNext(Result(handle.invoke(), null))
@@ -38,10 +38,17 @@ class LocalDataSource(
     private fun <T> delete(dao: BaseDao<T>, vararg t: T): Observable<Result<Int>> =
         runTask { dao.delete(*t) }
 
-    fun saveSharedPreferencesData(key: String, value: Any) = sharedPreferences.saveData(key, value)
+    fun saveSharedPreferencesData(key: String, value: Any) = runTask {
+        sharedPreferences.saveData(key, value)
+    }
 
-    inline fun <reified T> getSharedPreferencesData(key: String, defaultValue: T? = null) =
-        sharedPreferences.getData<T>(key, defaultValue)
+    inline fun <reified T> getSharedPreferencesData(
+        key: String,
+        defaultValue: T? = null
+    ): Observable<Result<T?>> =
+        runTask {
+            sharedPreferences.getData<T>(key, defaultValue) as T?
+        }
 
     fun insertUser(user: User) = insert(appDatabase.userDao(), user)
 }

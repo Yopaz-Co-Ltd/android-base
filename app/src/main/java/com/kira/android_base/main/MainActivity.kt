@@ -57,6 +57,9 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         activityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        makeStatusBarTransparent(false)
+
         manageActionBarFollowFragment()
 
         openScreen(LoginFragment.TAG)
@@ -131,13 +134,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun makeStatusBarTransparent(isLightStatusBar: Boolean = true) {
+    fun makeStatusBarTransparent(
+        isLightStatusBar: Boolean = true,
+        statusBarColor: Int = Color.TRANSPARENT
+    ) {
         window?.apply {
             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             decorView.systemUiVisibility =
                 if (isLightStatusBar) View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 else View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            statusBarColor = Color.TRANSPARENT
+            this.statusBarColor = statusBarColor
         }
     }
 
@@ -190,14 +196,4 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun popBackStack() = supportFragmentManager.popBackStack()
-
-    fun setTransparentStatusBar(isTransparent: Boolean) {
-        if (isTransparent) {
-            window?.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            window.statusBarColor = Color.TRANSPARENT
-        } else {
-            window?.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            window.statusBarColor = Color.WHITE
-        }
-    }
 }
