@@ -8,6 +8,8 @@ import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.base.ui.widgets.ErrorDialog
 import com.kira.android_base.base.ui.widgets.LoadingDialog
 import com.kira.android_base.databinding.FragmentLoginBinding
+import com.kira.android_base.main.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListener {
@@ -17,6 +19,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
     }
 
     private val viewModel: LoginViewModel by viewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
 
     override fun initViews() {
         (viewDataBinding as FragmentLoginBinding?)?.apply {

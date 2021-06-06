@@ -19,11 +19,13 @@ import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.ActivityMainBinding
 import com.kira.android_base.main.fragments.login.LoginFragment
 import org.koin.androidx.scope.ScopeActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @Suppress("DEPRECATION")
 class MainActivity : ScopeActivity() {
 
     private var activityMainBinding: ActivityMainBinding? = null
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
