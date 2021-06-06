@@ -8,8 +8,7 @@ import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.base.ui.widgets.ErrorDialog
 import com.kira.android_base.base.ui.widgets.LoadingDialog
 import com.kira.android_base.databinding.FragmentLoginBinding
-import org.koin.android.scope.currentScope
-import org.koin.android.viewmodel.scope.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListener {
 
@@ -17,7 +16,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
         val TAG: String = this::class.java.simpleName
     }
 
-    private val viewModel: LoginViewModel by currentScope.viewModel(this)
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun initViews() {
         (viewDataBinding as FragmentLoginBinding?)?.apply {

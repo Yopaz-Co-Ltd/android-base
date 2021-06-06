@@ -4,9 +4,9 @@ buildscript {
         kotlin_version = "1.5.31"
         lib_versions = [
                 multidex            : '2.0.1',
-                koin                : '2.1.6',
+                koin                : '3.0.2',
                 lifecycle           : '2.4.0',
-                chucker             : '2.0.4',
+                chucker             : '3.4.0',
                 okhttp3             : '4.9.1',
                 logging_okhttp3     : '4.4.0',
                 retrofit            : '2.9.0',
@@ -15,18 +15,18 @@ buildscript {
                 rxkotlin            : '2.4.0',
                 rxandroid           : '2.1.1',
                 moshi               : '1.12.0',
-                room                : '2.4.0-alpha03',
+                room                : '2.4.0-beta01',
                 room_compiler       : '2.2.5',
                 loading             : '1.4.0',
                 glide               : '4.12.0',
                 browser             : '1.3.0',
-                swipe_refresh_layout: '1.1.0'
+                swipe_refresh_layout: '1.1.0',
+                jdbc                : '3.34.0'
         ]
     }
     repositories {
         google()
         mavenCentral()
-        jcenter()
         maven { url 'https://jitpack.io' }
     }
     dependencies {
@@ -42,12 +42,11 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
         maven { url 'https://jitpack.io' }
     }
     configurations.all {
         resolutionStrategy {
-            force 'org.xerial:sqlite-jdbc:3.34.0'
+            force "org.xerial:sqlite-jdbc:$lib_versions.jdbc"
         }
     }
 }

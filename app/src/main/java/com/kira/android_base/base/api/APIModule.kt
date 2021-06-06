@@ -1,13 +1,14 @@
 package com.kira.android_base.base.api
 
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import com.kira.android_base.BuildConfig
 import com.kira.android_base.R
 import com.kira.android_base.base.database.AppDatabase
-import com.readystatesoftware.chuck.api.ChuckCollector
-import com.readystatesoftware.chuck.api.ChuckInterceptor
-import com.readystatesoftware.chuck.api.RetentionManager
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,7 +34,9 @@ val APIsModule = module {
     single { provideAPIs(get()) }
 }
 
-fun provideMoshi(): Moshi = Moshi.Builder().build()
+fun provideMoshi(): Moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
 
 fun provideCallAdapterFactory(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
 
@@ -58,12 +61,14 @@ fun provideOkHttp(
     appInterceptor: AppInterceptor,
     loggingInterceptor: HttpLoggingInterceptor
 ): OkHttpClient {
-    val collector = ChuckCollector(context)
-        .showNotification(true)
-        .retentionManager(RetentionManager(context, ChuckCollector.Period.FOREVER))
-
-    val chuckInterceptor = ChuckInterceptor(context, collector)
+    val collector =
+        ChuckerCollector(context, showNotification = true, RetentionManager.Period.FOREVER)
+    val chuckInterceptor = ChuckerInterceptor.Builder(context)
+        .collector(collector)
         .maxContentLength(CHUCK_MAX_CONTENT_LENGTH)
+        .redactHeaders(emptySet())
+        .alwaysReadResponseBody(false)
+        .build()
 
     return OkHttpClient.Builder()
         .connectTimeout(TIME_OUT, TimeUnit.SECONDS)

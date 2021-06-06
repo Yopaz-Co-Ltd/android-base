@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -19,9 +18,10 @@ import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.ActivityMainBinding
 import com.kira.android_base.main.fragments.login.LoginFragment
+import org.koin.androidx.scope.ScopeActivity
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
+class MainActivity : ScopeActivity() {
 
     private var activityMainBinding: ActivityMainBinding? = null
 

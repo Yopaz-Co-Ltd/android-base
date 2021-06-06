@@ -85,17 +85,17 @@ dependencies {
     implementation "androidx.multidex:multidex:$rootProject.ext.lib_versions.multidex"
 
     //Koin
-    implementation "org.koin:koin-android:$rootProject.ext.lib_versions.koin"
-    implementation "org.koin:koin-android-viewmodel:$rootProject.ext.lib_versions.koin"
-    implementation "org.koin:koin-android-scope:$rootProject.ext.lib_versions.koin"
+    implementation "io.insert-koin:koin-core:$rootProject.ext.lib_versions.koin"
+    implementation "io.insert-koin:koin-android:$rootProject.ext.lib_versions.koin"
+    implementation "io.insert-koin:koin-android-ext:$rootProject.ext.lib_versions.koin"
 
     //ViewModel + LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"
 
     //Chucker
-    debugImplementation "fr.o80.chucker:library-no-op:$rootProject.ext.lib_versions.chucker"
-    releaseImplementation "fr.o80.chucker:library-no-op:$rootProject.ext.lib_versions.chucker"
+    debugImplementation "com.github.chuckerteam.chucker:library:$rootProject.ext.lib_versions.chucker"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$rootProject.ext.lib_versions.chucker"
 
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:$rootProject.ext.lib_versions.okhttp3"

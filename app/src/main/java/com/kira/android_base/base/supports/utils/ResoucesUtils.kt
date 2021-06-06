@@ -1,7 +1,7 @@
 package com.kira.android_base.base.supports.utils
 
 import android.content.res.Resources
-import com.kira.mythnovel.R
+import com.kira.android_base.R
 
 fun Resources.getStatusBarHeight(): Int {
     try {
