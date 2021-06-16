@@ -1,6 +1,6 @@
 package com.kira.android_base.base.datahandling
 
-import com.squareup.moshi.Moshi
+import com.kira.android_base.base.api.provideMoshi
 import io.reactivex.Observable
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -56,8 +56,7 @@ private fun parseErrorMessageFromServer(
     defaultMessage: String
 ): Error {
     try {
-        Moshi.Builder().build()
-            .adapter(Error::class.java)
+        provideMoshi().adapter(Error::class.java)
             .fromJson(response)?.apply {
                 this.code = code
                 return this
@@ -71,23 +70,15 @@ private fun parseErrorMessageFromServer(
     )
 }
 
-class ResultObserverWithFullCallback<T>(
-    private val callback: (Result<T>) -> Unit
-) : ResultObserver<T>() {
-    override fun onSuccess(success: T) {
-        callback(success.asResult())
-    }
+class ResultObserverWithCallback<T>(private val callback: (Result<T>) -> Unit) :
+    ResultObserver<T>() {
 
-    override fun onError(error: Error) {
-        super.onError(error)
-        callback(error.asResult())
+    override fun onNext(result: Result<T>) {
+        super.onNext(result)
+        callback(result)
     }
 }
 
-class ResultObserverWithOnlySuccessCallback<T>(
-    private val callback: (Result<T>) -> Unit
-) : ResultObserver<T>() {
-    override fun onSuccess(success: T) {
-        callback(success.asResult())
-    }
-}
+fun <T> Observable<Result<T>>.subscribeCallback(callback: (Result<T>) -> Unit): ResultObserverWithCallback<T> =
+    subscribeWith(ResultObserverWithCallback(callback))
+

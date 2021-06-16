@@ -39,7 +39,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
     override fun handleObservables() {
         super.handleObservables()
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
-            (viewDataBinding as FragmentLoginBinding?)?.loginResponse = it
+            (viewDataBinding as FragmentLoginBinding?)?.user = it.data
             LoadingDialog.dismiss()
         }
 
@@ -51,7 +51,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
         viewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
             LoadingDialog.dismiss()
             context?.let {
-                ErrorDialog.show(it, error.message)
+                ErrorDialog.show(it, error.message ?: return@let)
             }
         }
     }

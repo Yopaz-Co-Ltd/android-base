@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="loginResponse"
-            type="com.kira.android_base.base.api.models.response.LoginResponse" />
+            name="user"
+            type="com.kira.android_base.base.database.entities.User" />
 
         <variable
             name="onClickListener"
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@{loginResponse.name}"
+            android:text="@{user.name}"
             android:textColor="@android:color/black"
             app:layout_constraintTop_toBottomOf="@id/b_login" />
 
@@ -41,5 +41,11 @@
             android:layout_height="@dimen/space_0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+        <com.kira.android_base.base.ui.widgets.ErrorPage
+            android:id="@+id/ep"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

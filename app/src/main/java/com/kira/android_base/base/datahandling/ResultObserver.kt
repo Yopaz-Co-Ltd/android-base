@@ -11,13 +11,13 @@ abstract class ResultObserver<T> : DisposableObserver<Result<T>>() {
         }
     }
 
-    open override fun onError(e: Throwable) {
+    override fun onError(e: Throwable) {
         onError(convertError(e))
     }
 
     final override fun onComplete() {}
 
-    abstract fun onSuccess(success: T)
+    fun onSuccess(success: T) {}
 
     open fun onError(error: Error) {}
 

@@ -1,11 +1,8 @@
 package com.kira.android_base.base.datahandling
 
-import com.squareup.moshi.Json
-
 data class Error(
-    var code: Int,
-    @field:Json(name = "message")
-    val message: String
+    var code: Int?,
+    val message: String?
 ) {
     companion object {
         enum class Code(val value: Error) {
