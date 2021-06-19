@@ -1,9 +1,7 @@
 package com.kira.android_base.main
 
 import com.kira.android_base.base.datahandling.Result
-import com.kira.android_base.base.datahandling.subscribeCallback
 import com.kira.android_base.base.ui.BaseViewModel
-import io.reactivex.rxkotlin.plusAssign
 
 class MainViewModel(
     val mainRepository: MainRepository
@@ -14,8 +12,7 @@ class MainViewModel(
         value: Any,
         callback: (Result<Unit>) -> Unit
     ) {
-        compositeDisposable += mainRepository.saveSharedPreferencesData(key, value)
-            .subscribeCallback(callback)
+        subscribeCallback(mainRepository.saveSharedPreferencesData(key, value), callback)
     }
 
     inline fun <reified T> getSharedPreferencesData(
@@ -23,7 +20,6 @@ class MainViewModel(
         defaultValue: T? = null,
         noinline callback: (Result<T?>) -> Unit
     ) {
-        compositeDisposable += mainRepository.getSharedPreferencesData<T>(key, defaultValue)
-            .subscribeCallback(callback)
+        subscribeCallback(mainRepository.getSharedPreferencesData<T>(key, defaultValue), callback)
     }
 }

@@ -5,9 +5,7 @@ import com.kira.android_base.base.api.models.response.BaseResponse
 import com.kira.android_base.base.database.entities.User
 import com.kira.android_base.base.datahandling.Error
 import com.kira.android_base.base.datahandling.Result
-import com.kira.android_base.base.datahandling.subscribeCallback
 import com.kira.android_base.base.ui.BaseViewModel
-import io.reactivex.rxkotlin.plusAssign
 
 class LoginViewModel(
     private val loginRepository: LoginRepository
@@ -21,32 +19,30 @@ class LoginViewModel(
         loginCallback: ((Result<BaseResponse<User>>) -> Unit)? = null,
         insertLocalUserCallback: ((Result<List<Long>>) -> Unit)? = null
     ) {
-        compositeDisposable += loginRepository.login()
-            .subscribeCallback { result ->
-                loginCallback?.invoke(result)
-                result.data?.let { success ->
-                    loginLiveData.postValue(success)
-                    success.data?.let {
-                        insertLocalUser(it, insertLocalUserCallback)
-                    }
-                    return@subscribeCallback
+        subscribeCallback(loginRepository.login()) { result ->
+            loginCallback?.invoke(result)
+            result.data?.let { success ->
+                loginLiveData.postValue(success)
+                success.data?.let {
+                    insertLocalUser(it, insertLocalUserCallback)
                 }
-                result.error?.let { error ->
-                    errorLiveData.postValue(error)
-                }
+                return@subscribeCallback
             }
+            result.error?.let { error ->
+                errorLiveData.postValue(error)
+            }
+        }
     }
 
     private fun insertLocalUser(
         user: User,
         insertLocalUserCallback: ((Result<List<Long>>) -> Unit)? = null
     ) {
-        compositeDisposable += loginRepository.insertLocalUser(user)
-            .subscribeCallback { result ->
-                insertLocalUserCallback?.invoke(result)
-                result.data?.let {
-                    insertLocalUserLiveData.postValue(it)
-                }
+        subscribeCallback(loginRepository.insertLocalUser(user)) { result ->
+            insertLocalUserCallback?.invoke(result)
+            result.data?.let {
+                insertLocalUserLiveData.postValue(it)
             }
+        }
     }
 }
