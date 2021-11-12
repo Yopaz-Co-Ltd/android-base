@@ -4,12 +4,8 @@
     <data>
 
         <variable
-            name="user"
-            type="com.kira.android_base.base.database.entities.User" />
-
-        <variable
-            name="onClickListener"
-            type="android.view.View.OnClickListener" />
+            name="viewModel"
+            type="com.kira.android_base.main.fragments.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +18,7 @@
             android:id="@+id/b_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{(view)->onClickListener.onClick(view)}"
+            android:onClick="@{()->viewModel.login()}"
             android:text="@string/login"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@{user.name}"
+            android:text="@{viewModel.userNameLiveData}"
             android:textColor="@android:color/black"
             app:layout_constraintTop_toBottomOf="@id/b_login" />
 

@@ -15,7 +15,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -25,20 +24,17 @@ const val CHUCK_MAX_CONTENT_LENGTH = 250000L
 
 val APIsModule = module {
     single { provideMoshi() }
-    single { provideCallAdapterFactory() }
     single { provideAppInterceptor(androidContext(), get()) }
     single { provideLoggingInterceptor() }
     single { provideCache(androidContext()) }
     single { provideOkHttp(androidContext(), get(), get(), get()) }
-    single { provideRetrofit(androidContext(), get(), get(), get()) }
+    single { provideRetrofit(androidContext(), get(), get()) }
     single { provideAPIs(get()) }
 }
 
 fun provideMoshi(): Moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
-
-fun provideCallAdapterFactory(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
 
 fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     val loggingInterceptor = HttpLoggingInterceptor()
@@ -84,14 +80,12 @@ fun provideOkHttp(
 fun provideRetrofit(
     context: Context,
     okHttpClient: OkHttpClient,
-    moshi: Moshi,
-    rxJava2CallAdapterFactory: RxJava2CallAdapterFactory
+    moshi: Moshi
 ): Retrofit =
     Retrofit.Builder()
         .baseUrl(context.resources.getString(R.string.base_url))
         .client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .addCallAdapterFactory(rxJava2CallAdapterFactory)
         .build()
 
 fun provideAPIs(retrofit: Retrofit): APIs = retrofit.create(APIs::class.java)

@@ -1,18 +1,15 @@
 package com.kira.android_base.main.fragments.login
 
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
-import com.kira.android_base.base.ui.widgets.ErrorDialog
-import com.kira.android_base.base.ui.widgets.LoadingDialog
 import com.kira.android_base.databinding.FragmentLoginBinding
 import com.kira.android_base.main.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListener {
+class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     companion object {
         val TAG: String = this::class.java.simpleName
@@ -23,7 +20,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
 
     override fun initViews() {
         (viewDataBinding as FragmentLoginBinding?)?.apply {
-            onClickListener = this@LoginFragment
+            this.viewModel = this@LoginFragment.viewModel
+            lifecycleOwner = this@LoginFragment
             brvLogin.apply {
                 setAdapter(LoginRecyclerViewAdapter().apply {
                     list.addAll((1..10).map { "$it" })
@@ -33,44 +31,21 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), View.OnClickListene
                 }
             }
         }
-        mainActivity?.hideStatusBar()
     }
 
     override fun handleObservables() {
         super.handleObservables()
-        viewModel.loginLiveData.observe(viewLifecycleOwner) {
-            (viewDataBinding as FragmentLoginBinding?)?.user = it.data
-            LoadingDialog.dismiss()
-        }
 
-        viewModel.insertLocalUserLiveData.observe(viewLifecycleOwner) {
-            if (it.isNullOrEmpty()) return@observe
-            Toast.makeText(context, "Insert success ${it.first()}", Toast.LENGTH_SHORT).show()
+        viewModel.loadingLiveData.observe(viewLifecycleOwner) {
+            mainActivity?.showLoadingDialog(it == true)
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
-            LoadingDialog.dismiss()
-            context?.let {
-                ErrorDialog.show(it, error.message ?: return@let)
-            }
+            mainActivity?.showErrorDialog(error?.message ?: return@observe)
         }
-    }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.b_login -> {
-                context?.let {
-                    LoadingDialog.show(it)
-                }
-                viewModel.login(
-                    loginCallback = {
-                        Log.d(TAG, "loginCallback: $it")
-                    },
-                    insertLocalUserCallback = {
-                        Log.d(TAG, "insertLocalUserCallback: $it")
-                    }
-                )
-            }
+        viewModel.toastLiveData.observe(viewLifecycleOwner) {
+            Toast.makeText(context, it ?: return@observe, Toast.LENGTH_SHORT).show()
         }
     }
 }

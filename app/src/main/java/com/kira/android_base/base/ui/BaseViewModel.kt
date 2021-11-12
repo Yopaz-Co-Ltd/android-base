@@ -1,11 +1,9 @@
 package com.kira.android_base.base.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kira.android_base.base.datahandling.Result
-import com.kira.android_base.base.datahandling.subscribeCallback
-import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.plusAssign
+import com.kira.android_base.base.datahandling.Error
 import org.koin.core.component.KoinComponent
 
 abstract class BaseViewModel : ViewModel(), KoinComponent {
@@ -14,14 +12,12 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
         val TAG: String = this::class.java.simpleName
     }
 
-    val compositeDisposable = CompositeDisposable()
+    protected val _loadingLiveData = MutableLiveData<Boolean>()
+    val loadingLiveData: LiveData<Boolean> = _loadingLiveData
 
-    override fun onCleared() {
-        compositeDisposable.dispose()
-        super.onCleared()
-    }
+    protected val _errorLiveData = MutableLiveData<Error>()
+    val errorLiveData: LiveData<Error> = _errorLiveData
 
-    fun <T> subscribeCallback(observable: Observable<Result<T>>, callback: (Result<T>) -> Unit) {
-        compositeDisposable += observable.subscribeCallback(callback)
-    }
+    protected val _toastLiveData = MutableLiveData<String>()
+    val toastLiveData: LiveData<String> = _toastLiveData
 }

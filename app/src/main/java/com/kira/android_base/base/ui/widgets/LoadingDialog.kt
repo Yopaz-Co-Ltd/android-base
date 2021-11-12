@@ -11,25 +11,6 @@ import com.kira.android_base.databinding.DialogLoadingBinding
 
 class LoadingDialog {
 
-    companion object {
-        private var loadingDialog: LoadingDialog? = null
-        fun show(
-            context: Context?,
-            minTime: Long? = null,
-            loadingTypeSprite: Sprite? = null,
-            loadingColor: Int? = null
-        ) {
-            if (loadingDialog == null) {
-                loadingDialog = LoadingDialog()
-            }
-            loadingDialog?.show(context, minTime, loadingTypeSprite, loadingColor)
-        }
-
-        fun dismiss() {
-            loadingDialog?.dismiss()
-        }
-    }
-
     private var dialog: Dialog? = null
     private var dialogLoadingBinding: DialogLoadingBinding? = null
     private var markedTime = 0L
@@ -64,11 +45,7 @@ class LoadingDialog {
         minTime?.let {
             markedTime = System.currentTimeMillis() + it
         }
-        try {
-            dialog?.show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        dialog?.show()
     }
 
     fun dismiss() {

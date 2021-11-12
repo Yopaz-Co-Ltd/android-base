@@ -91,7 +91,7 @@ dependencies {
 
     //ViewModel + LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.ext.lib_versions.lifecycle"
 
     //Chucker
     debugImplementation "com.github.chuckerteam.chucker:library:$rootProject.ext.lib_versions.chucker"
@@ -104,19 +104,12 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.lib_versions.retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$rootProject.ext.lib_versions.moshi_retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.lib_versions.retrofit"
-
-    //Rxjava
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.lib_versions.rxjava"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.lib_versions.rxkotlin"
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.lib_versions.rxandroid"
 
     //Moshi
     implementation "com.squareup.moshi:moshi:$rootProject.ext.lib_versions.moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$rootProject.ext.lib_versions.moshi"
 
     //Room
-    implementation "androidx.room:room-rxjava2:$rootProject.ext.lib_versions.room"
     implementation "androidx.room:room-runtime:$rootProject.ext.lib_versions.room"
     kapt "androidx.room:room-compiler:$rootProject.ext.lib_versions.room_compiler"
 

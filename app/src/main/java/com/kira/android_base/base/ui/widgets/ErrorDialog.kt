@@ -1,43 +1,34 @@
 package com.kira.android_base.base.ui.widgets
 
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
 import com.kira.android_base.R
 
 class ErrorDialog {
 
-    companion object {
-        private var errorDialog: ErrorDialog? = null
-
-        fun show(context: Context, errorMessage: String) {
-            if (errorDialog == null) {
-                errorDialog = ErrorDialog()
-            }
-            errorDialog?.show(context, errorMessage)
-        }
-
-        fun dismiss() {
-            errorDialog?.dismiss()
-        }
-    }
-
     private var dialog: AlertDialog? = null
 
-    fun show(context: Context, errorMessage: String) {
+    fun show(
+        context: Context,
+        errorMessage: String,
+        title: String,
+        positiveText: String,
+        onPositiveClick: () -> Unit
+    ) {
         if (dialog == null) {
-            dialog = AlertDialog.Builder(context)
-                .setTitle(R.string.error)
-                .setMessage(errorMessage)
-                .setPositiveButton(R.string.ok) { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .create()
+            dialog =
+                AlertDialog.Builder(context)
+                    .setPositiveButton(R.string.ok) { dialog, _ -> dialog?.dismiss() }
+                    .create()
         }
-        try {
-            dialog?.show()
-        } catch (e: Exception) {
-            e.printStackTrace()
+        dialog?.setMessage(errorMessage)
+        dialog?.setTitle(title)
+        dialog?.getButton(DialogInterface.BUTTON_POSITIVE)?.apply {
+            text = positiveText
+            setOnClickListener { onPositiveClick() }
         }
+        dialog?.show()
     }
 
     fun dismiss() {

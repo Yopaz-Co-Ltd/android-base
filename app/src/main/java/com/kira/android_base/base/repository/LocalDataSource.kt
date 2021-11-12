@@ -1,54 +1,41 @@
 package com.kira.android_base.base.repository
 
-import android.util.Log
 import com.kira.android_base.base.database.AppDatabase
 import com.kira.android_base.base.database.daos.BaseDao
 import com.kira.android_base.base.database.entities.User
-import com.kira.android_base.base.datahandling.Result
-import com.kira.android_base.base.reactivex.AppReactivexSchedulers
+import com.kira.android_base.base.datahandling.Error
+import com.kira.android_base.base.datahandling.toResult
 import com.kira.android_base.base.sharedpreference.SharedPreferences
-import com.kira.android_base.base.supports.extensions.TAG
-import io.reactivex.Observable
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class LocalDataSource(
     private val appDatabase: AppDatabase,
     val sharedPreferences: SharedPreferences,
-    private val appReactivexSchedulers: AppReactivexSchedulers
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    fun <T> runTask(handle: () -> T): Observable<Result<T>> {
-        return Observable.create<Result<T>> { emitter ->
-            try {
-                emitter.onNext(Result(handle.invoke(), null))
-                emitter.onComplete()
-            } catch (throwable: Throwable) {
-                Log.d(TAG, "runTask: $throwable")
-                emitter.onError(throwable)
-            }
-        }.subscribeOn(appReactivexSchedulers.io())
-            .observeOn(appReactivexSchedulers.androidMainThread())
+    private suspend fun <T> runTask(task: () -> T) = withContext(dispatcher) {
+        runCatching {
+            return@withContext task().toResult()
+        }.getOrElse {
+            Error(Error.Companion.Code.DEFAULT.value.code, it.localizedMessage)
+        }.toResult()
     }
 
-    private fun <T> insert(dao: BaseDao<T>, vararg t: T): Observable<Result<List<Long>>> =
-        runTask { dao.insert(*t) }
+    private suspend fun <T> insert(dao: BaseDao<T>, vararg t: T) = runTask { dao.insert(*t) }
 
-    private fun <T> update(dao: BaseDao<T>, vararg t: T): Observable<Result<Int>> =
-        runTask { dao.update(*t) }
+    private suspend fun <T> update(dao: BaseDao<T>, vararg t: T) = runTask { dao.update(*t) }
 
-    private fun <T> delete(dao: BaseDao<T>, vararg t: T): Observable<Result<Int>> =
-        runTask { dao.delete(*t) }
+    private suspend fun <T> delete(dao: BaseDao<T>, vararg t: T) = runTask { dao.delete(*t) }
 
-    fun saveSharedPreferencesData(key: String, value: Any) = runTask {
-        sharedPreferences.saveData(key, value)
-    }
+    fun saveSharedPreferencesData(key: String, value: Any) = sharedPreferences.saveData(key, value)
 
     inline fun <reified T> getSharedPreferencesData(
         key: String,
         defaultValue: T? = null
-    ): Observable<Result<T?>> =
-        runTask {
-            sharedPreferences.getData<T>(key, defaultValue) as T?
-        }
+    ) = sharedPreferences.getData<T>(key, defaultValue) as T?
 
-    fun insertUser(user: User) = insert(appDatabase.userDao(), user)
+    suspend fun insertUser(user: User) = insert(appDatabase.userDao(), user)
 }

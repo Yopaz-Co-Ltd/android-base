@@ -9,8 +9,9 @@ val databaseModule = module {
     single { provideRoomDb(androidContext()) }
 }
 
-private val APP_DB_NAME = "app_database"
+private const val APP_DB_NAME = "app_database"
 
 fun provideRoomDb(context: Context) =
     Room.databaseBuilder(context, AppDatabase::class.java, APP_DB_NAME)
-        .addMigrations().build()
+        .fallbackToDestructiveMigration()
+        .build()

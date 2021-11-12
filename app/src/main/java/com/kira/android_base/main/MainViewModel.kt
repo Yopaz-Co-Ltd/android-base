@@ -11,15 +11,11 @@ class MainViewModel(
         key: String,
         value: Any,
         callback: (Result<Unit>) -> Unit
-    ) {
-        subscribeCallback(mainRepository.saveSharedPreferencesData(key, value), callback)
-    }
+    ) = mainRepository.saveSharedPreferencesData(key, value)
 
     inline fun <reified T> getSharedPreferencesData(
         key: String,
         defaultValue: T? = null,
         noinline callback: (Result<T?>) -> Unit
-    ) {
-        subscribeCallback(mainRepository.getSharedPreferencesData<T>(key, defaultValue), callback)
-    }
+    ) = mainRepository.getSharedPreferencesData<T>(key, defaultValue)
 }

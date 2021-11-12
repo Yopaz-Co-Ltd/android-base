@@ -1,5 +1,6 @@
 package com.kira.android_base.base.ui.widgets.recyclerview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -71,6 +72,7 @@ class BaseRecyclerView : FrameLayout {
         binding.srlBaseRecyclerView.setOnRefreshListener(onRefreshListener)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun notifyDataSetChanged() {
         binding.rvBaseRecyclerView.adapter?.notifyDataSetChanged()
     }
