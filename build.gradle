@@ -24,8 +24,8 @@ buildscript {
                 swipe_refresh_layout: '1.1.0',
                 jdbc                : '3.34.0',
                 coroutines          : '1.5.0',
-                navigation_component: '2.3.5',
-                security_crypto     : '1.1.0-alpha03'
+                security_crypto     : '1.1.0-alpha03',
+                navigation_component: '2.3.5'
         ]
     }
     repositories {
@@ -36,6 +36,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$lib_versions.navigation_component"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

@@ -2,11 +2,12 @@ package com.kira.android_base.main.fragments.login
 
 import android.util.Log
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.kira.android_base.R
+import com.kira.android_base.base.supports.extensions.navigateTo
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.FragmentLoginBinding
-import com.kira.android_base.main.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.kira.android_base.main.fragments.home.HomeArgs
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
@@ -16,7 +17,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private val viewModel: LoginViewModel by viewModel()
-    private val mainViewModel: MainViewModel by sharedViewModel()
 
     override fun initViews() {
         (viewDataBinding as FragmentLoginBinding?)?.apply {
@@ -46,6 +46,14 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         viewModel.toastLiveData.observe(viewLifecycleOwner) {
             Toast.makeText(context, it ?: return@observe, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.userLiveData.observe(viewLifecycleOwner) {
+            findNavController().navigateTo(
+                LoginFragmentDirections.actionLoginFragmentToHomeFragment(
+                    HomeArgs(it?.name, it?.age)
+                )
+            )
         }
     }
 }

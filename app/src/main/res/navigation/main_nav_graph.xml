@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.kira.android_base.main.fragments.login.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.kira.android_base.main.fragments.home.HomeFragment"
+        android:label="HomeFragment" >
+        <argument
+            android:name="args"
+            app:argType="com.kira.android_base.main.fragments.home.HomeArgs"
+            app:nullable="true" />
+    </fragment>
+</navigation>
