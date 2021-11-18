@@ -6,11 +6,10 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.view.View
+import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.FragmentManager
 import com.kira.android_base.R
 
@@ -44,14 +43,11 @@ fun AppCompatActivity.disableStatusBarTransparent() {
     }
 }
 
-fun AppCompatActivity.hideStatusBar(root: View, isFitsSystemWindows: Boolean = true) {
+fun AppCompatActivity.hideStatusBar(root: View) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        WindowCompat.setDecorFitsSystemWindows(window, isFitsSystemWindows)
-        WindowInsetsControllerCompat(window, root).let { controller ->
-            controller.hide(WindowInsetsCompat.Type.statusBars())
-            controller.systemBarsBehavior =
-                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        }
+        val controller = root.windowInsetsController ?: return
+        controller.hide(WindowInsetsCompat.Type.statusBars())
+        controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     } else {
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -60,10 +56,10 @@ fun AppCompatActivity.hideStatusBar(root: View, isFitsSystemWindows: Boolean = t
     }
 }
 
-fun AppCompatActivity.showStatusBar(root: View, isFitsSystemWindows: Boolean = false) {
+fun AppCompatActivity.showStatusBar(root: View) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        WindowCompat.setDecorFitsSystemWindows(window, isFitsSystemWindows)
-        WindowInsetsControllerCompat(window, root).show(WindowInsetsCompat.Type.statusBars())
+        val controller = root.windowInsetsController ?: return
+        controller.show(WindowInsetsCompat.Type.statusBars())
     } else {
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }

@@ -127,4 +127,6 @@ abstract class BaseActivity(
         if (isShow) loadingDialog.show(this, minTime, loadingTypeSprite, loadingColor)
         else loadingDialog.dismiss()
     }
+
+    fun getDataBiding() = activityViewDataBinding
 }
