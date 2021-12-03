@@ -18,6 +18,7 @@
             android:id="@+id/b_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/secondary"
             android:onClick="@{()->viewModel.login()}"
             android:text="@string/login"
             app:layout_constraintTop_toTopOf="parent" />

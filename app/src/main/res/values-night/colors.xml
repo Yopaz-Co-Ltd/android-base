@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">@color/white</color>
+    <color name="secondary">@color/black</color>
+    <color name="global_screen_background">@color/white</color>
+
+    <color name="black">#FFFFFF</color>
+    <color name="white">#000000</color>
+</resources>

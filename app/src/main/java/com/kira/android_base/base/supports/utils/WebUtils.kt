@@ -1,4 +1,4 @@
-package com.kira.android_base.base.supports
+package com.kira.android_base.base.supports.utils
 
 import android.content.Context
 import androidx.browser.customtabs.CustomTabsIntent
