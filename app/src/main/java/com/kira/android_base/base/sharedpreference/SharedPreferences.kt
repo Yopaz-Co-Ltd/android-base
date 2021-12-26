@@ -1,15 +1,30 @@
 package com.kira.android_base.base.sharedpreference
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 
 class SharedPreferences(context: Context) {
 
     companion object {
         private const val APP_SHARED_PREFS_NAME = "shared_preferences"
+
+        const val DEFAULT_INT = -1
+        const val DEFAULT_LONG = -1L
+        const val DEFAULT_BOOLEAN = false
+        const val DEFAULT_FLOAT = -1f
     }
 
-    val sharedPreferences =
-        context.getSharedPreferences(APP_SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+    val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+        context,
+        APP_SHARED_PREFS_NAME,
+        MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build(),
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+    )
 
     fun saveData(key: String, value: Any) {
         when (value) {
@@ -37,18 +52,22 @@ class SharedPreferences(context: Context) {
                 sharedPreferences.getString(key, defaultValue?.toString())
             }
             Int::class -> {
-                sharedPreferences.getInt(key, (defaultValue ?: 0) as Int)
+                sharedPreferences.getInt(key, (defaultValue ?: DEFAULT_INT) as Int)
             }
             Long::class -> {
-                sharedPreferences.getLong(key, (defaultValue ?: 0L) as Long)
+                sharedPreferences.getLong(key, (defaultValue ?: DEFAULT_LONG) as Long)
             }
             Boolean::class -> {
-                sharedPreferences.getBoolean(key, (defaultValue ?: false) as Boolean)
+                sharedPreferences.getBoolean(key, (defaultValue ?: DEFAULT_BOOLEAN) as Boolean)
             }
             Float::class -> {
-                sharedPreferences.getFloat(key, (defaultValue ?: 0f) as Float)
+                sharedPreferences.getFloat(key, (defaultValue ?: DEFAULT_FLOAT) as Float)
             }
             else -> null
         }
+    }
+
+    fun clear() {
+        sharedPreferences.edit().clear().apply()
     }
 }
