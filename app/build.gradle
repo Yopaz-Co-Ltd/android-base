@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "com.kira.android_base"
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 32
         multiDexEnabled true
         versionCode 1
         versionName "1.0"
@@ -89,7 +89,7 @@ dependencies {
     //Koin
     implementation "io.insert-koin:koin-core:$rootProject.ext.lib_versions.koin"
     implementation "io.insert-koin:koin-android:$rootProject.ext.lib_versions.koin"
-    implementation "io.insert-koin:koin-android-ext:$rootProject.ext.lib_versions.koin"
+    implementation "io.insert-koin:koin-android-ext:$rootProject.ext.lib_versions.koin_android_ext"
 
     //ViewModel + LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"
@@ -120,7 +120,7 @@ dependencies {
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$rootProject.ext.lib_versions.glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.lib_versions.glide"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.ext.lib_versions.glide"
 
     //Android Browser
     implementation "androidx.browser:browser:$rootProject.ext.lib_versions.browser"

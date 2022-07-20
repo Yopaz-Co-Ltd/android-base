@@ -6,7 +6,6 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.kira.android_base.BuildConfig
 import com.kira.android_base.R
-import com.kira.android_base.base.database.AppDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Cache
@@ -24,7 +23,7 @@ const val CHUCK_MAX_CONTENT_LENGTH = 250000L
 
 val APIsModule = module {
     single { provideMoshi() }
-    single { provideAppInterceptor(androidContext(), get()) }
+    single { provideAppInterceptor() }
     single { provideLoggingInterceptor() }
     single { provideCache(androidContext()) }
     single { provideOkHttp(androidContext(), get(), get(), get()) }
@@ -46,8 +45,7 @@ fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     return loggingInterceptor
 }
 
-fun provideAppInterceptor(context: Context, database: AppDatabase) =
-    AppInterceptor(context, database)
+fun provideAppInterceptor() = AppInterceptor()
 
 fun provideCache(context: Context): Cache = Cache(context.cacheDir, CACHE_SIZE)
 
