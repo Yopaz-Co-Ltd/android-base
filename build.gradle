@@ -1,6 +1,7 @@
 buildscript {
     ext {
         compose_version = '1.1.1'
+        compose_viewmodel = '2.5.0'
         room_version = '2.4.2'
         chucker = '3.5.2'
         okhttp3 = '4.9.1'
