@@ -1,27 +1,18 @@
 package com.example.android_base_compose.main
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import com.example.android_base_compose.main.theme.AndroidbasecomposeTheme
+import androidx.navigation.compose.rememberNavController
+import com.example.android_base_compose.base.ui.BaseActivity
+import com.example.android_base_compose.main.navigation.SetUpNavigationGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            AndroidbasecomposeTheme {
-                // A surface container using the 'background' color from the theme
-                Greeting("Android")
-            }
-        }
-    }
-}
+class MainActivity : BaseActivity() {
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+    @Composable
+    override fun InitView() {
+        val navController = rememberNavController()
+
+        SetUpNavigationGraph(navController = navController)
+    }
 }

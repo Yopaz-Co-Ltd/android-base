@@ -3,4 +3,20 @@
     <string name="error">Error</string>
     <string name="ok">OK</string>
     <string name="refresh">Refresh</string>
+
+    <!--    login screen    -->
+    <string name="login_screen_title">Login screen</string>
+    <string name="login_screen_email">Email</string>
+    <string name="login_screen_password">Password</string>
+    <string name="login_screen_submit_button">LOGIN</string>
+    <string name="login_blank_email">Email can not be blank</string>
+    <string name="login_invalid_email">Invalid Email</string>
+    <string name="login_blank_password">Password can not be blank</string>
+    <string name="login_password_too_short">Password too short</string>
+
+    <!--    home screen    -->
+    <string name="home_screen_title">Card List</string>
+
+    <!--    account screen    -->
+    <string name="account_logout_button">Logout</string>
 </resources>
