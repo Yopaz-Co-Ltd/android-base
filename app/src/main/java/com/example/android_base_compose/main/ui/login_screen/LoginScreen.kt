@@ -48,29 +48,28 @@ fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
     Box(modifier = Modifier.clearFocus(focusManager)) {
         LoadingScreen(isShowLoading = isShowLoading)
         Column(
-                modifier = modifierFullSize, verticalArrangement = Arrangement.Center
+            modifier = modifierFullSize, verticalArrangement = Arrangement.Center
         ) {
             Text(
-                    modifier = modifier16Padding,
-                    fontSize = Dimen.Text20,
-                    textAlign = TextAlign.Center,
-                    text = stringResource(id = R.string.login_screen_title),
+                modifier = modifier16Padding,
+                fontSize = Dimen.Text20,
+                textAlign = TextAlign.Center,
+                text = stringResource(id = R.string.login_screen_title),
             )
             LoginTextField(
-                    modifier = modifier16Padding,
-                    text = email,
-                    setText = { loginViewModel.setEmail(it) },
-                    focusManager = focusManager,
-                    label = stringResource(id = R.string.login_screen_email)
+                modifier = modifier16Padding,
+                text = email,
+                setText = { loginViewModel.setEmail(it) },
+                focusManager = focusManager,
+                label = stringResource(id = R.string.login_screen_email)
             )
-
             LoginTextField(
-                    modifier = modifier16Padding,
-                    text = password,
-                    setText = { loginViewModel.setPassword(it) },
-                    focusManager = focusManager,
-                    label = stringResource(id = R.string.login_screen_password),
-                    isPasswordFiled = true
+                modifier = modifier16Padding,
+                text = password,
+                setText = { loginViewModel.setPassword(it) },
+                focusManager = focusManager,
+                label = stringResource(id = R.string.login_screen_password),
+                isPasswordFiled = true
             )
             Button(modifier = modifier16Padding.focusable(), onClick = {
                 focusManager.clearFocus()
@@ -86,24 +85,24 @@ fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
 
 @Composable
 fun LoginTextField(
-        modifier: Modifier,
-        text: String,
-        setText: (String) -> Unit,
-        focusManager: FocusManager,
-        label: String? = null,
-        isPasswordFiled: Boolean = false
+    modifier: Modifier,
+    text: String,
+    setText: (String) -> Unit,
+    focusManager: FocusManager,
+    label: String? = null,
+    isPasswordFiled: Boolean = false
 ) {
     OutlinedTextField(
-            modifier = modifier,
-            value = text,
-            singleLine = true,
-            label = { label?.let { Text(text = label) } },
-            onValueChange = { setText(it) },
-            keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(FocusDirection.Down) }),
-            keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Next,
-                    keyboardType = if (isPasswordFiled) KeyboardType.Password else KeyboardType.Email
-            ),
-            visualTransformation = if (isPasswordFiled) PasswordVisualTransformation() else VisualTransformation.None
+        modifier = modifier,
+        value = text,
+        singleLine = true,
+        label = { label?.let { Text(text = label) } },
+        onValueChange = { setText(it) },
+        keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(FocusDirection.Down) }),
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next,
+            keyboardType = if (isPasswordFiled) KeyboardType.Password else KeyboardType.Email
+        ),
+        visualTransformation = if (isPasswordFiled) PasswordVisualTransformation() else VisualTransformation.None
     )
 }

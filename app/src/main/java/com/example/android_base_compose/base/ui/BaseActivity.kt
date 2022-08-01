@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import com.example.android_base_compose.main.theme.AndroidbasecomposeTheme
+import com.example.android_base_compose.main.theme.BaseTheme
 
 abstract class BaseActivity : ComponentActivity() {
 
@@ -12,7 +12,7 @@ abstract class BaseActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            AndroidbasecomposeTheme { InitView() }
+            BaseTheme { InitView() }
         }
     }
 

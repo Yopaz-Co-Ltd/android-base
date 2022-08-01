@@ -25,21 +25,29 @@ fun AccountScreen() {
     val name by remember { mutableStateOf("Dat") }
     val email by remember { mutableStateOf("datnt@yopaz.vn") }
     Column(
-            modifier = modifier16Padding
-                    .padding(top = Dimen.Space36),
-            horizontalAlignment = CenterHorizontally,
+        modifier = modifier16Padding
+            .padding(top = Dimen.Space36),
+        horizontalAlignment = CenterHorizontally,
     ) {
         Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "",
-                modifier = modifier16Padding
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = "",
+            modifier = modifier16Padding
         )
         Column(Modifier.padding(Dimen.Space16)) {
-            Text(text = "name: $name", fontSize = Dimen.Text20, modifier = modifier8Padding.padding(bottom = Dimen.Space8))
-            Text(text = "Email: $email", fontSize = Dimen.Text20, modifier = modifier8Padding.padding(bottom = Dimen.Space16))
+            Text(
+                text = "name: $name",
+                fontSize = Dimen.Text20,
+                modifier = modifier8Padding.padding(bottom = Dimen.Space8)
+            )
+            Text(
+                text = "Email: $email",
+                fontSize = Dimen.Text20,
+                modifier = modifier8Padding.padding(bottom = Dimen.Space16)
+            )
             Button(
-                    onClick = { accountViewModel.logOut() },
-                    modifier = Modifier.align(CenterHorizontally)
+                onClick = { accountViewModel.logOut() },
+                modifier = Modifier.align(CenterHorizontally)
             ) {
                 Text(text = stringResource(id = R.string.account_logout_button))
             }

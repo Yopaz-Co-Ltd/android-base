@@ -14,9 +14,9 @@ import com.example.android_base_compose.main.ui.login_screen.LoginScreen
 @Composable
 fun SetUpNavigationGraph(navController: NavHostController, isLogged: State<Boolean?>) {
     NavHost(
-            navController = navController,
-            startDestination = if (isLogged.value == true) Screen.Home.route else Screen.Login.route,
-            modifier = Modifier.fillMaxSize()
+        navController = navController,
+        startDestination = if (isLogged.value == true) Screen.Home.route else Screen.Login.route,
+        modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.Login.route) {
             LoginScreen()

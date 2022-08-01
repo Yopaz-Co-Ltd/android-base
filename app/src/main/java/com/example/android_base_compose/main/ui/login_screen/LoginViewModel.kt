@@ -9,7 +9,7 @@ import com.example.android_base_compose.R
 import com.example.android_base_compose.base.api.entities.LoginRequest
 import com.example.android_base_compose.base.datahandling.handleFlowResponse
 import com.example.android_base_compose.base.repository.BaseRepository
-import com.example.android_base_compose.base.until.IS_LOGIN_KEY
+import com.example.android_base_compose.base.until.KEY_IS_LOGIN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -75,7 +75,7 @@ class LoginViewModel @Inject constructor(
             Toast.makeText(context, it?.message, Toast.LENGTH_SHORT).show()
         }) {
             viewModelScope.launch {
-                baseRepository.localDataSource.preferencesDataStore.saveData(IS_LOGIN_KEY, true)
+                baseRepository.localDataSource.preferencesDataStore.saveData(KEY_IS_LOGIN, true)
             }
             _isShowLoadingState.value = false
         }

@@ -35,10 +35,10 @@ class MainActivity : BaseActivity() {
 
         Scaffold(bottomBar = {
             SetUpBottomBar(
-                    isShowBottomBar = isShowBottomBar,
-                    navController = navController,
-                    screenList = items,
-                    navBackStackEntry = navBackStackEntry ?: return@Scaffold
+                isShowBottomBar = isShowBottomBar,
+                navController = navController,
+                screenList = items,
+                navBackStackEntry = navBackStackEntry ?: return@Scaffold
             )
         }) {
             Box(Modifier.padding(it)) {
@@ -50,34 +50,34 @@ class MainActivity : BaseActivity() {
 
 @Composable
 fun SetUpBottomBar(
-        isShowBottomBar: State<Boolean?>,
-        navController: NavHostController,
-        screenList: List<Screen>,
-        navBackStackEntry: NavBackStackEntry
+    isShowBottomBar: State<Boolean?>,
+    navController: NavHostController,
+    screenList: List<Screen>,
+    navBackStackEntry: NavBackStackEntry
 ) {
     if (isShowBottomBar.value == false) return
     BottomNavigation(
-            backgroundColor = MaterialTheme.colors.surface
+        backgroundColor = MaterialTheme.colors.surface
     ) {
         val currentDestination = navBackStackEntry.destination
         screenList.forEach { screen ->
             BottomNavigationItem(
-                    selected = currentDestination.hierarchy.any { it.route == screen.route },
-                    onClick = {
-                        navController.navigate(screen.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
+                selected = currentDestination.hierarchy.any { it.route == screen.route },
+                onClick = {
+                    navController.navigate(screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
                         }
-                    },
-                    icon = {
-                        Icon(painter = painterResource(id = screen.icon), contentDescription = "")
-                    },
-                    label = { Text(text = screen.title) },
-                    selectedContentColor = MaterialTheme.colors.primary,
-                    unselectedContentColor = Color.LightGray
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                icon = {
+                    Icon(painter = painterResource(id = screen.icon), contentDescription = "")
+                },
+                label = { Text(text = screen.title) },
+                selectedContentColor = MaterialTheme.colors.primary,
+                unselectedContentColor = Color.LightGray
             )
         }
     }

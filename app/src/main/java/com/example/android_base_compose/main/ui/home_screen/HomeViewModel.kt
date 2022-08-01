@@ -1,6 +1,5 @@
 package com.example.android_base_compose.main.ui.home_screen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android_base_compose.base.api.entities.UserResponse
@@ -22,12 +21,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            remoteDataSource.fetchUsers().handleFlowResponse (
-                onError = {
-                    Log.e("TAG", "$it: ")
-                }
-            ) {
-                Log.e("TAG", "$it: ", )
+            remoteDataSource.fetchUsers().handleFlowResponse {
                 _userList.value = it ?: listOf()
             }
         }

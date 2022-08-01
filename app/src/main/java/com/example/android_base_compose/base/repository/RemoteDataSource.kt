@@ -24,7 +24,6 @@ class RemoteDataSource @Inject constructor(
             }
             emit(Response.Error(ErrorResponse(ErrorResponse.UNKNOWN_ERROR_CODE, exception.message)))
         }
-
     }
 
     suspend fun login(loginRequest: LoginRequest) = getResponseFlow { apIs.login(loginRequest) }

@@ -48,8 +48,8 @@ object AppModules {
     @Singleton
     @Provides
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
-            Room.databaseBuilder(context, AppDatabase::class.java, APP_DB_NAME)
-                    .fallbackToDestructiveMigration().build()
+        Room.databaseBuilder(context, AppDatabase::class.java, APP_DB_NAME)
+            .fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides
@@ -67,39 +67,39 @@ object AppModules {
     @Singleton
     @Provides
     fun provideAppInterceptor(@ApplicationContext context: Context, database: AppDatabase) =
-            AppInterceptor(context, database)
+        AppInterceptor(context, database)
 
     @Singleton
     @Provides
     fun provideCache(@ApplicationContext context: Context): Cache =
-            Cache(context.cacheDir, CACHE_SIZE)
+        Cache(context.cacheDir, CACHE_SIZE)
 
     @Singleton
     @Provides
     fun provideOkHttp(
-            @ApplicationContext context: Context,
-            cache: Cache,
-            appInterceptor: AppInterceptor,
-            loggingInterceptor: HttpLoggingInterceptor
+        @ApplicationContext context: Context,
+        cache: Cache,
+        appInterceptor: AppInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         val collector =
-                ChuckerCollector(context, showNotification = true, RetentionManager.Period.FOREVER)
+            ChuckerCollector(context, showNotification = true, RetentionManager.Period.FOREVER)
         val chuckInterceptor = ChuckerInterceptor.Builder(context).collector(collector)
-                .maxContentLength(CHUCK_MAX_CONTENT_LENGTH).redactHeaders(emptySet())
-                .alwaysReadResponseBody(false).build()
+            .maxContentLength(CHUCK_MAX_CONTENT_LENGTH).redactHeaders(emptySet())
+            .alwaysReadResponseBody(false).build()
 
         return OkHttpClient.Builder().connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .readTimeout(TIME_OUT, TimeUnit.SECONDS).writeTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .cache(cache).addInterceptor(appInterceptor).addInterceptor(chuckInterceptor)
-                .addInterceptor(loggingInterceptor).build()
+            .readTimeout(TIME_OUT, TimeUnit.SECONDS).writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+            .cache(cache).addInterceptor(appInterceptor).addInterceptor(chuckInterceptor)
+            .addInterceptor(loggingInterceptor).build()
     }
 
     @Singleton
     @Provides
     fun provideRetrofit(
-            @ApplicationContext context: Context, okHttpClient: OkHttpClient, moshi: Moshi
+        @ApplicationContext context: Context, okHttpClient: OkHttpClient, moshi: Moshi
     ): Retrofit = Retrofit.Builder().baseUrl(context.resources.getString(R.string.base_url))
-            .client(okHttpClient).addConverterFactory(MoshiConverterFactory.create(moshi)).build()
+        .client(okHttpClient).addConverterFactory(MoshiConverterFactory.create(moshi)).build()
 
     @Singleton
     @Provides
@@ -109,9 +109,9 @@ object AppModules {
     @Provides
     fun providePreferencesDataStore(@ApplicationContext appContext: Context): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(corruptionHandler = ReplaceFileCorruptionHandler(
-                produceNewData = { emptyPreferences() }),
-                migrations = listOf(SharedPreferencesMigration(appContext, APP_PREFERENCES)),
-                scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-                produceFile = { appContext.preferencesDataStoreFile(APP_PREFERENCES) })
+            produceNewData = { emptyPreferences() }),
+            migrations = listOf(SharedPreferencesMigration(appContext, APP_PREFERENCES)),
+            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            produceFile = { appContext.preferencesDataStoreFile(APP_PREFERENCES) })
     }
 }
