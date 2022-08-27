@@ -2,8 +2,10 @@ package com.kira.android_base.base.supports.extensions
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
 import androidx.core.view.marginRight
@@ -88,4 +90,16 @@ fun View.visibleWithTranslationAnimation(
                 onAnimationEnd?.invoke()
             }
         })
+}
+
+fun View.addForegroundRippleEffect() {
+    val outValue = TypedValue()
+    context.theme.resolveAttribute(android.R.attr.selectableItemBackground, outValue, true)
+    foreground = ResourcesCompat.getDrawable(resources, outValue.resourceId, null)
+}
+
+fun View.addBackgroundRippleEffect() {
+    val outValue = TypedValue()
+    context.theme.resolveAttribute(android.R.attr.selectableItemBackground, outValue, true)
+    setBackgroundResource(outValue.resourceId)
 }
