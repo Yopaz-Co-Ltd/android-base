@@ -67,7 +67,7 @@ fun View.goneWithTranslationAnimation(
         .translationY(if (isTopToBottom) height.toFloat() * translationRatio else -height.toFloat() * translationRatio)
         .setDuration(duration)
         .setListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 gone()
                 onAnimationEnd?.invoke()
@@ -84,7 +84,7 @@ fun View.visibleWithTranslationAnimation(
         .translationY(0f)
         .setDuration(duration)
         .setListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 visible()
                 onAnimationEnd?.invoke()
