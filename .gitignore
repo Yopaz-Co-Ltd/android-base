@@ -19,3 +19,4 @@ local.properties
 .idea/vcs.xml
 .idea/gradle.xml
 .idea/misc.xml
+.env.*

@@ -5,7 +5,6 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.kira.android_base.BuildConfig
-import com.kira.android_base.R
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Cache
@@ -27,7 +26,7 @@ val APIsModule = module {
     single { provideLoggingInterceptor() }
     single { provideCache(androidContext()) }
     single { provideOkHttp(androidContext(), get(), get(), get()) }
-    single { provideRetrofit(androidContext(), get(), get()) }
+    single { provideRetrofit(get(), get()) }
     single { provideAPIs(get()) }
 }
 
@@ -75,13 +74,9 @@ fun provideOkHttp(
         .build()
 }
 
-fun provideRetrofit(
-    context: Context,
-    okHttpClient: OkHttpClient,
-    moshi: Moshi
-): Retrofit =
+fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit =
     Retrofit.Builder()
-        .baseUrl(context.resources.getString(R.string.base_url))
+        .baseUrl(BuildConfig.SERVER_URL)
         .client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()

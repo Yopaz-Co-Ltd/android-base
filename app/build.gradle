@@ -49,17 +49,27 @@ android {
         }
     }
     flavorDimensions 'root'
+
+    def serverUrlKey = 'SERVER_URL'
+    def environmentProperties = new Properties()
+
     productFlavors {
         production {
             dimension 'root'
+            environmentProperties.load(new FileInputStream(rootProject.file(".env.production.properties")))
+            buildConfigField "String", serverUrlKey, environmentProperties[serverUrlKey]
         }
 
         staging {
             dimension 'root'
+            environmentProperties.load(new FileInputStream(rootProject.file(".env.staging.properties")))
+            buildConfigField "String", serverUrlKey, environmentProperties[serverUrlKey]
         }
 
         develop {
             dimension 'root'
+            environmentProperties.load(new FileInputStream(rootProject.file(".env.develop.properties")))
+            buildConfigField "String", serverUrlKey, environmentProperties[serverUrlKey]
         }
     }
     sourceSets {

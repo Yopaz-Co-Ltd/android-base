@@ -1,6 +1,5 @@
 <resources>
     <!--    Main-->
-    <string name="app_name">AndroidBase</string>
     <string name="error">Error</string>
     <string name="ok">OK</string>
     <string name="refresh">Refresh</string>
