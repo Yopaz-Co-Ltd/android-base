@@ -1,4 +1,5 @@
-1. Mô hình sử dụng
+1. Base này đã được config môi trường cho nên các file .env đã được ignore trong git, khi tạo project mới từ base này cần copy 3 file .env từ base sang hoặc lấy trong Project Docs
+2. Mô hình sử dụng
    https://developer.android.com/topic/libraries/architecture/images/final-architecture.png
     - Thực hiện việc chọn luồng data trong repository, cache data cũng tại đây luôn
     - Luồng data chuẩn: Lấy local data -> hiển thị (data cũ)
