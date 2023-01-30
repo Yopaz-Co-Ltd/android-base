@@ -5,7 +5,7 @@ import com.kira.android_base.base.database.daos.BaseDao
 import com.kira.android_base.base.database.entities.User
 import com.kira.android_base.base.datahandling.Error
 import com.kira.android_base.base.datahandling.toResult
-import com.kira.android_base.base.dispatcher.IoDispatcher
+import com.kira.android_base.base.dispatcher.IODispatcher
 import com.kira.android_base.base.sharedpreference.SharedPreferences
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class LocalDataSource @Inject constructor(
     private val appDatabase: AppDatabase,
     val sharedPreferences: SharedPreferences,
-    @IoDispatcher private val dispatcher: CoroutineDispatcher
+    @IODispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
     private suspend fun <T> runTask(task: () -> T) = withContext(dispatcher) {

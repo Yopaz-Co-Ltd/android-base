@@ -4,7 +4,7 @@ import com.kira.android_base.base.api.APIs
 import com.kira.android_base.base.api.models.response.BaseResponse
 import com.kira.android_base.base.datahandling.Error
 import com.kira.android_base.base.datahandling.toResult
-import com.kira.android_base.base.dispatcher.IoDispatcher
+import com.kira.android_base.base.dispatcher.IODispatcher
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(
     private val apIs: APIs,
     private val moshi: Moshi,
-    @IoDispatcher private val dispatcher: CoroutineDispatcher
+    @IODispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
     private fun Throwable.toError(): Error {

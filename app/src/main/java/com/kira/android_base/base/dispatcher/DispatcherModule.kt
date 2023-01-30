@@ -16,7 +16,7 @@ class DispatcherModule {
     @Provides
     fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
-    @IoDispatcher
+    @IODispatcher
     @Provides
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 
@@ -31,7 +31,7 @@ annotation class DefaultDispatcher
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
-annotation class IoDispatcher
+annotation class IODispatcher
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier

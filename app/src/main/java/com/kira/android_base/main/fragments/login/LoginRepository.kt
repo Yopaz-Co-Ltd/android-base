@@ -3,15 +3,18 @@ package com.kira.android_base.main.fragments.login
 import com.kira.android_base.base.database.entities.User
 import com.kira.android_base.base.datahandling.Result
 import com.kira.android_base.base.datahandling.toResult
-import com.kira.android_base.base.dispatcher.IoDispatcher
-import com.kira.android_base.base.repository.BaseRepository
+import com.kira.android_base.base.dispatcher.IODispatcher
+import com.kira.android_base.base.repository.LocalDataSource
+import com.kira.android_base.base.repository.RemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(
-    @IoDispatcher private val dispatcher: CoroutineDispatcher
-) : BaseRepository() {
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    @IODispatcher private val dispatcher: CoroutineDispatcher
+) {
 
     suspend fun login(): Result<User?>? = withContext(dispatcher) {
         val result = remoteDataSource.login()
