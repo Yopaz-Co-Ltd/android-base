@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -96,11 +97,6 @@ dependencies {
     //Multidex
     implementation "androidx.multidex:multidex:$rootProject.ext.lib_versions.multidex"
 
-    //Koin
-    implementation "io.insert-koin:koin-core:$rootProject.ext.lib_versions.koin"
-    implementation "io.insert-koin:koin-android:$rootProject.ext.lib_versions.koin"
-    implementation "io.insert-koin:koin-android-ext:$rootProject.ext.lib_versions.koin_android_ext"
-
     //ViewModel + LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.ext.lib_versions.lifecycle"
@@ -147,4 +143,8 @@ dependencies {
 
     //EncryptedSharedPreferences
     implementation "androidx.security:security-crypto-ktx:$rootProject.ext.lib_versions.security_crypto"
+
+    //Hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.ext.lib_versions.hilt"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.ext.lib_versions.hilt"
 }

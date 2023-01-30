@@ -11,8 +11,6 @@ buildscript {
                 junit_ext           : '1.1.4',
                 espresso            : '3.5.0',
                 multidex            : '2.0.1',
-                koin                : '3.2.0',
-                koin_android_ext    : '3.0.2',
                 lifecycle           : '2.5.1',
                 chucker             : '3.5.2',
                 okhttp3             : '4.9.3',
@@ -33,7 +31,8 @@ buildscript {
                 jdbc                : '3.34.0',
                 coroutines          : '1.5.0',
                 security_crypto     : '1.1.0-alpha04',
-                navigation_component: '2.5.3'
+                navigation_component: '2.5.3',
+                hilt                : '2.38.1'
         ]
     }
     repositories {
@@ -44,6 +43,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$lib_versions.build_gradle"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$lib_versions.navigation_component"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$lib_versions.hilt"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

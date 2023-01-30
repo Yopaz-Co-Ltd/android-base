@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import com.kira.android_base.main.MainActivity
-import org.koin.androidx.scope.ScopeFragment
 
-abstract class BaseFragment(private val layoutResId: Int) : ScopeFragment() {
+abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
 
     var mainActivity: MainActivity? = null
     var viewDataBinding: ViewDataBinding? = null

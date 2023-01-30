@@ -7,7 +7,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseActivity
 import com.kira.android_base.main.fragments.login.LoginFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun initViews() {

@@ -4,8 +4,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class SharedPreferences(context: Context) {
+class SharedPreferences @Inject constructor(
+    @ApplicationContext context: Context
+) {
 
     companion object {
         private const val APP_SHARED_PREFS_NAME = "shared_preferences"

@@ -1,8 +1,9 @@
 package com.kira.android_base.main
 
 import com.kira.android_base.base.ui.BaseViewModel
+import javax.inject.Inject
 
-class MainViewModel(
+class MainViewModel @Inject constructor(
     val mainRepository: MainRepository
 ) : BaseViewModel() {
 
