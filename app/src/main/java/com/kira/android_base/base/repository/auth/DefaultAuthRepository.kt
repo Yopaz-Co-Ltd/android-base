@@ -14,11 +14,13 @@ import com.kira.android_base.base.database.runDatabaseTask
 import com.kira.android_base.base.supports.utils.ACCESS_TOKEN_KEY
 import com.kira.android_base.base.supports.utils.DEFAULT_STRING
 import com.kira.android_base.base.toResult
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class DefaultAuthRepository(
-    private val context: Context,
+class DefaultAuthRepository @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val sharedPreferences: SharedPreferences,
     private val authApi: AuthApi,
     private val userDao: UserDao

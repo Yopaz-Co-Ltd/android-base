@@ -1,16 +1,18 @@
 package com.kira.android_base.main
 
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
-    private val mainViewModel: MainViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun initViews() {
         invalidateAuthState()

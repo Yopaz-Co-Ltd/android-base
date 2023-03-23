@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kira.android_base.base.Error
-import org.koin.core.component.KoinComponent
 
-abstract class BaseViewModel : ViewModel(), KoinComponent {
+abstract class BaseViewModel : ViewModel() {
 
     companion object {
         val TAG: String = this::class.java.simpleName

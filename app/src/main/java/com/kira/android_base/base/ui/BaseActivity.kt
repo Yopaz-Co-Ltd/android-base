@@ -5,18 +5,18 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.EditText
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.github.ybq.android.spinkit.sprite.Sprite
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.widgets.ErrorDialog
 import com.kira.android_base.base.ui.widgets.LoadingDialog
-import org.koin.androidx.scope.ScopeActivity
 
 abstract class BaseActivity(
     @LayoutRes
     private val activityLayoutRes: Int
-) : ScopeActivity() {
+) : AppCompatActivity() {
 
     private var activityViewDataBinding: ViewDataBinding? = null
     private val errorDialog = ErrorDialog()

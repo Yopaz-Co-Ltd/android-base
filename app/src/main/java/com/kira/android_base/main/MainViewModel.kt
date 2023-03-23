@@ -7,9 +7,12 @@ import com.kira.android_base.base.database.entities.User
 import com.kira.android_base.base.repository.auth.AuthRepository
 import com.kira.android_base.base.repository.user.UserRepository
 import com.kira.android_base.base.ui.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val userRepository: UserRepository
 ) : BaseViewModel() {

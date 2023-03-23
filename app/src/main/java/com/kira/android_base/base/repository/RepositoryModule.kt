@@ -4,10 +4,18 @@ import com.kira.android_base.base.repository.auth.AuthRepository
 import com.kira.android_base.base.repository.auth.DefaultAuthRepository
 import com.kira.android_base.base.repository.user.DefaultUserRepository
 import com.kira.android_base.base.repository.user.UserRepository
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 
-val repositoryModule = module {
-    single<AuthRepository> { DefaultAuthRepository(androidContext(), get(), get(), get()) }
-    single<UserRepository> { DefaultUserRepository(get()) }
+@Module
+@InstallIn(ViewModelComponent::class)
+interface RepositoryModule {
+
+    @Binds
+    fun provideAuthRepository(defaultAuthRepository: DefaultAuthRepository): AuthRepository
+
+    @Binds
+    fun provideUserRepository(defaultUserRepository: DefaultUserRepository): UserRepository
 }
