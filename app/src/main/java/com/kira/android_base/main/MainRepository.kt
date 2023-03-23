@@ -1,11 +1,9 @@
 package com.kira.android_base.main
 
-import com.kira.android_base.base.repository.LocalDataSource
+import com.kira.android_base.base.repository.BaseRepository
 import javax.inject.Inject
 
-class MainRepository @Inject constructor(
-    val localDataSource: LocalDataSource
-) {
+class MainRepository @Inject constructor() : BaseRepository() {
 
     fun saveSharedPreferencesData(key: String, value: Any) =
         localDataSource.saveSharedPreferencesData(key, value)
