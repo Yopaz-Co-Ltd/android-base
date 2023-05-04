@@ -21,8 +21,8 @@ class Application : MultiDexApplication() {
             modules(
                 APIsModule,
                 databaseModule,
-                repositoryModule,
                 sharedPreferencesModule,
+                repositoryModule,
                 mainModule
             )
         }

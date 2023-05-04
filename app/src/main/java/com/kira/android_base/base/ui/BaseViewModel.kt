@@ -3,7 +3,7 @@ package com.kira.android_base.base.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kira.android_base.base.datahandling.Error
+import com.kira.android_base.base.Error
 import org.koin.core.component.KoinComponent
 
 abstract class BaseViewModel : ViewModel(), KoinComponent {

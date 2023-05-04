@@ -1,7 +1,7 @@
-package com.kira.android_base.base.api.models.response
+package com.kira.android_base.base.api
 
-import com.kira.android_base.base.datahandling.Result
-import com.kira.android_base.base.datahandling.toResult
+import com.kira.android_base.base.Result
+import com.kira.android_base.base.toResult
 import com.squareup.moshi.Json
 
 open class BaseResponse<T> {

@@ -1,31 +1,31 @@
 package com.kira.android_base.main.fragments.login
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.kira.android_base.base.database.entities.User
-import com.kira.android_base.base.supports.extensions.SingleLiveData
+import com.kira.android_base.base.repository.auth.AuthRepository
 import com.kira.android_base.base.ui.BaseViewModel
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val loginRepository: LoginRepository
+    private val authRepository: AuthRepository,
 ) : BaseViewModel() {
 
-    private val _userLiveData = SingleLiveData<User?>()
-    val userLiveData: LiveData<User?> = _userLiveData
+    private val _isLoggedInLiveData = MutableLiveData<Boolean>()
+    val isLoggedInLiveData: LiveData<Boolean> = _isLoggedInLiveData
 
     fun login() {
         viewModelScope.launch {
             _loadingLiveData.postValue(true)
-            val result = loginRepository.login()
-            result?.data?.let { user ->
-                _loadingLiveData.postValue(false)
-                _userLiveData.postValue(user)
+            // todo remove fake data
+            val result = authRepository.login("email", "password")
+            _loadingLiveData.postValue(false)
+            result.data?.let { isLoggedIn ->
+                _isLoggedInLiveData.postValue(isLoggedIn)
                 return@launch
             }
 
-            _loadingLiveData.postValue(false)
-            result?.error?.let { error ->
+            result.error?.let { error ->
                 _errorLiveData.postValue(error)
             }
         }

@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="args"
-            type="com.kira.android_base.main.fragments.home.HomeArgs" />
+            name="mainViewModel"
+            type="com.kira.android_base.main.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -13,18 +13,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> mainViewModel.logout()}"
+            android:text="@string/logout" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text='@{args.userName ?? ""}'
+            android:text='@{mainViewModel.userLiveData.name ?? ""}'
             android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text='@{`` + (args.age ?? "")}'
+            android:text='@{mainViewModel.userLiveData.stringAge() ?? ""}'
             android:textColor="@android:color/black" />
     </LinearLayout>
 </layout>

@@ -78,8 +78,6 @@
 
 
 #Room, entities
--dontwarn android.arch.util.paging.CountedDataSource
--dontwarn android.arch.persistence.room.paging.LimitOffsetDataSource
 -keep class com.kira.android_base.base.database.entities.** { *; }
 
 
@@ -97,8 +95,6 @@
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
     @retrofit2.http.* <methods>;
 }
-# Ignore annotation used for build tooling.
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 # Ignore JSR 305 annotations for embedding nullability information.
 -dontwarn javax.annotation.**
 # Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
@@ -189,9 +185,7 @@
 
 
 ###main, keep entities, api interface, interceptor
--keep class com.kira.android_base.base.api.models.** { *; }
--keep interface com.kira.android_base.base.api.APIs
--keep class com.kira.android_base.base.api.AppInterceptor
+-keep interface com.kira.android_base.base.api.** { *; }
 
 
 ### REMOVE all Log messages

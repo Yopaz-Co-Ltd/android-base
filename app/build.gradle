@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -89,6 +90,9 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.ext.lib_versions.appcompat"
     implementation "com.google.android.material:material:$rootProject.ext.lib_versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.lib_versions.constraintlayout"
+    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation "androidx.test:core-ktx:$rootProject.ext.lib_versions.testCoreKtx"
     testImplementation "junit:junit:$rootProject.ext.lib_versions.junit"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.lib_versions.junit_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.lib_versions.espresso"
@@ -100,6 +104,7 @@ dependencies {
     implementation "io.insert-koin:koin-core:$rootProject.ext.lib_versions.koin"
     implementation "io.insert-koin:koin-android:$rootProject.ext.lib_versions.koin"
     implementation "io.insert-koin:koin-android-ext:$rootProject.ext.lib_versions.koin_android_ext"
+    testImplementation "io.insert-koin:koin-test:$rootProject.ext.lib_versions.koin"
 
     //ViewModel + LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"

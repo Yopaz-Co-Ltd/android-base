@@ -9,4 +9,6 @@ data class User(
     val id: Int? = null,
     val name: String?,
     val age: Int?
-)
+) {
+    fun stringAge() = age?.toString()
+}

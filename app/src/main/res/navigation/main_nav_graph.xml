@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/loginFragment">
+    android:label="main">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.kira.android_base.main.fragments.login.LoginFragment"
-        android:label="LoginFragment">
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.kira.android_base.main.fragments.home.HomeFragment"
-        android:label="HomeFragment" >
-        <argument
-            android:name="args"
-            app:argType="com.kira.android_base.main.fragments.home.HomeArgs"
-            app:nullable="true" />
-    </fragment>
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
 </navigation>

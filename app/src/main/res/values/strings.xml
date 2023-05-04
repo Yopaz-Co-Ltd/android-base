@@ -6,4 +6,8 @@
 
     <!--    Login Fragment-->
     <string name="login">Login</string>
+    <string name="error_login_failed">Login Failed!</string>
+
+    <!--    Home Fragment-->
+    <string name="logout">Logout</string>
 </resources>

@@ -7,7 +7,6 @@ import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import com.github.ybq.android.spinkit.sprite.Sprite
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.widgets.ErrorDialog
@@ -29,20 +28,13 @@ abstract class BaseActivity(
         activityViewDataBinding = DataBindingUtil.setContentView(this, activityLayoutRes)
 
         initViews()
-    }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) {
-            finish()
-        } else {
-            super.onBackPressed()
-        }
+        handleObservables()
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         val isConsumed = super.dispatchTouchEvent(ev)
         if (ev?.action == MotionEvent.ACTION_DOWN) {
-            currentFocus?.let { it ->
+            currentFocus?.let {
                 if (it !is EditText) return@let
                 val outRect = Rect()
                 it.getGlobalVisibleRect(outRect)
@@ -56,7 +48,7 @@ abstract class BaseActivity(
 
     abstract fun initViews()
 
-    abstract fun generateNewFragmentWithTag(fragmentTag: String): Fragment?
+    open fun handleObservables() {}
 
     fun showErrorDialog(
         errorMessage: String,

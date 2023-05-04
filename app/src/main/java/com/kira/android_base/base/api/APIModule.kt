@@ -5,6 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.kira.android_base.BuildConfig
+import com.kira.android_base.base.api.auth.AuthApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Cache
@@ -27,14 +28,14 @@ val APIsModule = module {
     single { provideCache(androidContext()) }
     single { provideOkHttp(androidContext(), get(), get(), get()) }
     single { provideRetrofit(get(), get()) }
-    single { provideAPIs(get()) }
+    single { provideAuthApi(get()) }
 }
 
 fun provideMoshi(): Moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+private fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     val loggingInterceptor = HttpLoggingInterceptor()
     if (BuildConfig.DEBUG)
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -44,11 +45,11 @@ fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     return loggingInterceptor
 }
 
-fun provideAppInterceptor() = AppInterceptor()
+private fun provideAppInterceptor() = AppInterceptor()
 
-fun provideCache(context: Context): Cache = Cache(context.cacheDir, CACHE_SIZE)
+private fun provideCache(context: Context): Cache = Cache(context.cacheDir, CACHE_SIZE)
 
-fun provideOkHttp(
+private fun provideOkHttp(
     context: Context,
     cache: Cache,
     appInterceptor: AppInterceptor,
@@ -74,11 +75,11 @@ fun provideOkHttp(
         .build()
 }
 
-fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit =
+private fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit =
     Retrofit.Builder()
         .baseUrl(BuildConfig.SERVER_URL)
         .client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-fun provideAPIs(retrofit: Retrofit): APIs = retrofit.create(APIs::class.java)
+private fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
