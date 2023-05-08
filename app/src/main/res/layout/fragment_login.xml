@@ -8,32 +8,47 @@
             type="com.kira.android_base.main.fragments.login.LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/global_screen_background">
 
-        <Button
-            android:id="@+id/b_login"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/secondary"
-            android:onClick="@{()->viewModel.login()}"
-            android:text="@string/login"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginHorizontal="@dimen/space_16"
+            android:layout_marginTop="@dimen/space_32"
+            android:orientation="vertical">
 
-        <com.kira.android_base.base.ui.widgets.recyclerview.BaseRecyclerView
-            android:id="@+id/brv_login"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/space_0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/b_login" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_hint"
+                android:inputType="textEmailAddress" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/b_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16"
+                android:backgroundTint="@color/secondary"
+                android:onClick='@{()->viewModel.login(context, editTextEmail.getText().toString(), editTextPassword.getText().toString())}'
+                android:text="@string/login" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.kira.android_base.base.ui.widgets.ErrorPage
             android:id="@+id/ep"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

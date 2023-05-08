@@ -10,6 +10,9 @@ abstract class UserDao : BaseDao<User>() {
     @Query("select * from user limit 1")
     abstract fun getUser(): User?
 
+    @Query("select * from user")
+    abstract fun getAllUser(): List<User>
+
     @Query("delete from user")
     abstract fun deleteAllUser(): Int
 }

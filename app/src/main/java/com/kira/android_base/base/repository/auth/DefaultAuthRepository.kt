@@ -11,8 +11,7 @@ import com.kira.android_base.base.api.callApi
 import com.kira.android_base.base.database.daos.UserDao
 import com.kira.android_base.base.database.insertDatabase
 import com.kira.android_base.base.database.runDatabaseTask
-import com.kira.android_base.base.supports.utils.ACCESS_TOKEN_KEY
-import com.kira.android_base.base.supports.utils.DEFAULT_STRING
+import com.kira.android_base.base.supports.utils.Constants
 import com.kira.android_base.base.toResult
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +25,8 @@ class DefaultAuthRepository @Inject constructor(
     private val userDao: UserDao
 ) : AuthRepository {
 
-    override fun getLocalAccessToken() = sharedPreferences.getString(ACCESS_TOKEN_KEY, DEFAULT_STRING)
+    override fun getLocalAccessToken() =
+        sharedPreferences.getString(Constants.ACCESS_TOKEN_KEY, Constants.DEFAULT_STRING)
 
     override suspend fun login(email: String, password: String): Result<Boolean> = withContext(Dispatchers.IO) {
         val result = callApi { authApi.login(LoginRequestModel(email, password)) }
@@ -35,13 +35,13 @@ class DefaultAuthRepository @Inject constructor(
                 R.string.error_login_failed
             )
         ).toResult<Boolean>()
-        sharedPreferences.edit().putString(ACCESS_TOKEN_KEY, accessToken).apply()
+        sharedPreferences.edit().putString(Constants.ACCESS_TOKEN_KEY, accessToken).apply()
         result.data.user?.let { user -> insertDatabase(userDao, user) }
         return@withContext true.toResult()
     }
 
     override suspend fun logout(): Result<Int> {
-        sharedPreferences.edit().remove(ACCESS_TOKEN_KEY).apply()
+        sharedPreferences.edit().remove(Constants.ACCESS_TOKEN_KEY).apply()
         return runDatabaseTask { userDao.deleteAllUser() }
     }
 }

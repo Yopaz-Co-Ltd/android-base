@@ -1,6 +1,5 @@
 package com.kira.android_base.main.fragments.login
 
-import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.kira.android_base.R
@@ -21,14 +20,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         (viewDataBinding as FragmentLoginBinding?)?.apply {
             this.viewModel = this@LoginFragment.viewModel
             lifecycleOwner = this@LoginFragment
-            brvLogin.apply {
-                setAdapter(LoginRecyclerViewAdapter().apply {
-                    list.addAll((1..10).map { "$it" })
-                })
-                setOnRefreshListener {
-                    Log.d(TAG, "initViews: setOnRefreshListener")
-                }
-            }
         }
     }
 

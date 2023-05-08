@@ -33,5 +33,10 @@
             android:gravity="center_horizontal"
             android:text='@{mainViewModel.userLiveData.stringAge() ?? ""}'
             android:textColor="@android:color/black" />
+
+        <com.kira.android_base.base.ui.widgets.recyclerview.BaseRecyclerView
+            android:id="@+id/brv_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </layout>

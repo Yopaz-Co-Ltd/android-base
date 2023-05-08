@@ -6,7 +6,12 @@
 
     <!--    Login Fragment-->
     <string name="login">Login</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
     <string name="error_login_failed">Login Failed!</string>
+    <string name="error_invalid_email">Email is invalid!</string>
+    <string name="error_password_does_not_have_enough_characters">Password must have at least 6 characters!</string>
+    <string name="error_password_does_not_contain_any_digits">Password must have at least 1 digit!</string>
 
     <!--    Home Fragment-->
     <string name="logout">Logout</string>

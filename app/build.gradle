@@ -8,11 +8,10 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
-
     defaultConfig {
         applicationId "com.kira.android_base"
         minSdkVersion 23
+        compileSdk 33
         targetSdkVersion 33
         multiDexEnabled true
         versionCode 1
@@ -34,11 +33,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     namespace 'com.kira.android_base'
     signingConfigs {
@@ -49,26 +48,24 @@ android {
             keyPassword "123456"
         }
     }
-    flavorDimensions 'root'
+
+    flavorDimensions.add("environment")
 
     def serverUrlKey = 'SERVER_URL'
     def environmentProperties = new Properties()
 
     productFlavors {
         production {
-            dimension 'root'
             environmentProperties.load(new FileInputStream(rootProject.file(".env.production.properties")))
             buildConfigField "String", serverUrlKey, environmentProperties[serverUrlKey]
         }
 
         staging {
-            dimension 'root'
             environmentProperties.load(new FileInputStream(rootProject.file(".env.staging.properties")))
             buildConfigField "String", serverUrlKey, environmentProperties[serverUrlKey]
         }
 
         develop {
-            dimension 'root'
             environmentProperties.load(new FileInputStream(rootProject.file(".env.develop.properties")))
             buildConfigField "String", serverUrlKey, environmentProperties[serverUrlKey]
         }
@@ -86,72 +83,83 @@ android {
     kapt {
         correctErrorTypes true
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.ext.kotlin_version"
-    implementation "androidx.core:core-ktx:$rootProject.ext.lib_versions.core_ktx"
-    implementation "androidx.appcompat:appcompat:$rootProject.ext.lib_versions.appcompat"
-    implementation "com.google.android.material:material:$rootProject.ext.lib_versions.material"
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.lib_versions.constraintlayout"
-    implementation 'androidx.core:core-ktx:1.10.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
-    implementation "androidx.test:core-ktx:$rootProject.ext.lib_versions.testCoreKtx"
-    testImplementation "junit:junit:$rootProject.ext.lib_versions.junit"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.lib_versions.junit_ext"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.lib_versions.espresso"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "androidx.core:core-ktx:$lib_versions.core_ktx"
+    implementation "androidx.appcompat:appcompat:$lib_versions.appcompat"
+    implementation "com.google.android.material:material:$lib_versions.material"
+    implementation "androidx.constraintlayout:constraintlayout:$lib_versions.constraintlayout"
+    implementation "androidx.test:core-ktx:$lib_versions.testCoreKtx"
+
+    testImplementation "androidx.arch.core:core-testing:$lib_versions.arch_core_testing"
+    testImplementation "junit:junit:$lib_versions.junit"
+    testImplementation "com.google.truth:truth:$lib_versions.truth"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$lib_versions.mockito"
+
+    androidTestImplementation "androidx.arch.core:core-testing:$lib_versions.arch_core_testing"
+    androidTestImplementation "androidx.test.ext:junit:$lib_versions.junit_ext"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$lib_versions.espresso"
+    androidTestImplementation "com.google.truth:truth:$lib_versions.truth"
 
     //Multidex
-    implementation "androidx.multidex:multidex:$rootProject.ext.lib_versions.multidex"
+    implementation "androidx.multidex:multidex:$lib_versions.multidex"
 
     //ViewModel + LiveData
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.ext.lib_versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lib_versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lib_versions.lifecycle"
 
     //Chucker
-    debugImplementation "com.github.chuckerteam.chucker:library:$rootProject.ext.lib_versions.chucker"
-    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$rootProject.ext.lib_versions.chucker"
+    debugImplementation "com.github.chuckerteam.chucker:library:$lib_versions.chucker"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$lib_versions.chucker"
 
     //OkHttp
-    implementation "com.squareup.okhttp3:okhttp:$rootProject.ext.lib_versions.okhttp3"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.lib_versions.logging_okhttp3"
+    implementation "com.squareup.okhttp3:okhttp:$lib_versions.okhttp3"
+    implementation "com.squareup.okhttp3:logging-interceptor:$lib_versions.logging_okhttp3"
 
     //Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.lib_versions.retrofit"
-    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.ext.lib_versions.moshi_retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$lib_versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$lib_versions.moshi_retrofit"
 
     //Moshi
-    implementation "com.squareup.moshi:moshi:$rootProject.ext.lib_versions.moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$rootProject.ext.lib_versions.moshi"
+    implementation "com.squareup.moshi:moshi:$lib_versions.moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$lib_versions.moshi"
 
     //Room
-    implementation "androidx.room:room-runtime:$rootProject.ext.lib_versions.room"
-    kapt "androidx.room:room-compiler:$rootProject.ext.lib_versions.room_compiler"
+    implementation "androidx.room:room-runtime:$lib_versions.room"
+    kapt "androidx.room:room-compiler:$lib_versions.room_compiler"
 
     //Loading Indicator https://github.com/ybq/Android-SpinKit
-    implementation "com.github.ybq:Android-SpinKit:$rootProject.ext.lib_versions.loading"
+    implementation "com.github.ybq:Android-SpinKit:$lib_versions.loading"
 
     //Glide
-    implementation "com.github.bumptech.glide:glide:$rootProject.ext.lib_versions.glide"
-    kapt "com.github.bumptech.glide:compiler:$rootProject.ext.lib_versions.glide"
+    implementation "com.github.bumptech.glide:glide:$lib_versions.glide"
+    kapt "com.github.bumptech.glide:compiler:$lib_versions.glide"
 
     //Android Browser
-    implementation "androidx.browser:browser:$rootProject.ext.lib_versions.browser"
+    implementation "androidx.browser:browser:$lib_versions.browser"
 
     //Swipe Refresh Layout
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.ext.lib_versions.swipe_refresh_layout"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$lib_versions.swipe_refresh_layout"
 
     //Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.lib_versions.coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$lib_versions.coroutines"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$lib_versions.coroutines"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$lib_versions.coroutines"
 
     //Navigation Component
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.lib_versions.navigation_component"
-    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.ext.lib_versions.navigation_component"
+    implementation "androidx.navigation:navigation-fragment-ktx:$lib_versions.navigation_component"
+    implementation "androidx.navigation:navigation-ui-ktx:$lib_versions.navigation_component"
 
     //EncryptedSharedPreferences
-    implementation "androidx.security:security-crypto-ktx:$rootProject.ext.lib_versions.security_crypto"
+    implementation "androidx.security:security-crypto-ktx:$lib_versions.security_crypto"
 
     //Hilt
-    implementation "com.google.dagger:hilt-android:$rootProject.ext.lib_versions.hilt"
-    kapt "com.google.dagger:hilt-compiler:$rootProject.ext.lib_versions.hilt"
+    implementation "com.google.dagger:hilt-android:$lib_versions.hilt"
+    kapt "com.google.dagger:hilt-compiler:$lib_versions.hilt"
 }
