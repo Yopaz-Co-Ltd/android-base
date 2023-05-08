@@ -28,8 +28,8 @@ class MainViewModel @Inject constructor(
     fun getLocalUser() {
         viewModelScope.launch {
             val result = userRepository.getLocalUser()
-            result.data?.let {
-                _userLiveData.postValue(it)
+            result.data?.let { user ->
+                _userLiveData.postValue(user)
                 return@launch
             }
 

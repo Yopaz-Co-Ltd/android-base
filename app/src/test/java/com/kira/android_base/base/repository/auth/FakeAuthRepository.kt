@@ -9,9 +9,11 @@ class FakeAuthRepository : AuthRepository {
 
     companion object {
         const val ERROR_LOGIN_FAILED = "Login failed!"
+        const val ERROR_LOGOUT_FAILED = "Logout failed!"
     }
 
     private var shouldShowLoginError = false
+    private var shouldShowLogoutError = false
     private var accessToken: String? = null
     private var user: User? = null
 
@@ -30,11 +32,17 @@ class FakeAuthRepository : AuthRepository {
 
     override suspend fun logout(): Result<Int> {
         accessToken = null
+        if (shouldShowLogoutError)
+            return Error(Error.Companion.Code.DEFAULT.value, ERROR_LOGOUT_FAILED).toResult()
         user = null
         return 1.toResult()
     }
 
     fun setShouldShowLoginError(shouldShowLoginError: Boolean) {
         this.shouldShowLoginError = shouldShowLoginError
+    }
+
+    fun setShouldShowLogoutError(shouldShowLogoutError: Boolean) {
+        this.shouldShowLogoutError = shouldShowLogoutError
     }
 }
