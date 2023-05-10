@@ -1,7 +1,6 @@
 package com.kira.android_base.base.repository.auth
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.kira.android_base.R
 import com.kira.android_base.base.Error
 import com.kira.android_base.base.Result
@@ -11,6 +10,7 @@ import com.kira.android_base.base.api.callApi
 import com.kira.android_base.base.database.daos.UserDao
 import com.kira.android_base.base.database.insertDatabase
 import com.kira.android_base.base.database.runDatabaseTask
+import com.kira.android_base.base.sharedpreferences.SharedPreferences
 import com.kira.android_base.base.supports.utils.Constants
 import com.kira.android_base.base.toResult
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -35,13 +35,13 @@ class DefaultAuthRepository @Inject constructor(
                 R.string.error_login_failed
             )
         ).toResult<Boolean>()
-        sharedPreferences.edit().putString(Constants.ACCESS_TOKEN_KEY, accessToken).apply()
+        sharedPreferences.putString(Constants.ACCESS_TOKEN_KEY, accessToken)
         result.data.user?.let { user -> insertDatabase(userDao, user) }
         return@withContext true.toResult()
     }
 
     override suspend fun logout(): Result<Int> {
-        sharedPreferences.edit().remove(Constants.ACCESS_TOKEN_KEY).apply()
+        sharedPreferences.remove(Constants.ACCESS_TOKEN_KEY)
         return runDatabaseTask { userDao.deleteAllUser() }
     }
 }

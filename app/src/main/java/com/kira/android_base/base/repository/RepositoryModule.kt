@@ -14,8 +14,8 @@ import dagger.hilt.android.components.ViewModelComponent
 interface RepositoryModule {
 
     @Binds
-    fun provideAuthRepository(defaultAuthRepository: DefaultAuthRepository): AuthRepository
+    fun bindAuthRepository(defaultAuthRepository: DefaultAuthRepository): AuthRepository
 
     @Binds
-    fun provideUserRepository(defaultUserRepository: DefaultUserRepository): UserRepository
+    fun bindUserRepository(defaultUserRepository: DefaultUserRepository): UserRepository
 }
