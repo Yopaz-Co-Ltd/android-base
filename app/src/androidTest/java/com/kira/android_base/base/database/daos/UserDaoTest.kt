@@ -1,34 +1,43 @@
 package com.kira.android_base.base.database.daos
 
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.kira.android_base.base.database.AppDatabase
+import com.kira.android_base.base.database.TEST_APP_DATABASE_NAME
 import com.kira.android_base.base.database.entities.User
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
 @ExperimentalCoroutinesApi
 @SmallTest
-@RunWith(AndroidJUnit4::class)
+@HiltAndroidTest
 class UserDaoTest {
 
-    private lateinit var appDatabase: AppDatabase
+    @get:Rule
+    var hiltAndroidRule = HiltAndroidRule(this)
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Inject
+    @Named(TEST_APP_DATABASE_NAME)
+    lateinit var appDatabase: AppDatabase
+
     private lateinit var userDao: UserDao
     private lateinit var initialInsertedUser: User
 
     @Before
     fun setUp() {
-        appDatabase = Room
-            .inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), AppDatabase::class.java)
-            .allowMainThreadQueries()
-            .build()
+        hiltAndroidRule.inject()
         userDao = appDatabase.userDao()
         initialInsertedUser = User(id = 1, name = "Kira", age = 18)
         userDao.insert(initialInsertedUser)

@@ -7,22 +7,18 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import javax.inject.Named
 
-private const val APP_DATABASE_NAME = "app_database"
+const val TEST_APP_DATABASE_NAME = "test_app_database"
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DatabaseModule {
+object TestDatabaseModule {
 
     @Provides
-    @Singleton
+    @Named(TEST_APP_DATABASE_NAME)
     fun provideRoomDb(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, AppDatabase::class.java, APP_DATABASE_NAME)
-            .fallbackToDestructiveMigration()
+        Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
+            .allowMainThreadQueries()
             .build()
-
-    @Provides
-    @Singleton
-    fun provideUserDao(appDatabase: AppDatabase) = appDatabase.userDao()
 }

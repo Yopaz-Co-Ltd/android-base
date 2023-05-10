@@ -1,4 +1,4 @@
-package com.kira.android_base.base.dispatcher
+package com.kira.android_base.base.supports
 
 import dagger.Module
 import dagger.Provides

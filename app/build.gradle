@@ -17,7 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.kira.android_base.base.supports.HiltTestRunner"
     }
 
     buildTypes {
@@ -162,4 +162,6 @@ dependencies {
     //Hilt
     implementation "com.google.dagger:hilt-android:$lib_versions.hilt"
     kapt "com.google.dagger:hilt-compiler:$lib_versions.hilt"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$lib_versions.hilt"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$lib_versions.hilt"
 }
