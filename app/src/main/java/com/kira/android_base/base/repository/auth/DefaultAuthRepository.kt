@@ -12,10 +12,9 @@ import com.kira.android_base.base.database.insertDatabase
 import com.kira.android_base.base.database.runDatabaseTask
 import com.kira.android_base.base.sharedpreferences.SharedPreferences
 import com.kira.android_base.base.supports.utils.Constants
+import com.kira.android_base.base.supports.wrapEspressoIdlingResource
 import com.kira.android_base.base.toResult
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class DefaultAuthRepository @Inject constructor(
@@ -28,20 +27,21 @@ class DefaultAuthRepository @Inject constructor(
     override fun getLocalAccessToken() =
         sharedPreferences.getString(Constants.ACCESS_TOKEN_KEY, Constants.DEFAULT_STRING)
 
-    override suspend fun login(email: String, password: String): Result<Boolean> = withContext(Dispatchers.IO) {
-        val result = callApi { authApi.login(LoginRequestModel(email, password)) }
-        val accessToken = result?.data?.accessToken ?: return@withContext Error(
-            Error.Companion.Code.UNAUTHORIZED.value, context.getString(
-                R.string.error_login_failed
-            )
-        ).toResult<Boolean>()
-        sharedPreferences.putString(Constants.ACCESS_TOKEN_KEY, accessToken)
-        result.data.user?.let { user -> insertDatabase(userDao, user) }
-        return@withContext true.toResult()
-    }
+    override suspend fun login(email: String, password: String): Result<Boolean> =
+        wrapEspressoIdlingResource {
+            val result = callApi { authApi.login(LoginRequestModel(email, password)) }
+            val accessToken = result?.data?.accessToken ?: return@wrapEspressoIdlingResource Error(
+                Error.Companion.Code.UNAUTHORIZED.value, context.getString(
+                    R.string.error_login_failed
+                )
+            ).toResult<Boolean>()
+            sharedPreferences.putString(Constants.ACCESS_TOKEN_KEY, accessToken)
+            result.data.user?.let { user -> insertDatabase(userDao, user) }
+            return@wrapEspressoIdlingResource true.toResult()
+        }
 
-    override suspend fun logout(): Result<Int> {
+    override suspend fun logout(): Result<Int> = wrapEspressoIdlingResource {
         sharedPreferences.remove(Constants.ACCESS_TOKEN_KEY)
-        return runDatabaseTask { userDao.deleteAllUser() }
+        runDatabaseTask { userDao.deleteAllUser() }
     }
 }

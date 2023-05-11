@@ -9,6 +9,7 @@ buildscript {
                 constraintlayout    : '2.1.4',
                 junit               : '4.13.2',
                 truth               : '1.1.3',
+                fragment_testing    : '1.5.7',
                 mockito             : '4.1.0',
                 testCoreKtx         : '1.5.0',
                 junit_ext           : '1.1.5',

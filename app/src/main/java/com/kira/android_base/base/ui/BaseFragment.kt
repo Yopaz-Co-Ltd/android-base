@@ -16,7 +16,7 @@ abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainActivity = activity as MainActivity?
+        mainActivity = activity as? MainActivity
     }
 
     override fun onCreateView(

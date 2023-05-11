@@ -84,8 +84,9 @@ android {
         correctErrorTypes true
     }
 
-    testOptions {
-        unitTests.returnDefaultValues = true
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
     }
 }
 
@@ -96,6 +97,7 @@ dependencies {
     implementation "com.google.android.material:material:$lib_versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$lib_versions.constraintlayout"
     implementation "androidx.test:core-ktx:$lib_versions.testCoreKtx"
+    implementation "androidx.test.espresso:espresso-idling-resource:$lib_versions.espresso"
 
     testImplementation "androidx.arch.core:core-testing:$lib_versions.arch_core_testing"
     testImplementation "junit:junit:$lib_versions.junit"
@@ -106,6 +108,8 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$lib_versions.junit_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$lib_versions.espresso"
     androidTestImplementation "com.google.truth:truth:$lib_versions.truth"
+    androidTestImplementation "org.mockito:mockito-android:$lib_versions.mockito"
+    debugImplementation "androidx.fragment:fragment-testing:$lib_versions.fragment_testing"
 
     //Multidex
     implementation "androidx.multidex:multidex:$lib_versions.multidex"
