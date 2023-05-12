@@ -30,8 +30,8 @@ import javax.inject.Inject
 class LoginFragmentTest {
 
     companion object {
-        private const val VALID_TEST_EMAIL = "kira@gmail.com"
-        private const val VALID_TEST_PASSWORD = "kira1234"
+        const val VALID_TEST_EMAIL = "kira@gmail.com"
+        const val VALID_TEST_PASSWORD = "kira1234"
     }
 
     @get:Rule
