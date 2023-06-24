@@ -2,7 +2,7 @@
 buildscript {
     ext {
         lib_versions = [
-                build_gradle        : "7.3.1",
+                build_gradle        : '8.0.2',
                 core_ktx            : '1.10.0',
                 appcompat           : '1.6.1',
                 material            : '1.8.0',
