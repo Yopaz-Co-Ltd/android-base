@@ -1,6 +1,7 @@
 package com.kira.android_base.main.fragments.home
 
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.kira.android_base.R
 import com.kira.android_base.base.service.MyForegroundService
@@ -27,6 +28,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 setOnRefreshListener {
                     Log.d(LoginFragment.TAG, "initViews: setOnRefreshListener")
                 }
+            }
+
+            buttonGetDataBindService.setOnClickListener {
+                Toast.makeText(
+                    context,
+                    mainActivity?.getDataBindService().toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
         mainViewModel.getLocalUser()

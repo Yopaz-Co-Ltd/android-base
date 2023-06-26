@@ -51,6 +51,14 @@
                 android:text="@string/kill_service" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/button_get_data_bind_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/space_16"
+            android:text="@string/get" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -17,4 +17,7 @@
     <string name="logout">Logout</string>
     <string name="start_service">Start service</string>
     <string name="kill_service">Kill service</string>
+    <string name="start_bind_service">Start bind service</string>
+    <string name="kill_bind_service">Kill bind service</string>
+    <string name="get">Get Data Bind Service</string>
 </resources>
