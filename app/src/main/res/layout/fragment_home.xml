@@ -6,6 +6,12 @@
         <variable
             name="mainViewModel"
             type="com.kira.android_base.main.MainViewModel" />
+
+        <variable
+            name="service"
+            type="com.kira.android_base.base.service.MyForegroundService" />
+
+        <import type="com.kira.android_base.base.supports.utils.Enums.CommandService" />
     </data>
 
     <LinearLayout
@@ -14,12 +20,36 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_logout"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> mainViewModel.logout()}"
-            android:text="@string/logout" />
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> mainViewModel.logout()}"
+                android:text="@string/logout" />
+
+            <Button
+                android:id="@+id/button_start_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16"
+                android:backgroundTint="@color/selector_button_enable"
+                android:onClick="@{() -> mainViewModel.sendCommandToService(CommandService.ACTION_START_OR_RESUME_SERVICE)}"
+                android:text="@string/start_service" />
+
+            <Button
+                android:id="@+id/button_kill_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16"
+                android:backgroundTint="@color/selector_button_enable"
+                android:onClick="@{() -> mainViewModel.sendCommandToService(CommandService.ACTION_STOP_SERVICE)}"
+                android:text="@string/kill_service" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

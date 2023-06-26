@@ -3,6 +3,7 @@ package com.kira.android_base.main.fragments.home
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import com.kira.android_base.R
+import com.kira.android_base.base.service.MyForegroundService
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.FragmentHomeBinding
 import com.kira.android_base.main.MainViewModel
@@ -29,5 +30,15 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             }
         }
         mainViewModel.getLocalUser()
+    }
+
+    override fun handleObservables() {
+        super.handleObservables()
+        MyForegroundService.isTrackingLiveData.observe(viewLifecycleOwner) {
+            (viewDataBinding as? FragmentHomeBinding)?.run {
+                buttonStartService.isEnabled = !it
+                buttonKillService.isEnabled = it
+            }
+        }
     }
 }

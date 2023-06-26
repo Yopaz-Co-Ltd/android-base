@@ -15,4 +15,6 @@
 
     <!--    Home Fragment-->
     <string name="logout">Logout</string>
+    <string name="start_service">Start service</string>
+    <string name="kill_service">Kill service</string>
 </resources>

@@ -1,11 +1,13 @@
 package com.kira.android_base.main
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.kira.android_base.R
+import com.kira.android_base.base.service.MyForegroundService
 import com.kira.android_base.base.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +25,13 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
         mainViewModel.logoutSuccessfullyLiveData.observe(this) {
             invalidateAuthState()
+        }
+
+        mainViewModel.commandServiceLiveData.observe(this) {
+            Intent(this, MyForegroundService::class.java).apply {
+                action = it.value
+                startService(this)
+            }
         }
 
         mainViewModel.errorLiveData.observe(this) { error ->

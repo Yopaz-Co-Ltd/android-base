@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.kira.android_base.base.database.entities.User
 import com.kira.android_base.base.repository.auth.AuthRepository
 import com.kira.android_base.base.repository.user.UserRepository
+import com.kira.android_base.base.supports.utils.Enums
 import com.kira.android_base.base.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,6 +23,9 @@ class MainViewModel @Inject constructor(
 
     private val _userLiveData = MutableLiveData<User>()
     val userLiveData: LiveData<User> = _userLiveData
+
+    private val _commandServiceLiveData = MutableLiveData<Enums.CommandService>()
+    val commandServiceLiveData: LiveData<Enums.CommandService> = _commandServiceLiveData
 
     fun getLocalAccessToken() = authRepository.getLocalAccessToken()
 
@@ -51,5 +55,9 @@ class MainViewModel @Inject constructor(
                 _errorLiveData.postValue(error)
             }
         }
+    }
+
+    fun sendCommandToService(commandService: Enums.CommandService) {
+        _commandServiceLiveData.postValue(commandService)
     }
 }
