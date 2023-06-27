@@ -3,6 +3,7 @@
     <string name="error">Error</string>
     <string name="ok">OK</string>
     <string name="refresh">Refresh</string>
+    <string name="share_using">Share using</string>
 
     <!--    Login Fragment-->
     <string name="login">Login</string>
