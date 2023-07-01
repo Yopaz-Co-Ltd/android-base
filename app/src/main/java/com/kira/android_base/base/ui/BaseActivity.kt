@@ -2,31 +2,28 @@ package com.kira.android_base.base.ui
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.EditText
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.github.ybq.android.spinkit.sprite.Sprite
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.widgets.ErrorDialog
 import com.kira.android_base.base.ui.widgets.LoadingDialog
 
-abstract class BaseActivity(
-    @LayoutRes
-    private val activityLayoutRes: Int
+abstract class BaseActivity<VDB : ViewDataBinding>(
+    private val inflateMethod: (LayoutInflater) -> VDB
 ) : AppCompatActivity() {
 
-    private var activityViewDataBinding: ViewDataBinding? = null
+    protected val binding: VDB by lazy { inflateMethod(layoutInflater) }
     private val errorDialog = ErrorDialog()
     private val loadingDialog = LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activityViewDataBinding = DataBindingUtil.setContentView(this, activityLayoutRes)
-
+        setContentView(binding.root)
         initViews()
         handleObservables()
     }
@@ -63,11 +60,11 @@ abstract class BaseActivity(
         isShow: Boolean = true,
         minTime: Long? = null,
         loadingTypeSprite: Sprite? = null,
-        loadingColor: Int? = null
+        loadingColor: Int? = null,
     ) {
         if (isShow) loadingDialog.show(this, minTime, loadingTypeSprite, loadingColor)
         else loadingDialog.dismiss()
     }
 
-    fun getDataBiding() = activityViewDataBinding
+    fun getDataBiding() = binding
 }

@@ -15,5 +15,8 @@
     <string name="error_password_does_not_contain_any_digits">Password must have at least 1 digit!</string>
 
     <!--    Home Fragment-->
+    <string name="setting">Setting</string>
+
+    <!--    Setting Fragment-->
     <string name="logout">Logout</string>
 </resources>

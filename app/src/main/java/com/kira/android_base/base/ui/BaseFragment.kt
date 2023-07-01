@@ -4,33 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.kira.android_base.main.MainActivity
 
-abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
+abstract class BaseFragment<VDB : ViewDataBinding>(
+    private val inflateMethod: (LayoutInflater) -> VDB
+) : Fragment() {
 
-    var mainActivity: MainActivity? = null
-    var viewDataBinding: ViewDataBinding? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mainActivity = activity as? MainActivity
-    }
+    protected val binding: VDB by lazy { inflateMethod(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        DataBindingUtil.inflate<ViewDataBinding>(
-            inflater, layoutResId, container, false
-        ).apply {
-            viewDataBinding = this
-            return root
-        }
-    }
+        savedInstanceState: Bundle?,
+    ) = binding.root
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)

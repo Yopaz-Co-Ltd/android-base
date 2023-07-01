@@ -2,22 +2,23 @@ package com.kira.android_base.main.fragments.login
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.FragmentLoginBinding
+import com.kira.android_base.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment(R.layout.fragment_login) {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     companion object {
         val TAG: String = this::class.java.simpleName
     }
 
+    private val mainActivity: MainActivity? by lazy { activity as? MainActivity }
     private val viewModel by viewModels<LoginViewModel>()
 
     override fun initViews() {
-        (viewDataBinding as FragmentLoginBinding?)?.apply {
+        binding.run {
             this.viewModel = this@LoginFragment.viewModel
             lifecycleOwner = this@LoginFragment
         }

@@ -12,14 +12,14 @@
         android:id="@+id/linear_layout_root_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/global_screen_background"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_logout"
+            android:id="@+id/button_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> mainViewModel.logout()}"
-            android:text="@string/logout" />
+            android:text="@string/setting" />
 
         <TextView
             android:layout_width="match_parent"

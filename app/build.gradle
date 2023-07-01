@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
-    id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
 }
 
@@ -155,10 +154,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$lib_versions.coroutines"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$lib_versions.coroutines"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$lib_versions.coroutines"
-
-    //Navigation Component
-    implementation "androidx.navigation:navigation-fragment-ktx:$lib_versions.navigation_component"
-    implementation "androidx.navigation:navigation-ui-ktx:$lib_versions.navigation_component"
 
     //EncryptedSharedPreferences
     implementation "androidx.security:security-crypto-ktx:$lib_versions.security_crypto"

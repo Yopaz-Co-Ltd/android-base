@@ -5,8 +5,6 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.MediumTest
 import com.kira.android_base.R
@@ -23,7 +21,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
 import javax.inject.Inject
 
 @HiltAndroidTest
@@ -75,14 +72,5 @@ class HomeFragmentTest {
             defaultAuthRepository.logout()
             activityScenario.close()
         }
-    }
-
-    @Test
-    fun logoutSuccessfully_opensLogin() {
-        // WHEN
-        onView(withId(R.id.button_logout)).perform(click())
-
-        // THEN
-        onView(withId(R.id.frame_layout_root_login)).check(matches(isDisplayed()))
     }
 }

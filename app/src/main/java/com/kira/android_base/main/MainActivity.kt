@@ -1,16 +1,24 @@
 package com.kira.android_base.main
 
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.kira.android_base.R
+import com.kira.android_base.base.supports.utils.Enums
 import com.kira.android_base.base.ui.BaseActivity
+import com.kira.android_base.databinding.ActivityMainBinding
+import com.kira.android_base.main.fragments.home.HomeFragment
+import com.kira.android_base.main.fragments.login.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
+
+    companion object {
+        private val TAG = MainActivity::class.java.simpleName
+    }
 
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -28,63 +36,46 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         mainViewModel.errorLiveData.observe(this) { error ->
             showErrorDialog(error?.message ?: return@observe)
         }
-    }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController() ?: return super.onSupportNavigateUp()
-        val shouldFinishAppFragmentIds = listOf(
-            R.id.homeFragment,
-            R.id.loginFragment
-        )
-        if (!shouldFinishAppFragmentIds.contains(navController.currentDestination?.id)) {
-            return navController.navigateUp() || super.onSupportNavigateUp()
+        onBackPressedDispatcher.addCallback(this) {
+            if (supportFragmentManager.backStackEntryCount > 1) {
+                supportFragmentManager.popBackStack()
+                return@addCallback
+            }
+            finish()
         }
-        return runCatching { finishAffinity() }.isSuccess
     }
 
-    override fun onBackPressed() {
-        if (onSupportNavigateUp()) return
-        super.onBackPressed()
-    }
+    fun openFragment(fragment: Fragment, transactionType: Enums.TransactionType? = null) {
+        if (supportFragmentManager.isDestroyed) return
+        supportFragmentManager.beginTransaction().apply {
+            addToBackStack(null)
+            when (transactionType) {
+                Enums.TransactionType.OPEN_CLOSE -> {
+                    setCustomAnimations(
+                        R.anim.up_enter, R.anim.no_animation, R.anim.no_animation, R.anim.down_exit
+                    )
+                }
 
-    private fun findNavController(): NavController? {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
-        return navHostFragment?.navController
-    }
-
-    private fun setUpActionBar() {
-        findNavController()?.let { navController ->
-            setupActionBarWithNavController(navController)
-            navController.addOnDestinationChangedListener { _, destination, _ ->
-                when (destination.id) {
-                    R.id.loginFragment -> {
-                        supportActionBar?.hide()
-                    }
-                    else -> {
-                        supportActionBar?.show()
-                    }
+                else -> {
+                    setCustomAnimations(
+                        R.anim.right_enter, R.anim.left_exit, R.anim.left_enter, R.anim.right_exit
+                    )
                 }
             }
+            setPrimaryNavigationFragment(fragment)
+            add(R.id.frame_layout_container, fragment, fragment::class.java.simpleName)
+            if (supportFragmentManager.isStateSaved) commitAllowingStateLoss() else commit()
         }
-    }
-
-    private fun setNavigationStartDestination(startDestinationId: Int) {
-        val navController = findNavController() ?: return
-        val navGraph = navController.navInflater.inflate(R.navigation.main_nav_graph)
-        navGraph.setStartDestination(startDestinationId)
-        navController.setGraph(navGraph, intent.extras)
-        setUpActionBar()
     }
 
     fun invalidateAuthState() {
-        mainViewModel.getLocalAccessToken()
-            .takeIf { !it.isNullOrBlank() }
-            ?.let {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                setNavigationStartDestination(R.id.homeFragment)
-                return
-            }
-        setNavigationStartDestination(R.id.loginFragment)
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        mainViewModel.getLocalAccessToken().takeIf { !it.isNullOrBlank() }?.let {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            openFragment(HomeFragment())
+            return
+        }
+        openFragment(LoginFragment())
     }
 }
