@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:orientation="vertical"
+    tools:context=".CalculatorFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/equal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="30dp"
+            android:maxLines="2"
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textColor="#ffffff"
+            android:textSize="80sp"
+            />
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentBottom="true"
+        android:columnCount="4"
+
+        android:rowCount="5">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/OptionButton"
+            android:text="C" />
+
+        <Button
+            android:id="@+id/btn_negative"
+            style="@style/OptionButton"
+            android:text="+/-" />
+
+        <Button
+            android:id="@+id/btn_percent"
+            style="@style/OptionButton"
+            android:text="%" />
+
+        <Button
+            android:id="@+id/btn_division"
+            style="@style/OperationButton"
+            android:text="/" />
+
+        <Button
+            android:id="@+id/btn_1"
+            style="@style/NumberButton"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/btn_2"
+            style="@style/NumberButton"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/btn_3"
+            style="@style/NumberButton"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/btn_multi"
+            style="@style/OperationButton"
+            android:text="x" />
+
+        <Button
+            android:id="@+id/btn_4"
+            style="@style/NumberButton"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/btn_5"
+            style="@style/NumberButton"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/btn_6"
+            style="@style/NumberButton"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/btn_plus"
+            style="@style/OperationButton"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/btn_7"
+            style="@style/NumberButton"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/btn_8"
+            style="@style/NumberButton"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/btn_9"
+            style="@style/NumberButton"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/btn_minus"
+            style="@style/OperationButton"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/btn_0"
+            style="@style/NumberButton"
+            android:layout_columnSpan="2"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btn_period"
+            style="@style/NumberButton"
+            android:text="." />
+
+        <Button
+            android:id="@+id/btn_equal"
+            style="@style/OperationButton"
+            android:text="=" />
+
+    </GridLayout>
+</RelativeLayout>

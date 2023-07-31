@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".HomeFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/navigateToCalculator"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:textSize="24sp"
+            android:text="Calculator"
+            />
+
+        <Button
+            android:id="@+id/navigateToTodoApp"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:textSize="24sp"
+            android:text="TODO App"
+            />
+    </LinearLayout>
+
+</FrameLayout>
