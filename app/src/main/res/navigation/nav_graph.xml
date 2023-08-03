@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.calculatorapp.HomeFragment"
+        android:name="com.example.calculatorapp.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -18,12 +18,12 @@
     </fragment>
     <fragment
         android:id="@+id/calculatorFragment"
-        android:name="com.example.calculatorapp.CalculatorFragment"
+        android:name="com.example.calculatorapp.fragments.calculator.CalculatorFragment"
         android:label="fragment_calculator"
         tools:layout="@layout/fragment_calculator" />
     <fragment
         android:id="@+id/todoFragment"
-        android:name="com.example.calculatorapp.TodoFragment"
+        android:name="com.example.calculatorapp.fragments.todoapp.TodoFragment"
         android:label="fragment_todo"
         tools:layout="@layout/fragment_todo" />
 </navigation>

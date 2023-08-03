@@ -1,10 +1,11 @@
-package com.example.calculatorapp
+package com.example.calculatorapp.fragments.calculator
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.example.calculatorapp.R
 
 class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
