@@ -2,30 +2,32 @@ package com.example.calculatorapp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 
-class CalculatorFragment : Fragment() {
+class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
-    private lateinit var equal: TextView
-    private var currenOperation: String = ""
-    private var currentInput: String = "0"
-    private var prevValue: Double = 0.0
+    companion object {
+        private const val DEFAULT_INPUT_VALUE = "0"
+        private const val PLUS_SIGN = "+"
+        private const val MINUS_SIGN = "-"
+        private const val MULTI_SIGN = "x"
+        private const val DIVISION_SIGN = "/"
+        private const val PERCENT_SIGN = "%"
+    }
+
+    private var equal: TextView? = null
+    private var currentOperation: String = ""
+    private var currentInput: String = DEFAULT_INPUT_VALUE
+    private var previousValue: Double = 0.0
     private var isCalculated = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val RootView = inflater.inflate(R.layout.fragment_calculator, container, false)
+        equal = view.findViewById(R.id.equal)
 
-        equal = RootView.findViewById(R.id.equal)
-
-        val numberButtons = arrayOf(
+        val numberButtonIds = arrayOf(
             R.id.btn_0,
             R.id.btn_1,
             R.id.btn_2,
@@ -38,57 +40,58 @@ class CalculatorFragment : Fragment() {
             R.id.btn_9,
         )
 
-        val operationButtons = arrayOf(
+        val operationButtonIds = arrayOf(
             R.id.btn_plus, R.id.btn_minus, R.id.btn_division, R.id.btn_multi, R.id.btn_percent
         )
 
-        for (buttonId in numberButtons) {
-            RootView.findViewById<Button>(buttonId).setOnClickListener {
+        for (buttonId in numberButtonIds) {
+            view.findViewById<Button>(buttonId).setOnClickListener {
                 onNumberClick(it)
             }
         }
 
-        for (buttonId in operationButtons) {
-            RootView.findViewById<Button>(buttonId).setOnClickListener {
+        for (buttonId in operationButtonIds) {
+            view.findViewById<Button>(buttonId).setOnClickListener {
                 onOperationClick(it)
             }
         }
 
-        RootView.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
-            currentInput = "0"
+        view.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+            currentInput = DEFAULT_INPUT_VALUE
             updateEqual()
         }
 
-        RootView.findViewById<Button>(R.id.btn_equal).setOnClickListener {
+        view.findViewById<Button>(R.id.btn_equal).setOnClickListener {
             onEqualClick()
         }
 
-        RootView.findViewById<Button>(R.id.btn_negative).setOnClickListener {
+        view.findViewById<Button>(R.id.btn_negative).setOnClickListener {
             onNegativeClick()
         }
 
-        RootView.findViewById<Button>(R.id.btn_percent).setOnClickListener {
+        view.findViewById<Button>(R.id.btn_percent).setOnClickListener {
             onPercentClick()
         }
 
-        RootView.findViewById<Button>(R.id.btn_period).setOnClickListener {
+        view.findViewById<Button>(R.id.btn_period).setOnClickListener {
             onClickPeriod()
         }
-
-
-        return inflater.inflate(R.layout.fragment_calculator, container, false)
     }
 
     fun onNumberClick(view: View) {
         val number = (view as Button).text.toString()
-        if (isCalculated == true) {
-            currentInput = ""
-            isCalculated = false
-            currentInput = number
-        } else {
-            if (currentInput == "0") {
+        when {
+            isCalculated -> {
+                currentInput = ""
+                isCalculated = false
                 currentInput = number
-            } else {
+            }
+
+            currentInput == DEFAULT_INPUT_VALUE -> {
+                currentInput = number
+            }
+
+            else -> {
                 currentInput += number
             }
         }
@@ -98,9 +101,9 @@ class CalculatorFragment : Fragment() {
     fun onOperationClick(view: View) {
         val buttonOperation = view as Button
         val operation = buttonOperation.text.toString()
-        prevValue = currentInput.toDouble()
+        previousValue = currentInput.toDouble()
         currentInput = ""
-        currenOperation = operation
+        currentOperation = operation
     }
 
     fun onNegativeClick() {
@@ -114,38 +117,38 @@ class CalculatorFragment : Fragment() {
     fun onPercentClick() {
         val currentValue = currentInput.toDouble()
         val currenPercentValue = currentValue / 100
+        previousValue = currenPercentValue
         currentInput = ""
         checkIntOrDouble(currenPercentValue)
         updateEqual()
     }
 
     fun onClickPeriod() {
-        if (currentInput == "0") {
+        if (currentInput == DEFAULT_INPUT_VALUE) {
             currentInput = ""
             currentInput = "0.$currentInput"
         }
         updateEqual()
-
     }
 
     fun onEqualClick() {
         val currentValue = currentInput.toDouble()
-        val result = when (currenOperation) {
-            "+" -> prevValue + currentValue
-            "-" -> prevValue - currentValue
-            "x" -> prevValue * currentValue
-            "/" -> prevValue / currentValue
-            "%" -> prevValue / 100
+        val result = when (currentOperation) {
+            PLUS_SIGN -> previousValue + currentValue
+            MINUS_SIGN -> previousValue - currentValue
+            MULTI_SIGN -> previousValue * currentValue
+            DIVISION_SIGN -> previousValue / currentValue
+            PERCENT_SIGN -> previousValue / 100
             else -> currentValue
         }
         checkIntOrDouble(result)
-        prevValue = currentInput.toDouble()
+        previousValue = currentInput.toDouble()
         updateEqual()
         isCalculated = true
     }
 
     fun updateEqual() {
-        equal.text = currentInput
+        equal?.text = currentInput
     }
 
     fun checkIntOrDouble(value: Double) {
@@ -155,7 +158,6 @@ class CalculatorFragment : Fragment() {
             currentInput = value.toString()
         }
     }
-
 
 
 }

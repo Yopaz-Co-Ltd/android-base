@@ -8,23 +8,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
 
-class HomeFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_home, container, false)
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-        rootView.findViewById<Button>(R.id.navigateToCalculator).setOnClickListener{view ->
-            view.findNavController().navigate(R.id.action_homeFragment_to_calculatorFragment)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        view.findViewById<Button>(R.id.navigateToCalculator).setOnClickListener{view ->
+            val action = HomeFragmentDirections.actionHomeFragmentToCalculatorFragment()
+            view.findNavController().navigate(action)
         }
 
-        rootView.findViewById<Button>(R.id.navigateToTodoApp).setOnClickListener{view ->
-            view.findNavController().navigate(R.id.action_homeFragment_to_todoFragment)
+        view.findViewById<Button>(R.id.navigateToTodoApp).setOnClickListener{view ->
+            val action = HomeFragmentDirections.actionHomeFragmentToTodoFragment()
+            view.findNavController().navigate(action)
         }
-
-        return rootView
     }
-
-
 }

@@ -17,13 +17,13 @@
             app:destination="@id/todoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/todoFragment"
-        android:name="com.example.calculatorapp.TodoFragment"
-        android:label="fragment_todo"
-        tools:layout="@layout/fragment_todo" />
-    <fragment
         android:id="@+id/calculatorFragment"
         android:name="com.example.calculatorapp.CalculatorFragment"
         android:label="fragment_calculator"
         tools:layout="@layout/fragment_calculator" />
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.example.calculatorapp.TodoFragment"
+        android:label="fragment_todo"
+        tools:layout="@layout/fragment_todo" />
 </navigation>

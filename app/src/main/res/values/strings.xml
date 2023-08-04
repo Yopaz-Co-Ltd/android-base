@@ -4,4 +4,24 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="initial_calculator_display">0</string>
+    <string name="calculator_cancel">C</string>
+    <string name="calculator_negative">+/-</string>
+    <string name="calculator_percent">%</string>
+    <string name="calculator_division">/</string>
+    <string name="calculator_1">1</string>
+    <string name="calculator_2">2</string>
+    <string name="calculator_3">3</string>
+    <string name="calculator_multi">x</string>
+    <string name="calculator_4">4</string>
+    <string name="calculator_5">5</string>
+    <string name="calculator_6">6</string>
+    <string name="calculator_plus">+</string>
+    <string name="calculator_7">7</string>
+    <string name="calculator_8">8</string>
+    <string name="calculator_9">9</string>
+    <string name="calculator_minus">-</string>
+    <string name="calculator_0">0</string>
+    <string name="calculator_period">.</string>
+    <string name="calculator_equal">=</string>
 </resources>
