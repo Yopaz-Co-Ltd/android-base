@@ -17,7 +17,7 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
         private const val PERCENT_SIGN = "%"
     }
 
-    private var equal: TextView? = null
+    private var equalTextView: TextView? = null
     private var currentOperation: String = ""
     private var currentInput: String = DEFAULT_INPUT_VALUE
     private var previousValue: Double = 0.0
@@ -25,7 +25,7 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        equal = view.findViewById(R.id.equal)
+        equalTextView = view.findViewById(R.id.equal)
 
         val numberButtonIds = arrayOf(
             R.id.btn_0,
@@ -148,7 +148,7 @@ class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
     }
 
     fun updateEqual() {
-        equal?.text = currentInput
+        equalTextView?.text = currentInput
     }
 
     fun checkIntOrDouble(value: Double) {
