@@ -1,21 +1,21 @@
 package com.example.calculatorapp.fragments.calculator
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.example.calculatorapp.R
 
 class CalculatorFragment : Fragment(R.layout.fragment_calculator) {
 
     companion object {
-        private const val DEFAULT_INPUT_VALUE = "0"
-        private const val PLUS_SIGN = "+"
-        private const val MINUS_SIGN = "-"
-        private const val MULTI_SIGN = "x"
-        private const val DIVISION_SIGN = "/"
-        private const val PERCENT_SIGN = "%"
+        const val DEFAULT_INPUT_VALUE = "0"
+        const val PLUS_SIGN = "+"
+        const val MINUS_SIGN = "-"
+        const val MULTI_SIGN = "x"
+        const val DIVISION_SIGN = "/"
+        const val PERCENT_SIGN = "%"
     }
 
     private var equalTextView: TextView? = null

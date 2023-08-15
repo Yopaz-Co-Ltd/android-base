@@ -13,19 +13,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
+
         <ImageView
             android:layout_width="82dp"
             android:layout_height="82dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_emptylist" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
-            android:textSize="18sp"
-            android:text="You have no tasks to do!">
-
-        </TextView>
+            android:text="@string/you_have_no_task_text"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

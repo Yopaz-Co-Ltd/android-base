@@ -24,4 +24,16 @@
     <string name="calculator_0">0</string>
     <string name="calculator_period">.</string>
     <string name="calculator_equal">=</string>
+    <string name="date_picked">%1$d/%2$d/%3$d</string>
+    <string name="time_picked">%1$d:%2$d</string>
+    <string name="have_you_completed_the_task">Have you completed the task %1$s ?</string>
+    <string name="are_you_sure_you_want_to_remove">Are you sure you want to remove %1$s ?</string>
+    <string name="ok_text">OK</string>
+    <string name="cancel_text">CANCEL</string>
+    <string name="remove_text">REMOVE</string>
+    <string name="reminder_notification_title">Reminder Notification</string>
+    <string name="task_to_do_title">Task To Do</string>
+    <string name="task_to_do_hint">Write your task hear</string>
+    <string name="reminder_time_title">Reminder time</string>
+    <string name="you_have_no_task_text">You have no task to do</string>
 </resources>

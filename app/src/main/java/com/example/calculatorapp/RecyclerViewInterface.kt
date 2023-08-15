@@ -1,5 +1,5 @@
 package com.example.calculatorapp
 
-interface RvInterface {
+interface RecyclerViewInterface {
     fun onRemoveItem(pos: Int)
 }

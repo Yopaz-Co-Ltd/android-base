@@ -1,29 +1,25 @@
 package com.example.calculatorapp.fragments.todoapp
 
-import android.app.PendingIntent
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calculatorapp.ItemData
 import com.example.calculatorapp.R
-import com.example.calculatorapp.RvInterface
+import com.example.calculatorapp.RecyclerViewInterface
+import com.example.calculatorapp.TaskModel
 
-class TodoListRVAdapter(var data: List<ItemData>, val onClick: RvInterface) :
+class TodoListRVAdapter(var data: List<TaskModel>, val onClick: RecyclerViewInterface) :
     RecyclerView.Adapter<TodoListRVAdapter.TodoViewHolder>() {
 
-    private lateinit var txtName: TextView
-    private lateinit var txtDate: TextView
-    private lateinit var txtTime: TextView
+    private var txtName: TextView? = null
+    private var txtDate: TextView? = null
+    private var txtTime: TextView? = null
     private var notificationId: Int? = null
 
     inner class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    //ctrl + i
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_todo_list, parent, false)
@@ -32,14 +28,13 @@ class TodoListRVAdapter(var data: List<ItemData>, val onClick: RvInterface) :
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         holder.itemView.apply {
-            txtName = this.findViewById(R.id.todo_item_name)
-            txtDate = this.findViewById(R.id.todo_item_date)
-            txtTime = this.findViewById(R.id.todo_item_time)
-            txtName.text = data[position].name
-            txtTime.text = data[position].time
-            txtDate.text = data[position].date
+            txtName = findViewById(R.id.todo_item_name)
+            txtDate = findViewById(R.id.todo_item_date)
+            txtTime = findViewById(R.id.todo_item_time)
+            txtName?.text = data[position].name
+            txtTime?.text = data[position].time
+            txtDate?.text = data[position].date
             notificationId = data[position].notificationId
-
 
             holder.itemView.findViewById<ImageButton>(R.id.btn_remove_item).setOnClickListener {
                 onClick.onRemoveItem(position)

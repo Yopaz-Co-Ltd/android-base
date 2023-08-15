@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="@color/black"
     tools:context=".fragments.HomeFragment">
 
     <LinearLayout
@@ -11,21 +11,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
+
         <Button
             android:id="@+id/navigateToCalculator"
             android:layout_width="250dp"
             android:layout_height="80dp"
-            android:textSize="24sp"
             android:text="Calculator"
-            />
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/navigateToTodoApp"
             android:layout_width="250dp"
             android:layout_height="80dp"
-            android:textSize="24sp"
             android:text="TODO App"
-            />
+            android:textSize="24sp" />
     </LinearLayout>
 
 </FrameLayout>
