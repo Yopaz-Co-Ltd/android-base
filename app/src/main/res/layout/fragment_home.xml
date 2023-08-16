@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="mainViewModel"
             type="com.kira.android_base.main.MainViewModel" />
@@ -13,6 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <include layout="@layout/layout_header_home" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_item_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_add_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/space_30"
+            app:srcCompat="@drawable/ic_add"
+            app:backgroundTint="@color/green"
+            app:tint="@color/white"
+            />
 
         <include layout="@layout/layout_header_home" />
 
@@ -39,6 +56,5 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> mainViewModel.logout()}"
             android:text="@string/logout" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
