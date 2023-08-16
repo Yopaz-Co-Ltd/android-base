@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/space_60"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="@dimen/space_16"
+    android:background="@color/white"
+    android:elevation="@dimen/space_3">
+
+    <ImageView
+        android:layout_width="@dimen/space_100"
+        android:layout_height="match_parent"
+        android:src="@drawable/logo_header" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end">
+
+        <ImageButton
+            android:layout_width="@dimen/space_48"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_search"
+            android:background="@color/white"/>
+
+        <ImageButton
+            android:layout_width="@dimen/space_48"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_notification"
+            android:background="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/space_60"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/space_10"
+            android:gravity="center_vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/space_30"
+                android:layout_height="@dimen/space_30"
+                app:cardCornerRadius="@dimen/space_100"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/space_4"
+                >
+                <ImageView
+                    android:id="@+id/header_home_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_avatar_placeholder"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_arrow_down"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
