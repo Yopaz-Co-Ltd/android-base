@@ -70,6 +70,9 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                     R.id.postDetailFragment -> {
                         supportActionBar?.hide()
                     }
+                    R.id.postEditorFragment -> {
+                        supportActionBar?.hide()
+                    }
                     else -> {
                         supportActionBar?.show()
                     }

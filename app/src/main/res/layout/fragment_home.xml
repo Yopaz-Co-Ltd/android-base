@@ -35,23 +35,6 @@
 
         <include layout="@layout/layout_header_home" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_item_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/space_60" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_add_post"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/space_30"
-            android:contentDescription="@string/description_button_add_post"
-            app:backgroundTint="@color/green"
-            app:srcCompat="@drawable/ic_add"
-            app:tint="@color/white" />
-
         <Button
             android:id="@+id/button_logout"
             android:layout_width="wrap_content"

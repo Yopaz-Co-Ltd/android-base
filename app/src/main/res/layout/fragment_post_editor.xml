@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="mainViewModel"
+            type="com.kira.android_base.main.MainViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_header_post_editor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_16"
+            android:paddingVertical="@dimen/space_20">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4"
+                android:text="@string/title"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_40"
+                android:layout_marginBottom="@dimen/space_12"
+                android:background="@drawable/background_input"
+                android:hint="@string/input_title_hint"
+                android:inputType="text"
+                android:paddingStart="@dimen/space_8"
+                android:paddingEnd="@dimen/space_4"
+                android:textSize="@dimen/text_14"
+                android:autofillHints="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4"
+                android:text="@string/tags"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/tag_input_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_60"
+                android:background="@drawable/background_input"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/space_4">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tag_list_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/tag_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="@dimen/space_4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_max="200dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <EditText
+                    android:id="@+id/tag_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/light_gray"
+                    android:elevation="@dimen/space_8"
+                    android:hint="@string/initial_input_tag_hint"
+                    android:inputType="textMultiLine"
+                    android:paddingStart="@dimen/space_8"
+                    android:paddingEnd="@dimen/space_8"
+                    android:textSize="@dimen/text_14"
+                    android:autofillHints="" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

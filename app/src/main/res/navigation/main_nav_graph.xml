@@ -23,5 +23,13 @@
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="com.kira.android_base.main.fragments.post_detai.PostDetailFragment"
-        android:label="PostDetailFragment" />
+        android:label="PostDetailFragment" >
+        <action
+            android:id="@+id/action_postDetailFragment_to_postEditorFragment"
+            app:destination="@id/postEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postEditorFragment"
+        android:name="com.kira.android_base.main.fragments.post_editor.PostEditorFragment"
+        android:label="PostEditorFragment" />
 </navigation>

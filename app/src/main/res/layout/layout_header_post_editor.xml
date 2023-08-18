@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/space_60"
+    android:background="@color/white"
+    android:elevation="@dimen/space_4"
+    android:paddingHorizontal="@dimen/space_12">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="@dimen/space_50"
+            android:layout_height="@dimen/space_50"
+            android:layout_marginRight="@dimen/space_8"
+            android:scaleType="fitXY"
+            android:src="@drawable/logo_basic" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/draft_in" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/space_16"
+                    android:text="@string/hikari" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saved" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|center_vertical"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_publish"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_12"
+            app:chipBackgroundColor="@color/green" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_options" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_notification" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/space_30"
+            android:layout_height="@dimen/space_30"
+            android:layout_marginLeft="@dimen/space_12"
+            app:cardCornerRadius="@dimen/space_100">
+
+            <ImageView
+                android:id="@+id/post_info_avatar_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_avatar_placeholder" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</FrameLayout>
