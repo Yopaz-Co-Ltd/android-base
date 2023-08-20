@@ -7,4 +7,10 @@
     <color name="chantilly">#f8bbd0</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="color1">#1E88E5</color>
+    <color name="color2">#00ACC1</color>
+    <color name="color3">#E53935</color>
+    <color name="color4">#FB8C00</color>
+    <color name="color5">#8E24AA</color>
 </resources>

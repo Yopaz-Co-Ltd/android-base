@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,36 +9,19 @@
             type="com.kira.android_base.main.MainViewModel" />
     </data>
 
-    <LinearLayout
-        android:id="@+id/linear_layout_root_home"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clipChildren="false">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> mainViewModel.logout()}"
-            android:text="@string/logout" />
-
-        <TextView
+        <com.kira.android_base.base.ui.widgets.cardstack.CardStackView
+            android:id="@+id/card_stack_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text='@{mainViewModel.userLiveData.name ?? ""}'
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text='@{mainViewModel.userLiveData.stringAge() ?? ""}'
-            android:textColor="@android:color/black" />
-
-        <com.kira.android_base.base.ui.widgets.recyclerview.BaseRecyclerView
-            android:id="@+id/brv_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_margin="@dimen/space_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -398,4 +398,10 @@
   <dimen name="space_100">
     150.0dp
   </dimen>
+  <dimen name="space_200">
+    300.0dp
+  </dimen>
+  <dimen name="space_300">
+    450.0dp
+  </dimen>
 </resources>
