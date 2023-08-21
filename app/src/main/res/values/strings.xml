@@ -36,4 +36,6 @@
     <string name="task_to_do_hint">Write your task hear</string>
     <string name="reminder_time_title">Reminder time</string>
     <string name="you_have_no_task_text">You have no task to do</string>
+    <string name="description_add_button">Add Button</string>
+    <string name="empty_list">Add Button</string>
 </resources>

@@ -8,11 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calculatorapp.R
 import com.example.calculatorapp.RecyclerViewInterface
-import com.example.calculatorapp.TaskModel
+import com.example.calculatorapp.TaskModels
 
-class TodoListRVAdapter(var data: List<TaskModel>, val onClick: RecyclerViewInterface) :
+class TodoListRVAdapter(var data: List<TaskModels>, val onClick: RecyclerViewInterface) :
     RecyclerView.Adapter<TodoListRVAdapter.TodoViewHolder>() {
-
     private var txtName: TextView? = null
     private var txtDate: TextView? = null
     private var txtTime: TextView? = null

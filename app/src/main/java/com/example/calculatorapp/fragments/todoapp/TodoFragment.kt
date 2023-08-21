@@ -1,5 +1,6 @@
 package com.example.calculatorapp.fragments.todoapp
 
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
@@ -19,12 +20,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 class TodoFragment : Fragment(R.layout.fragment_todo) {
+
     private var todoListView: RecyclerView? = null
     private var emptyData: LinearLayout? = null
     private var currentNotificationID: Int = 0
-
-    private var listTodoData: List<TaskModel> = emptyList()
-    private var mutableListTodoData: MutableList<TaskModel> = mutableListOf()
+    private var listTodoData: List<TaskModels> = emptyList()
+    private var mutableListTodoData: MutableList<TaskModels> = mutableListOf()
     private val today = Calendar.getInstance()
     private var currentTitle: String = ""
     private var dayOfMonthPicked: Int = today.get(Calendar.DAY_OF_MONTH)
@@ -38,19 +39,14 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
 
         todoListView = view.findViewById(R.id.todo_list_view)
         emptyData = view.findViewById(R.id.empty_data)
-
         context?.let {
-            mutableListTodoData = FileUltis.readData(it)
+            mutableListTodoData = FileUltis.readData(it) as MutableList<TaskModels>
             listTodoData = mutableListTodoData
         }
-
         validateEmptyView()
-
-        context?.let { createNotificationChannel(it) }
-
         val adapter = TodoListRVAdapter(listTodoData, object : RecyclerViewInterface {
-            override fun onRemoveItem(position: Int) {
-                cancelTodo(position)
+            override fun onRemoveItem(pos: Int) {
+                cancelTodo(pos)
             }
         })
         todoListView?.adapter = adapter
@@ -59,14 +55,13 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
                 it, LinearLayoutManager.VERTICAL, false
             )
         }
-
         view.findViewById<FloatingActionButton>(R.id.btn_dialog_add).setOnClickListener {
             showAddTodoDialog(adapter)
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun showAddTodoDialog(adapter: TodoListRVAdapter) {
-
         val dialogLayout = layoutInflater.inflate(R.layout.add_todo_dialog_layout, null)
         val inputTodo: EditText? = dialogLayout.findViewById(R.id.input_todo_dialog)
         val btnDateDialog: Button = dialogLayout.findViewById(R.id.btn_date)
@@ -89,7 +84,11 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
                     { _, hourOfDay, minute ->
                         hourOfDayPicked = hourOfDay
                         minutePicked = minute
-                        btnTimeDialog.setText(btnTimeDialog.text)
+                        btnTimeDialog.text = getString(
+                            R.string.time_picked,
+                            hourOfDayPicked,
+                            minutePicked
+                        )
                     },
                     hourOfDayPicked,
                     minutePicked,
@@ -97,7 +96,6 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
                 ).show()
             }
         }
-
         btnDateDialog.setOnClickListener {
             context?.let {
                 DatePickerDialog(
@@ -106,7 +104,12 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
                         yearPicked = year
                         monthPicked = month
                         dayOfMonthPicked = dayOfMonth
-                        btnDateDialog.setText(btnDateDialog.text)
+                        btnDateDialog.text = getString(
+                            R.string.date_picked,
+                            dayOfMonthPicked,
+                            monthPicked + 1,
+                            yearPicked
+                        )
                     },
                     yearPicked,
                     monthPicked,
@@ -114,11 +117,10 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
                 ).show()
             }
         }
-
         context?.let {
             val builder = AlertDialog.Builder(context)
             with(builder) {
-                setPositiveButton(R.string.ok_text) { dialog, with ->
+                setPositiveButton(R.string.ok_text) { _, _ ->
                     currentTitle = inputTodo?.text.toString()
                     addTodo(adapter)
                 }
@@ -141,17 +143,16 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
             hourOfDayPicked,
             minutePicked
         )
-
         if (currentTitle != "") {
             scheduleNotification()
             mutableListTodoData.add(
-                0, TaskModel(currentTitle, datePicked, timePicked, currentNotificationID)
+                0, TaskModels(currentTitle, datePicked, timePicked, currentNotificationID)
             )
             context?.let {
                 FileUltis.writeData(it, mutableListTodoData)
             }
             listTodoData = mutableListTodoData
-            adapter.notifyDataSetChanged()
+            adapter.notifyItemInserted(0)
         }
         validateEmptyView()
     }
@@ -183,7 +184,7 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
                     FileUltis.writeData(it.applicationContext, mutableListTodoData)
                 }
                 listTodoData = mutableListTodoData
-                todoListView?.adapter?.notifyDataSetChanged()
+                todoListView?.adapter?.notifyItemRemoved(position)
                 validateEmptyView()
             }.setNegativeButton(R.string.cancel_text) { _, _ -> }.show()
     }
@@ -222,6 +223,4 @@ class TodoFragment : Fragment(R.layout.fragment_todo) {
             emptyData?.visibility = View.GONE
         }
     }
-
 }
-

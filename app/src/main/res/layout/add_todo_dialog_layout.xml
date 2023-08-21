@@ -18,6 +18,7 @@
         android:id="@+id/input_todo_dialog"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:autofillHints="@string/task_to_do_hint"
         android:background="@drawable/background_input_todo"
         android:hint="@string/task_to_do_hint"
         android:inputType="text"
@@ -38,15 +39,17 @@
 
         <Button
             android:id="@+id/btn_date"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:backgroundTint="@color/light_gray"
             android:textColor="@color/black" />
 
         <Button
             android:id="@+id/btn_time"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
