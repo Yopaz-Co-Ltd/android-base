@@ -27,9 +27,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val mainViewModel: MainViewModel by sharedViewModel()
 
-    private var postListView: RecyclerView? = null
-    private var postListData: List<PostItemHomeData> = emptyList()
-
     override fun initViews() {
         (viewDataBinding as? FragmentHomeBinding)?.run {
             mainViewModel = this@HomeFragment.mainViewModel

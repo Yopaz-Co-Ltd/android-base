@@ -28,6 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -43,11 +44,13 @@
                             android:layout_marginVertical="@dimen/space_16"
                             android:isScrollContainer="false" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/light_gray"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -75,6 +78,7 @@
                                     android:text="@string/turtorials_for_ruby_on_rails" />
 
                             </LinearLayout>
+
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/btn_follow"
                                 android:layout_width="wrap_content"
@@ -102,10 +106,12 @@
                                 android:layout_height="@dimen/space_1"
                                 android:layout_marginBottom="@dimen/space_20"
                                 android:background="@color/light_silver" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/share_your_ideas_with_millions_of_reader" />
+
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/btn_navigate_to_post_editor"
                                 android:layout_width="wrap_content"
@@ -125,6 +131,7 @@
                                 android:layout_marginTop="@dimen/space_20"
                                 android:background="@color/light_silver" />
                         </LinearLayout>
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/suggesstion_post_list"
                             android:layout_width="match_parent"
