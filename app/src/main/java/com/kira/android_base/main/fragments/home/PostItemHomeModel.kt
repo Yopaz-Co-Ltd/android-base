@@ -1,6 +1,6 @@
 package com.kira.android_base.main.fragments.home
 
-class PostItemHomeData(
+class PostItemHomeModel(
     var user: String,
     var place: String,
     var time: String,

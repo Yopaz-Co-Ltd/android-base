@@ -11,6 +11,7 @@
     <!--    Home Fragment-->
     <string name="logout">Logout</string>
     <string name="in">in</string>
+    <string name="description_button_add_post">Button Add Post</string>
 
     <!--    PostDetail-->
     <string name="button_follow">Follow</string>
@@ -18,7 +19,9 @@
     <string name="button_save">Save</string>
     <string name="button_write_on_yopaz_blog">Write on Yopaz Blog</string>
     <string name="turtorials_for_ruby_on_rails">Tutorials for Ruby on Rails</string>
-    <string name="share_your_ideas_with_millions_of_reader"> Share your ideas wiht millions of reader</string>
+    <string name="share_your_ideas_with_millions_of_reader"> Share your ideas with millions of reader</string>
+
     //TODO REMOVE
     <string name="more_from_user">More from Trương Minh Nhật</string>
+    <string name="unencodeHtml"></string>
 </resources>
