@@ -59,6 +59,12 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                     R.id.loginFragment -> {
                         supportActionBar?.hide()
                     }
+                    R.id.homeFragment -> {
+                        supportActionBar?.hide()
+                    }
+                    R.id.postDetailFragment -> {
+                        supportActionBar?.hide()
+                    }
                     else -> {
                         supportActionBar?.show()
                     }

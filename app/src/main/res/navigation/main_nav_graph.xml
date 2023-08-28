@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:label="main">
+    android:label="main"
+    app:startDestination="@id/postDetailFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -13,5 +15,13 @@
         android:id="@+id/homeFragment"
         android:name="com.kira.android_base.main.fragments.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.kira.android_base.main.fragments.post_detai.PostDetailFragment"
+        android:label="PostDetailFragment" />
 </navigation>

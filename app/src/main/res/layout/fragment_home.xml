@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,10 +9,29 @@
             type="com.kira.android_base.main.MainViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <include layout="@layout/layout_header_home" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_item_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/space_60" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_add_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/space_30"
+            android:contentDescription="@string/description_button_add_post"
+            app:backgroundTint="@color/green"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/white" />
 
         <Button
             android:id="@+id/button_logout"
@@ -20,18 +40,5 @@
             android:onClick="@{() -> mainViewModel.logout()}"
             android:text="@string/logout" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text='@{mainViewModel.userLiveData.name ?? ""}'
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text='@{mainViewModel.userLiveData.stringAge() ?? ""}'
-            android:textColor="@android:color/black" />
-    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

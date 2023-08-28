@@ -3,8 +3,12 @@
     <color name="primary">@color/white</color>
     <color name="secondary">@color/chantilly</color>
     <color name="global_screen_background">@color/white</color>
-
     <color name="chantilly">#f8bbd0</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="light_gray">#F2F2F2</color>
+    <color name="dark_gray">#666666</color>
+    <color name="light_silver">#E7E7E7</color>
+    <color name="gray">#888888</color>
+    <color name="green">#028F10</color>
 </resources>

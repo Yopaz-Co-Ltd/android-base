@@ -152,4 +152,8 @@ dependencies {
 
     //EncryptedSharedPreferences
     implementation "androidx.security:security-crypto-ktx:$rootProject.ext.lib_versions.security_crypto"
+
+    //CardView
+    implementation "androidx.cardview:cardview:$rootProject.ext.lib_versions.card_view"
+
 }
