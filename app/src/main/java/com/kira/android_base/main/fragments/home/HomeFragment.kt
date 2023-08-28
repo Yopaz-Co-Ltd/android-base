@@ -11,6 +11,7 @@ import com.kira.android_base.databinding.FragmentHomeBinding
 import com.kira.android_base.main.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+//TODO REMOVE FAKE DATA
 val data = listOf(
     PostItemHomeModel("Trương Nhật 1", "Ha Noi", "11 August, 2023", "Hello World 1"),
     PostItemHomeModel("Trương Nhật 2", "Ha Noi", "12 August, 2023", "Hello World 2"),
@@ -63,7 +64,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
     }
 
-    fun navigateToPostDetail(view: View) {
+    private fun navigateToPostDetail(view: View) {
         val action = HomeFragmentDirections.actionHomeFragmentToPostDetailFragment()
         view.findNavController().navigate(action)
     }

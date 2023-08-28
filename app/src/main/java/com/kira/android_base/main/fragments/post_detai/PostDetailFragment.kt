@@ -12,6 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PostDetailFragment : BaseFragment(R.layout.fragment_post_detail) {
 
+    //TODO REMOVE
     val unencodeHtml = """
         <html>
         <head>
@@ -67,6 +68,10 @@ class PostDetailFragment : BaseFragment(R.layout.fragment_post_detail) {
         val encodeHtml = android.util.Base64.encodeToString(
             unencodeHtml.toByteArray(), android.util.Base64.NO_PADDING
         )
-        binding.postContent.loadData(encodeHtml, "text/html", "base64")
+        binding.postContent.loadData(
+            encodeHtml,
+            getString(R.string.web_view_mime_type),
+            getString(R.string.web_view_encoding)
+        )
     }
 }
