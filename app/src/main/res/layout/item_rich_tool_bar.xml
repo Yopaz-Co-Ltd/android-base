@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageButton
+        android:id="@+id/btn_rich_tool_bar"
+        android:layout_width="@dimen/space_30"
+        android:layout_height="@dimen/space_30"
+        android:background="@color/white"/>
+</layout>

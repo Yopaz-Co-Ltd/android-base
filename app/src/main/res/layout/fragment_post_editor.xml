@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_header_post_editor" />
+        <include android:id="@+id/header_post_editor" layout="@layout/layout_header_post_editor" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,6 +24,7 @@
             android:paddingVertical="@dimen/space_20">
 
             <TextView
+                android:id="@+id/title_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/space_4"
@@ -35,7 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_40"
                 android:layout_marginBottom="@dimen/space_12"
-                android:autofillHints=""
                 android:background="@drawable/background_input"
                 android:hint="@string/input_title_hint"
                 android:inputType="text"
@@ -91,6 +91,13 @@
                     android:paddingEnd="@dimen/space_8"
                     android:textSize="@dimen/text_14" />
             </LinearLayout>
+
+            <com.kira.android_base.base.ui.widgets.fieldposteditor.FieldPostEditor
+                android:id="@+id/field_post_editor"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+
         </LinearLayout>
     </LinearLayout>
 </layout>

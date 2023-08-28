@@ -33,9 +33,10 @@
     <string name="tags">Tag</string>
     <string name="initial_input_tag_hint">Tag the post, maximum of 5 tags, minium of 1 tag, separate tags by commas</string>
     <string name="input_tag_hint">Type</string>
+    <string name="dialog_text_color">Choose Your Text Color</string>
+    <string name="dialog_background_text_color">Choose Your Highlight Color</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="more_from_user">More from Trương Minh Nhật</string>
-    <string name="unencodeHtml"></string>
 </resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/space_20"
+        android:background="@drawable/background_rich_editor"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/space_4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/space_4">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rich_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_1"
+            android:layout_marginVertical="@dimen/space_4"
+            android:background="@color/light_silver" />
+
+        <jp.wasabeef.richeditor.RichEditor
+            android:id="@+id/rich_text_editor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/space_4"
+            android:background="@color/white" />
+
+    </LinearLayout>
+</layout>

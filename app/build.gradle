@@ -81,7 +81,9 @@ android {
 
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
+
 }
 
 dependencies {
@@ -96,6 +98,8 @@ dependencies {
     testImplementation "junit:junit:$rootProject.ext.lib_versions.junit"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.lib_versions.junit_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.lib_versions.espresso"
+    implementation"androidx.activity:activity-ktx:$rootProject.ext.lib_versions.activity_version"
+    implementation"androidx.fragment:fragment-ktx:$rootProject.ext.lib_versions.fragment_version"
 
     //Multidex
     implementation "androidx.multidex:multidex:$rootProject.ext.lib_versions.multidex"
@@ -155,5 +159,8 @@ dependencies {
 
     //CardView
     implementation "androidx.cardview:cardview:$rootProject.ext.lib_versions.card_view"
+
+    //Text Editor
+    implementation 'jp.wasabeef:richeditor-android:2.0.0'
 
 }
