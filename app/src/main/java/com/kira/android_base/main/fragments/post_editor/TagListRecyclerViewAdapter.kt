@@ -21,16 +21,12 @@ class TagListRecyclerViewAdapter :
     }
 
     fun updateInsertData(currentTagInput: String) {
-        this.apply {
-            list.add(itemCount, currentTagInput)
-            notifyItemInserted(itemCount)
-        }
+        list.add(itemCount, currentTagInput)
+        notifyItemInserted(itemCount)
     }
 
     fun updateRemoveData(position: Int) {
-        this.apply {
-            list.removeAt(position)
-            notifyItemRemoved(position)
-        }
+        list.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

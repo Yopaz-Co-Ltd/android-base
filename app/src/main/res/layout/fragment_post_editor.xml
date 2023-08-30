@@ -35,13 +35,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_40"
                 android:layout_marginBottom="@dimen/space_12"
+                android:autofillHints=""
                 android:background="@drawable/background_input"
                 android:hint="@string/input_title_hint"
                 android:inputType="text"
                 android:paddingStart="@dimen/space_8"
                 android:paddingEnd="@dimen/space_4"
-                android:textSize="@dimen/text_14"
-                android:autofillHints="" />
+                android:textSize="@dimen/text_14" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -68,11 +68,13 @@
                         android:id="@+id/tag_list"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:orientation="horizontal"
                         android:paddingVertical="@dimen/space_4"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_max="200dp" />
+                        app:layout_constraintWidth_max="@dimen/space_200" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -80,18 +82,15 @@
                     android:id="@+id/tag_input"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:autofillHints=""
                     android:background="@color/light_gray"
                     android:elevation="@dimen/space_8"
                     android:hint="@string/initial_input_tag_hint"
                     android:inputType="textMultiLine"
                     android:paddingStart="@dimen/space_8"
                     android:paddingEnd="@dimen/space_8"
-                    android:textSize="@dimen/text_14"
-                    android:autofillHints="" />
+                    android:textSize="@dimen/text_14" />
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
-
 </layout>

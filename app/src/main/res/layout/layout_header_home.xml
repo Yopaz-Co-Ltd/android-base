@@ -32,7 +32,7 @@
         <LinearLayout
             android:layout_width="@dimen/space_60"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/space_10"
+            android:layout_marginStart="@dimen/space_10"
             android:gravity="center_vertical">
 
             <androidx.cardview.widget.CardView

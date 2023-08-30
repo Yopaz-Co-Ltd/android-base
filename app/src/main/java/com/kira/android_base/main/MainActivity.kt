@@ -1,6 +1,5 @@
 package com.kira.android_base.main
 
-import android.os.Bundle
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,10 +11,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private val mainViewModel: MainViewModel by viewModel()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun initViews() {
         invalidateAuthState()
