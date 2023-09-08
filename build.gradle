@@ -36,6 +36,9 @@ buildscript {
                 security_crypto     : '1.1.0-alpha06',
                 navigation_component: '2.5.3',
                 card_view           : '1.0.0',
+                navigation_component: '2.5.3',
+                activity_version    : '1.6.1',
+                fragment_version    : '1.5.7'
         ]
         kotlin_version = '1.8.0'
     }

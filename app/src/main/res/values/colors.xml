@@ -17,4 +17,13 @@
     <color name="gray">#888888</color>
     <color name="green">#028F10</color>
     <color name="yellow">#FFCD0F</color>
+    <color name="red">#FF0000</color>
+    <color name="orange">#FFA500</color>
+    <color name="blue">#0000FF</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="brown">#A52A2A</color>
+    <color name="sky_blue">#87CEEB</color>
+    <color name="steel_blue">#4682B4</color>
+    <color name="turquoise">#00FF7F</color>
+    <color name="purple">#800080</color>
 </resources>

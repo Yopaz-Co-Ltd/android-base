@@ -7,20 +7,26 @@ import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
+import com.kira.android_base.base.ui.widgets.fieldposteditor.FieldPostEditor
 import com.kira.android_base.base.ui.widgets.recyclerview.BaseRecyclerViewAdapter
 import com.kira.android_base.databinding.FragmentPostEditorBinding
 import com.kira.android_base.main.MainViewModel
+import jp.wasabeef.richeditor.RichEditor
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
 
     companion object {
         const val MAX_TAG_NUMBER = 5
+        private const val IMAGE_MAX_WIDTH = 200
     }
 
     private val mainViewModel: MainViewModel by sharedViewModel()
+    private var contentHtml: String = ""
 
     override fun initViews() {
         (viewDataBinding as? FragmentPostEditorBinding)?.run {
@@ -33,7 +39,22 @@ class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = viewDataBinding as FragmentPostEditorBinding
+        val fielPostEditor = view.findViewById<LinearLayout>(R.id.field_post_editor)
         val tagInputView = binding.tagInput
+
+        val pickMedia =
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+                if (uri != null) {
+                    fielPostEditor.findViewById<RichEditor>(R.id.rich_text_editor)
+                        .insertImage("$uri", "$uri", IMAGE_MAX_WIDTH)
+                }
+            }
+        FieldPostEditor(view.context, pickMedia)
+
+        fielPostEditor.findViewById<RichEditor>(R.id.rich_text_editor)
+            .setOnTextChangeListener { text ->
+                contentHtml = text
+            }
 
         binding.tagList.run {
             adapter = TagListRecyclerViewAdapter().apply {
