@@ -31,5 +31,26 @@
     <fragment
         android:id="@+id/postEditorFragment"
         android:name="com.kira.android_base.main.fragments.post_editor.PostEditorFragment"
-        android:label="PostEditorFragment" />
+        android:label="PostEditorFragment" >
+        <action
+            android:id="@+id/action_postEditorFragment_to_postPreviewFragment"
+            app:destination="@id/postPreviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postPreviewFragment"
+        android:name="com.kira.android_base.main.fragments.post_preview.PostPreviewFragment"
+        android:label="PostPreviewFragment">
+        <argument
+            android:name="postTitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="listTags"
+            app:argType="string[]"
+            app:nullable="true" />
+        <argument
+            android:name="contentHtml"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.findNavController
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.base.ui.widgets.fieldposteditor.FieldPostEditor
@@ -27,6 +28,8 @@ class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
 
     private val mainViewModel: MainViewModel by sharedViewModel()
     private var contentHtml: String = ""
+    private var listTags: List<String>? = emptyList()
+    private var postTitle: String? = null
 
     override fun initViews() {
         (viewDataBinding as? FragmentPostEditorBinding)?.run {
@@ -40,7 +43,6 @@ class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
 
         val binding = viewDataBinding as FragmentPostEditorBinding
         val fielPostEditor = view.findViewById<LinearLayout>(R.id.field_post_editor)
-        val tagInputView = binding.tagInput
 
         val pickMedia =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -66,7 +68,7 @@ class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
             }
         }
 
-        tagInputView.setOnKeyListener { _, keyCode, event ->
+        binding.tagInput.setOnKeyListener { _, keyCode, event ->
             if ((keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_COMMA) && event.action == KeyEvent.ACTION_DOWN) {
                 addTagList(binding)
                 true
@@ -75,22 +77,36 @@ class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
             }
         }
 
-        tagInputView.addTextChangedListener(object : TextWatcher {
+        binding.tagInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 val adapter = binding.tagList.adapter as TagListRecyclerViewAdapter
                 if (adapter.list.isNotEmpty()) {
-                    tagInputView.inputType = InputType.TYPE_CLASS_TEXT
-                    tagInputView.hint = getString(R.string.input_tag_hint)
+                    binding.tagInput.inputType = InputType.TYPE_CLASS_TEXT
+                    binding.tagInput.hint = getString(R.string.input_tag_hint)
                 } else {
-                    tagInputView.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
-                    tagInputView.hint = getString(R.string.initial_input_tag_hint)
+                    binding.tagInput.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
+                    binding.tagInput.hint = getString(R.string.initial_input_tag_hint)
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
+
+        binding.titleInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                postTitle = binding.titleInput.text.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        binding.headerPostEditor.publishBtn.setOnClickListener {
+            navigateToPostPreview(it)
+        }
     }
 
     private fun addTagList(binding: FragmentPostEditorBinding) {
@@ -103,6 +119,7 @@ class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
                 setMultipleLine(binding, it.list)
                 binding.tagList.smoothScrollToPosition(it.itemCount)
                 validateTagLength(binding, it.list)
+                listTags = it.list
             }
         }
     }
@@ -113,6 +130,7 @@ class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
         adapter?.let {
             setMultipleLine(binding, it.list)
             validateTagLength(binding, it.list)
+            listTags = it.list
         }
     }
 
@@ -141,4 +159,12 @@ class PostEditorFragment : BaseFragment(R.layout.fragment_post_editor) {
     private fun validateInputTag(currentText: String, list: MutableList<String>): Boolean =
         currentText.isNotEmpty() && !list.contains(currentText)
 
+    private fun navigateToPostPreview(view: View) {
+        val action = PostEditorFragmentDirections.actionPostEditorFragmentToPostPreviewFragment(
+            postTitle!!,
+            listTags?.toTypedArray(),
+            contentHtml,
+        )
+        view.findNavController().navigate(action)
+    }
 }
