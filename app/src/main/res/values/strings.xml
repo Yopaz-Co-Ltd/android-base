@@ -15,6 +15,14 @@
     <string name="no_account">No account?</string>
     <string name="create_one">Create one</string>
 
+    <!--    Sign Up With Email Fragment-->
+    <string name="introduce_sign_up_with_email">Please input your email, and we\'ll send you a magic link to complete your sign-up.</string>
+    <string name="title_input_email">Email</string>
+    <string name="hint_input_email">Email Adress</string>
+    <string name="sign_up_with_email">Sign up with email</string>
+    <string name="sign_up_with_facebook">Sign up with Facebook</string>
+    <string name="sign_up_with_google">Sign up with Goodle</string>
+
     <!--    Home Fragment-->
     <string name="logout">Logout</string>
     <string name="in">in</string>
