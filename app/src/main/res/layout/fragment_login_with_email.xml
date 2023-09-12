@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,12 +9,102 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/space_24">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_login"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/space_32"
+            android:text="@string/introduce_login_with_email"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_14" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/space_8"
+            android:text="@string/title_input_email"
+            android:textSize="@dimen/text_14"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_40"
+            android:background="@drawable/background_input_login"
+            android:inputType="textEmailSubject"
+            android:hint="@string/hint_input_email"
+            android:autofillHints="emailAddress"
+            android:paddingHorizontal="@dimen/space_8"
+            android:textSize="@dimen/text_14" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/space_8"
+            android:text="@string/title_input_password"
+            android:textSize="@dimen/text_14"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_40"
+            android:background="@drawable/background_input_login"
+            android:inputType="textPassword"
+            android:hint="@string/hint_input_password"
+            android:autofillHints="password"
+            android:paddingHorizontal="@dimen/space_8"
+            android:textSize="@dimen/text_14"
+            tools:ignore="TextFields" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_32"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_28">
+
+            <Button
+                android:id="@+id/sign_in_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_50"
+                android:background="@drawable/background_button_login"
+                android:text="@string/sign_in_with_email"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+
+            <include layout="@layout/layout_auth_split_line" />
+
+            <Button
+                android:id="@+id/sign_in_with_google_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_50"
+                android:background="@drawable/background_button_login_social"
+                android:drawableLeft="@drawable/ic_google_color"
+                android:text="@string/sign_in_with_google"
+                android:textAllCaps="false"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/sign_in_with_facebook_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_50"
+                android:layout_marginTop="@dimen/space_16"
+                android:background="@drawable/background_button_login_social"
+                android:drawableLeft="@drawable/ic_facebook_color"
+                android:text="@string/sign_in_with_facebook"
+                android:textAllCaps="false"
+                app:backgroundTint="@null" />
+        </LinearLayout>
     </LinearLayout>
 </layout>
