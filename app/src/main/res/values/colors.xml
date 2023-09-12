@@ -17,4 +17,9 @@
     <color name="gray">#888888</color>
     <color name="green">#028F10</color>
     <color name="yellow">#FFCD0F</color>
+    <color name="yellow_google">#FFC107</color>
+    <color name="red_google">#FF3D00</color>
+    <color name="green_google">#4CAF50</color>
+    <color name="blue_google">#1976D2</color>
+    <color name="blue_facebook">#3D5A98</color>
 </resources>
