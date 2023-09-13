@@ -93,6 +93,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.core:core-ktx:$lib_versions.core_ktx"
     implementation "androidx.appcompat:appcompat:$lib_versions.appcompat"
+    implementation "androidx.activity:activity:1.2.0"
+    implementation "androidx.fragment:fragment:1.3.0"
     implementation "com.google.android.material:material:$lib_versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$lib_versions.constraintlayout"
     implementation "androidx.test:core-ktx:$lib_versions.testCoreKtx"

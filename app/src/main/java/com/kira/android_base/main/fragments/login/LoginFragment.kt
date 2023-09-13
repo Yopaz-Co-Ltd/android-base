@@ -1,5 +1,6 @@
 package com.kira.android_base.main.fragments.login
 
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.kira.android_base.base.ui.BaseFragment
@@ -21,6 +22,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.run {
             this.viewModel = this@LoginFragment.viewModel
             lifecycleOwner = this@LoginFragment
+
+            bLogin.setOnClickListener {
+                Log.d(TAG, "initViews: click login")
+                mainActivity?.registerSIP(
+                    editTextUserName.text.toString(),
+                    editTextPassword.text.toString(),
+                    editTextCallFor.text.toString()
+                )
+            }
         }
     }
 
@@ -37,11 +47,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
         viewModel.toastLiveData.observe(viewLifecycleOwner) {
             Toast.makeText(context, it ?: return@observe, Toast.LENGTH_SHORT).show()
-        }
-
-        viewModel.isLoggedInLiveData.observe(viewLifecycleOwner) {
-            if (it != true) return@observe
-            mainActivity?.invalidateAuthState()
         }
     }
 }

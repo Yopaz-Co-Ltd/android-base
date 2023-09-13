@@ -24,11 +24,11 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edit_text_email"
+                android:id="@+id/edit_text_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email_hint"
-                android:inputType="textEmailAddress" />
+                android:hint="User Name"
+                android:text="708883" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_password"
@@ -36,7 +36,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_16"
                 android:hint="@string/password_hint"
-                android:inputType="textPassword" />
+                android:text="j2ba9LhDa8" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_call_for"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16"
+                android:hint="Call For"
+                android:text="792751" />
 
             <Button
                 android:id="@+id/b_login"
@@ -44,8 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_16"
                 android:backgroundTint="@color/secondary"
-                android:onClick='@{()->viewModel.login(context, editTextEmail.getText().toString(), editTextPassword.getText().toString())}'
-                android:text="@string/login" />
+                android:text="Call" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.kira.android_base.base.ui.widgets.ErrorPage
