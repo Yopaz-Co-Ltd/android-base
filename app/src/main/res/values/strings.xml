@@ -23,6 +23,11 @@
     <string name="sign_up_with_facebook">Sign up with Facebook</string>
     <string name="sign_up_with_google">Sign up with Goodle</string>
 
+    <!--    Login With Email Fragment-->
+    <string name="title_input_password">Password</string>
+    <string name="hint_input_password">******</string>
+    <string name="introduce_login_with_email">Enter your email and password to sign in.</string>
+
     <!--    Home Fragment-->
     <string name="logout">Logout</string>
     <string name="in">in</string>

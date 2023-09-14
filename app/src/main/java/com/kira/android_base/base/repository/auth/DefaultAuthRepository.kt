@@ -24,19 +24,21 @@ class DefaultAuthRepository(
     private val userDao: UserDao
 ) : AuthRepository {
 
-    override fun getLocalAccessToken() = sharedPreferences.getString(ACCESS_TOKEN_KEY, DEFAULT_STRING)
+    override fun getLocalAccessToken() =
+        sharedPreferences.getString(ACCESS_TOKEN_KEY, DEFAULT_STRING)
 
-    override suspend fun login(email: String, password: String): Result<Boolean> = withContext(Dispatchers.IO) {
-        val result = callApi { authApi.login(LoginRequestModel(email, password)) }
-        val accessToken = result?.data?.accessToken ?: return@withContext Error(
-            Error.Companion.Code.UNAUTHORIZED.value, context.getString(
-                R.string.error_login_failed
-            )
-        ).toResult<Boolean>()
-        sharedPreferences.edit().putString(ACCESS_TOKEN_KEY, accessToken).apply()
-        result.data.user?.let { user -> insertDatabase(userDao, user) }
-        return@withContext true.toResult()
-    }
+    override suspend fun login(email: String, password: String): Result<Boolean> =
+        withContext(Dispatchers.IO) {
+            val result = callApi { authApi.login(LoginRequestModel(email, password)) }
+            val accessToken = result?.data?.accessToken ?: return@withContext Error(
+                Error.Companion.Code.UNAUTHORIZED.value, context.getString(
+                    R.string.error_login_failed
+                )
+            ).toResult<Boolean>()
+            sharedPreferences.edit().putString(ACCESS_TOKEN_KEY, accessToken).apply()
+            result.data.user?.let { user -> insertDatabase(userDao, user) }
+            return@withContext true.toResult()
+        }
 
     override suspend fun logout(): Result<Int> {
         sharedPreferences.edit().remove(ACCESS_TOKEN_KEY).apply()
