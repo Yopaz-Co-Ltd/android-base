@@ -68,6 +68,12 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                     R.id.postEditorFragment -> {
                         supportActionBar?.hide()
                     }
+                    R.id.signUpWithEmailFragment -> {
+                        supportActionBar?.hide()
+                    }
+                    R.id.loginWithEmailFragment -> {
+                        supportActionBar?.hide()
+                    }
                     else -> {
                         supportActionBar?.show()
                     }

@@ -1,7 +1,9 @@
 package com.kira.android_base.main.fragments.login
 
-import android.util.Log
+import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.navigation.findNavController
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.FragmentLoginBinding
@@ -19,14 +21,20 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         (viewDataBinding as FragmentLoginBinding?)?.apply {
             this.viewModel = this@LoginFragment.viewModel
             lifecycleOwner = this@LoginFragment
-            brvLogin.apply {
-                setAdapter(LoginRecyclerViewAdapter().apply {
-                    list.addAll((1..10).map { "$it" })
-                })
-                setOnRefreshListener {
-                    Log.d(TAG, "initViews: setOnRefreshListener")
-                }
-            }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val binding = viewDataBinding as FragmentLoginBinding
+
+        binding.buttonNavigateToSignUp.setOnClickListener {
+            navigateToSignUp(it)
+        }
+
+        binding.loginButton.setOnClickListener {
+            navigateToSignInWithEmail(it)
         }
     }
 
@@ -49,5 +57,16 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             if (it != true) return@observe
             mainActivity?.invalidateAuthState()
         }
+
+    }
+
+    private fun navigateToSignUp(view: View) {
+        val action = LoginFragmentDirections.actionLoginFragmentToSignUpWithEmailFragment()
+        view.findNavController().navigate(action)
+    }
+
+    private fun navigateToSignInWithEmail(view: View) {
+        val action = LoginFragmentDirections.actionLoginFragmentToLoginWithEmailFragment()
+        view.findNavController().navigate(action)
     }
 }

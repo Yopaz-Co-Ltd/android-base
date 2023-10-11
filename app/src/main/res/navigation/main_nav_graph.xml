@@ -10,12 +10,19 @@
         android:id="@+id/loginFragment"
         android:name="com.kira.android_base.main.fragments.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_signUpWithEmailFragment"
+            app:destination="@id/signUpWithEmailFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_loginWithEmailFragment"
+            app:destination="@id/loginWithEmailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.kira.android_base.main.fragments.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_postDetailFragment"
             app:destination="@id/postDetailFragment" />
@@ -23,7 +30,7 @@
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="com.kira.android_base.main.fragments.post_detai.PostDetailFragment"
-        android:label="PostDetailFragment" >
+        android:label="PostDetailFragment">
         <action
             android:id="@+id/action_postDetailFragment_to_postEditorFragment"
             app:destination="@id/postEditorFragment" />
@@ -32,4 +39,12 @@
         android:id="@+id/postEditorFragment"
         android:name="com.kira.android_base.main.fragments.post_editor.PostEditorFragment"
         android:label="PostEditorFragment" />
+    <fragment
+        android:id="@+id/signUpWithEmailFragment"
+        android:name="com.kira.android_base.main.fragments.sign_up_with_email.SignUpWithEmailFragment"
+        android:label="SignUpWithEmailFragment" />
+    <fragment
+        android:id="@+id/loginWithEmailFragment"
+        android:name="com.kira.android_base.main.fragments.login_with_email.LoginWithEmailFragment"
+        android:label="LoginWithEmailFragment" />
 </navigation>
