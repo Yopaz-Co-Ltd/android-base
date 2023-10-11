@@ -2,11 +2,13 @@ package com.kira.android_base.main.fragments.post_detai
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.FragmentPostDetailBinding
 import com.kira.android_base.main.MainViewModel
+import com.kira.android_base.main.fragments.home.HomeFragmentDirections
 import com.kira.android_base.main.fragments.home.PostItemHomeModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -73,5 +75,14 @@ class PostDetailFragment : BaseFragment(R.layout.fragment_post_detail) {
             getString(R.string.web_view_mime_type),
             getString(R.string.web_view_encoding)
         )
+
+        binding.btnNavigateToPostEditor.setOnClickListener{
+            navigateToPostEditor(it)
+        }
+    }
+
+    private fun navigateToPostEditor(view: View) {
+        val action = PostDetailFragmentDirections.actionPostDetailFragmentToPostEditorFragment()
+        view.findNavController().navigate(action)
     }
 }

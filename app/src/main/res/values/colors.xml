@@ -3,6 +3,11 @@
     <color name="primary">@color/white</color>
     <color name="secondary">@color/chantilly</color>
     <color name="global_screen_background">@color/white</color>
+    <color name="translucent_matte_black">#33000000</color>
+    <color name="translucent_light_black">#22000000</color>
+    <color name="yellow_logo_part">#f6b21c</color>
+    <color name="purple_logo_part">#54347a</color>
+    <color name="red_logo_part">#e84d39</color>
     <color name="chantilly">#f8bbd0</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
@@ -11,4 +16,5 @@
     <color name="light_silver">#E7E7E7</color>
     <color name="gray">#888888</color>
     <color name="green">#028F10</color>
+    <color name="yellow">#FFCD0F</color>
 </resources>

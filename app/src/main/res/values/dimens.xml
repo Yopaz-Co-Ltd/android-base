@@ -134,4 +134,5 @@
     <dimen name="space_98">98dp</dimen>
     <dimen name="space_99">99dp</dimen>
     <dimen name="space_100">100dp</dimen>
+    <dimen name="space_200">200dp</dimen>
 </resources>

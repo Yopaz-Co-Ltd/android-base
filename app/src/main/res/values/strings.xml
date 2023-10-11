@@ -23,7 +23,19 @@
     <string name="web_view_mime_type">text/html</string>
     <string name="web_view_encoding">base64</string>
 
-    //TODO REMOVE
+    <!--    Post Editor-->
+    <string name="draft_in">Draft in St.</string>
+    <string name="hikari">Hikari</string>
+    <string name="saved">Saved</string>
+    <string name="button_publish">Publish</string>
+    <string name="title">Title</string>
+    <string name="input_title_hint">Discover the riches of our editor</string>
+    <string name="tags">Tag</string>
+    <string name="initial_input_tag_hint">Tag the post, maximum of 5 tags, minium of 1 tag, separate tags by commas</string>
+    <string name="input_tag_hint">Type</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="more_from_user">More from Trương Minh Nhật</string>
     <string name="unencodeHtml"></string>
 </resources>

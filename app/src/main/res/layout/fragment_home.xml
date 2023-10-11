@@ -33,6 +33,8 @@
             app:srcCompat="@drawable/ic_add"
             app:tint="@color/white" />
 
+        <include layout="@layout/layout_header_home" />
+
         <Button
             android:id="@+id/button_logout"
             android:layout_width="wrap_content"
