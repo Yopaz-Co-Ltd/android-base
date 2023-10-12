@@ -12,9 +12,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/space_52"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/space_52">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -24,21 +24,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_32"
-            android:textColor="@color/black"
             android:layout_marginVertical="@dimen/space_40"
-            android:text="@string/welcome_back" />
+            android:text="@string/welcome_back"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_32" />
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_50"
+            android:background="@drawable/background_button_login"
+            android:text="@string/sign_in_with_email"
             android:textAllCaps="false"
             android:textStyle="bold"
-            android:text="@string/sign_in_with_email"
-            android:background="@drawable/background_button_login"
-            app:backgroundTint="@null"
-            />
+            app:backgroundTint="@null" />
 
         <include layout="@layout/layout_auth_split_line" />
 
@@ -46,24 +45,22 @@
             android:id="@+id/login_with_google_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_50"
-            android:textAllCaps="false"
-            android:text="@string/sign_in_with_google"
             android:background="@drawable/background_button_login_social"
-            app:backgroundTint="@null"
             android:drawableLeft="@drawable/ic_google_color"
-            />
+            android:text="@string/sign_in_with_google"
+            android:textAllCaps="false"
+            app:backgroundTint="@null" />
 
         <Button
             android:id="@+id/login_with_facebook_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_50"
-            android:textAllCaps="false"
-            android:text="@string/sign_in_with_facebook"
-            android:background="@drawable/background_button_login_social"
-            app:backgroundTint="@null"
             android:layout_marginTop="@dimen/space_16"
+            android:background="@drawable/background_button_login_social"
             android:drawableLeft="@drawable/ic_facebook_color"
-            />
+            android:text="@string/sign_in_with_facebook"
+            android:textAllCaps="false"
+            app:backgroundTint="@null" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -74,19 +71,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_18"
+                android:text="@string/no_account"
                 android:textColor="@color/black"
-                android:text="@string/no_account" />
+                android:textSize="@dimen/text_18" />
 
             <Button
                 android:id="@+id/button_navigate_to_sign_up"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_18"
                 android:text="@string/create_one"
                 android:textAllCaps="false"
                 android:textColor="@color/green"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                android:textSize="@dimen/text_18" />
 
         </LinearLayout>
     </LinearLayout>

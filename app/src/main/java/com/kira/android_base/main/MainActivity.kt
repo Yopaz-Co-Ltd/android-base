@@ -56,21 +56,14 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             setupActionBarWithNavController(navController)
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
-                    R.id.loginFragment -> {
-                        supportActionBar?.hide()
-                    }
-                    R.id.homeFragment -> {
-                        supportActionBar?.hide()
-                    }
-                    R.id.postDetailFragment -> {
-                        supportActionBar?.hide()
-                    }
-                    R.id.signUpWithEmailFragment -> {
-                        supportActionBar?.hide()
-                    }
+                    R.id.loginFragment,
+                    R.id.homeFragment,
+                    R.id.postDetailFragment,
+                    R.id.signUpWithEmailFragment,
                     R.id.loginWithEmailFragment -> {
                         supportActionBar?.hide()
                     }
+
                     else -> {
                         supportActionBar?.show()
                     }

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import com.kira.android_base.R
 import com.kira.android_base.base.ui.BaseFragment
 import com.kira.android_base.databinding.FragmentLoginBinding
@@ -30,11 +32,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         val binding = viewDataBinding as FragmentLoginBinding
 
         binding.buttonNavigateToSignUp.setOnClickListener {
-            navigateToSignUp(it)
+            navigateToSignUp()
         }
 
         binding.loginButton.setOnClickListener {
-            navigateToSignInWithEmail(it)
+            navigateToSignInWithEmail()
         }
     }
 
@@ -60,13 +62,13 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     }
 
-    private fun navigateToSignUp(view: View) {
+    private fun navigateToSignUp() {
         val action = LoginFragmentDirections.actionLoginFragmentToSignUpWithEmailFragment()
-        view.findNavController().navigate(action)
+        findNavController().navigate(action)
     }
 
-    private fun navigateToSignInWithEmail(view: View) {
+    private fun navigateToSignInWithEmail() {
         val action = LoginFragmentDirections.actionLoginFragmentToLoginWithEmailFragment()
-        view.findNavController().navigate(action)
+        findNavController().navigate(action)
     }
 }
