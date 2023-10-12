@@ -1,5 +1,6 @@
 package com.kira.android_base.main.fragments.login_with_email
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -22,6 +23,7 @@ internal class LoginWithEmailViewModel(
         viewModelScope.launch {
             _loadingLiveData.postValue(true)
             val result = authRepository.login(email!!, password!!)
+            Log.e("Result001", "$result")
             _loadingLiveData.postValue(false)
             result.data?.let { isLoggedIn ->
                 _isLoggedInLiveData.postValue(isLoggedIn)

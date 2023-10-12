@@ -1,7 +1,9 @@
 package com.kira.android_base.main.fragments.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kira.android_base.R
@@ -11,21 +13,12 @@ import com.kira.android_base.databinding.FragmentHomeBinding
 import com.kira.android_base.main.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-//TODO REMOVE FAKE DATA
-val data = listOf(
-    PostItemHomeModel("Trương Nhật 1", "Ha Noi", "11 August, 2023", "Hello World 1"),
-    PostItemHomeModel("Trương Nhật 2", "Ha Noi", "12 August, 2023", "Hello World 2"),
-    PostItemHomeModel("Trương Nhật 3", "Ha Noi", "13 August, 2023", "Hello World 3"),
-    PostItemHomeModel("Trương Nhật 4", "Ha Noi", "14 August, 2023", "Hello World 4"),
-    PostItemHomeModel("Trương Nhật 5", "Ha Noi", "15 August, 2023", "Hello World 5"),
-    PostItemHomeModel("Trương Nhật 6", "Ha Noi", "16 August, 2023", "Hello World 6"),
-    PostItemHomeModel("Trương Nhật 7", "Ha Noi", "17 August, 2023", "Hello World 7"),
-    PostItemHomeModel("Trương Nhật 8", "Ha Noi", "18 August, 2023", "Hello World 8"),
-)
-
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val mainViewModel: MainViewModel by sharedViewModel()
+    private val homeViewModel: HomeViewModel by sharedViewModel()
+
+    private val listPostData: MutableList<PostItemHomeModel> = mutableListOf()
 
     override fun initViews() {
         (viewDataBinding as? FragmentHomeBinding)?.run {
@@ -33,6 +26,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             lifecycleOwner = viewLifecycleOwner
         }
         mainViewModel.getLocalUser()
+        homeViewModel.getListPostHome()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,27 +34,51 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         val binding = viewDataBinding as FragmentHomeBinding
 
+        binding.swipeRefreshHome.setProgressViewOffset(false, 0, 200)
+
+    }
+
+    override fun handleObservables() {
+        super.handleObservables()
+
+        homeViewModel.mutableListPost.observe(viewLifecycleOwner, Observer {
+            updatePostList(it)
+        })
+
+        mainViewModel.loadingLiveData.observe(viewLifecycleOwner) {
+            mainActivity?.showLoadingDialog(it == true)
+
+        }
+    }
+
+    private fun updatePostList(data: List<PostItemHomeModel>?) {
+        if (data != null) {
+            listPostData.addAll(data)
+        }
+
+        val binding = viewDataBinding as FragmentHomeBinding
+
         binding.listItemHome.apply {
             adapter = ListPostHomeRecyclerViewAdapter().apply {
-                list.addAll(data.map {
+                list.addAll(listPostData.map {
                     PostItemHomeModel(
+                        it.id,
+                        it.user_id,
+                        it.title,
+                        it.content,
+                        it.created_at,
+                        it.updated_at,
+                        it.deleted_at,
                         it.user,
-                        it.place,
-                        it.time,
-                        it.title
+                        it.tags
                     )
                 })
                 listener = object : BaseRecyclerViewAdapter.Listener<PostItemHomeModel> {
                     override fun onItemClick(position: Int, t: PostItemHomeModel) {
-                        navigateToPostDetail(view)
+                        navigateToPostDetail(requireView())
                     }
                 }
             }
-            layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.VERTICAL,
-                false
-            )
         }
     }
 

@@ -54,11 +54,11 @@ class PostDetailFragment : BaseFragment(R.layout.fragment_post_detail) {
         binding.suggesstionPostList.isNestedScrollingEnabled = false
 
         binding.suggesstionPostList.apply {
-            adapter = SuggestionPostRecyclerViewAdapter().apply {
-                list.addAll(data.map {
-                    PostItemHomeModel(it.user, it.place, it.time, it.title)
-                })
-            }
+//            adapter = SuggestionPostRecyclerViewAdapter().apply {
+//                list.addAll(data.map {
+//                    PostItemHomeModel(it.user, it.place, it.time, it.title)
+//                })
+//            }
             layoutManager = LinearLayoutManager(
                 context, LinearLayoutManager.VERTICAL, false
             )

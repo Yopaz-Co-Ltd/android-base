@@ -10,9 +10,9 @@ class SuggestionPostRecyclerViewAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = list[position]
         (holder.viewDataBinding as ItemHomeRecyclerViewBinding?)?.apply {
-            userItemHome.text = currentItem.user
-            placeItemHome.text = currentItem.place
-            timeItemHome.text = currentItem.time
+            userItemHome.text = currentItem.user.name
+            placeItemHome.text = currentItem.created_at
+            timeItemHome.text = currentItem.updated_at
             titleItemHome.text = currentItem.title
         }
         holder.viewDataBinding.postItemHome.setOnClickListener {

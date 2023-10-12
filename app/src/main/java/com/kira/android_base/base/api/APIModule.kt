@@ -1,11 +1,13 @@
 package com.kira.android_base.base.api
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.kira.android_base.BuildConfig
 import com.kira.android_base.base.api.auth.AuthApi
+import com.kira.android_base.base.api.home.HomeApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Cache
@@ -23,12 +25,13 @@ const val CHUCK_MAX_CONTENT_LENGTH = 250000L
 
 val APIsModule = module {
     single { provideMoshi() }
-    single { provideAppInterceptor() }
+    single { provideAppInterceptor(get()) }
     single { provideLoggingInterceptor() }
     single { provideCache(androidContext()) }
     single { provideOkHttp(androidContext(), get(), get(), get()) }
     single { provideRetrofit(get(), get()) }
     single { provideAuthApi(get()) }
+    single { provideHomeApi(get())}
 }
 
 fun provideMoshi(): Moshi = Moshi.Builder()
@@ -45,7 +48,7 @@ private fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     return loggingInterceptor
 }
 
-private fun provideAppInterceptor() = AppInterceptor()
+private fun provideAppInterceptor(sharedPreferences: SharedPreferences) = AppInterceptor(sharedPreferences)
 
 private fun provideCache(context: Context): Cache = Cache(context.cacheDir, CACHE_SIZE)
 
@@ -83,3 +86,5 @@ private fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit 
         .build()
 
 private fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+
+private fun provideHomeApi(retrofit: Retrofit): HomeApi = retrofit.create(HomeApi::class.java)

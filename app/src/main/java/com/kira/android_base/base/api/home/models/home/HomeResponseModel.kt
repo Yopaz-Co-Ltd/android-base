@@ -1,6 +1,6 @@
-package com.kira.android_base.main.fragments.home
+package com.kira.android_base.base.api.home.models.home
 
-data class PostItemHomeModel(
+data class HomeResponseModel(
     val id: Int,
     val user_id: Int,
     val title: String,
