@@ -36,7 +36,8 @@ buildscript {
                 coroutines          : '1.5.0',
                 security_crypto     : '1.1.0-alpha06',
                 navigation_component: '2.5.3',
-                hilt                : '2.44'
+                hilt                : '2.44',
+                dexter              : '6.2.3'
         ]
         kotlin_version = '1.8.10'
     }

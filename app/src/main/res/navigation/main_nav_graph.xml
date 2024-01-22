@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:label="main">
+    android:label="main"
+    app:startDestination="@id/homeBluetoothFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -14,4 +16,9 @@
         android:name="com.kira.android_base.main.fragments.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/homeBluetoothFragment"
+        android:name="com.kira.android_base.main.fragments.homebluetooth.HomeBluetoothFragment"
+        android:label="HomeBluetoothFragment" />
 </navigation>

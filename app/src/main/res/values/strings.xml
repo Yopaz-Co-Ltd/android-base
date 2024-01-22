@@ -15,4 +15,8 @@
 
     <!--    Home Fragment-->
     <string name="logout">Logout</string>
+
+    <!--    Home Bluetooth Fragment-->
+    <string name="find_device">Find Device</string>
+    <string name="advertising_device">advertising device</string>
 </resources>

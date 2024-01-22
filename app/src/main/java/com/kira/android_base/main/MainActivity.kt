@@ -85,6 +85,6 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                 setNavigationStartDestination(R.id.homeFragment)
                 return
             }
-        setNavigationStartDestination(R.id.loginFragment)
+        setNavigationStartDestination(R.id.homeBluetoothFragment)
     }
 }
