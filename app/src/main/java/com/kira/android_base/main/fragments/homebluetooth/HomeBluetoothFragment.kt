@@ -22,17 +22,16 @@ import android.bluetooth.le.AdvertiseData
 import android.bluetooth.le.AdvertiseSettings
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
-import android.content.Context
-import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.ParcelUuid
 import android.util.Log
-import android.widget.Toast
+import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.ExoPlayer
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -44,10 +43,8 @@ import com.kira.android_base.databinding.FragmentHomeBluetoothBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.Calendar
-import java.util.UUID
 
-class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
+class HomeBluetoothFragment : BaseFragment(com.kira.android_base.R.layout.fragment_home_bluetooth) {
 
     companion object {
         private const val REQUEST_BLUETOOTH_PERMISSION = 0
@@ -61,10 +58,8 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
     private var bluetoothGattServer: BluetoothGattServer? = null
     private var bluetoothManager: BluetoothManager? = null
     private var devices = mutableSetOf<BluetoothDevice>()
-
-    private val calendar by lazy {
-        Calendar.getInstance()
-    }
+    private var exoPlayer: ExoPlayer? = null
+    private var additionalTimeAdapter: ArrayAdapter<CharSequence?>? = null
 
     private val bluetoothRequestEnableLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -103,7 +98,7 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
             characteristic: BluetoothGattCharacteristic?
         ) {
             super.onCharacteristicReadRequest(device, requestId, offset, characteristic)
-            Log.e("TAG", "onCharacteristicReadRequest: start", )
+            Log.e("TAG", "onCharacteristicReadRequest: start")
             bluetoothGattServer?.sendResponse(device, requestId, BluetoothGatt.GATT_SUCCESS, offset, "ok".toByteArray())
         }
 
@@ -135,7 +130,7 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
         override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
             super.onServicesDiscovered(gatt, status)
 
-            Log.e("TAG", "onServicesDiscovered: ", )
+            Log.e("TAG", "onServicesDiscovered: ")
             val service = gatt?.getService(SERVICE_UUID.uuid)
             val characteristic = service?.getCharacteristic(CHAR_UUID.uuid)
             gatt?.readCharacteristic(characteristic)
@@ -147,10 +142,10 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
             value: ByteArray,
             status: Int
         ) {
-            Log.e("TAG", "onCharacteristicRead: $status", )
+            Log.e("TAG", "onCharacteristicRead: $status")
             super.onCharacteristicRead(gatt, characteristic, value, status)
             val data = characteristic.value
-            Log.e("TAG", "onCharacteristicRead: ${String(data)} ${String(value)}", )
+            Log.e("TAG", "onCharacteristicRead: ${String(data)} ${String(value)}")
         }
     }
 
@@ -159,25 +154,43 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
         override fun onStartSuccess(settingsInEffect: AdvertiseSettings?) {
             super.onStartSuccess(settingsInEffect)
 
-            Log.e("TAG", "onStartSuccess: ", )
+            Log.e("TAG", "onStartSuccess: ")
         }
 
         override fun onStartFailure(errorCode: Int) {
             super.onStartFailure(errorCode)
 
-            Log.e("TAG", "onStartFailure: $errorCode", )
+            Log.e("TAG", "onStartFailure: $errorCode")
         }
     }
+
+    var gTime = 0L
+    var preSystemTime = System.currentTimeMillis()
+    var shouldSync = true
 
     private val leScanCallback = object : ScanCallback() {
         @SuppressLint("MissingPermission")
         override fun onScanResult(callbackType: Int, result: ScanResult?) {
             super.onScanResult(callbackType, result)
-            Log.e("TAG", "onScanResult: ${result?.device?.name} ${result?.device?.address} ${result?.scanRecord?.serviceData}", )
+            Log.e(
+                "TAG",
+                "onScanResult: ${result?.device?.name} ${result?.device?.address} ${result?.scanRecord?.serviceData}"
+            )
             val serviceData = result?.scanRecord?.serviceData?.get(SERVICE_DATA_UUID) ?: return
             val time = String(serviceData).toLongOrNull() ?: return
-            Log.e("TAG", "onScanResult: $time", )
+            Log.e("TAG", "onScanResult: $time")
             setTime(time)
+            val currentSysTime = System.currentTimeMillis()
+            if (gTime == time ||
+//                currentSysTime - preSystemTime < 2000 ||
+                !shouldSync
+            ) return
+            gTime = time
+            val binding = viewDataBinding as? FragmentHomeBluetoothBinding
+            binding?.buttonSync?.performClick()
+            preSystemTime = currentSysTime
+            Log.d("TAG", "onScanResult: gTime = $gTime")
+            exoPlayer?.seekTo(time + (binding?.spinner?.selectedItem?.toString()?.toLong() ?: 0L))
 //            devices.add(result?.device ?: return)
         }
     }
@@ -191,9 +204,38 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
             }
 
             buttonAdvertisingDevice.setOnClickListener {
-                Log.e("TAG", "initViews: ${bluetoothAdapter?.isMultipleAdvertisementSupported}", )
+                Log.e("TAG", "initViews: ${bluetoothAdapter?.isMultipleAdvertisementSupported}")
                 if (bluetoothAdapter?.isMultipleAdvertisementSupported == false) return@setOnClickListener
                 startAdvertising()
+            }
+
+            buttonSync.text = "Sync: $shouldSync"
+            buttonSync.setOnClickListener {
+                shouldSync = !shouldSync
+                buttonSync.text = "Sync: $shouldSync"
+            }
+
+            val context = context ?: return
+
+            ArrayAdapter.createFromResource(
+                context, R.array.additional_time_array, android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+                additionalTimeAdapter = adapter
+            }
+
+            exoPlayer = ExoPlayer.Builder(context).build().apply {
+                playerView.player = this
+                repeatMode = ExoPlayer.REPEAT_MODE_ALL
+                val mediaItem = MediaItem.fromUri(
+                    Uri.parse(
+                        "android.resource://" + context.packageName + "/" + R.raw.video_10mb
+                    )
+                )
+                setMediaItem(mediaItem)
+                prepare()
+                play()
             }
         }
     }
@@ -201,7 +243,7 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
     @SuppressLint("MissingPermission")
 
     private fun startAdvertising() {
-        Log.e("TAG", "startAdvertising: ", )
+        Log.e("TAG", "startAdvertising: ")
 //        val bluetoothGattService = createGattService()
 //        bluetoothGattServer = bluetoothManager?.openGattServer(context, gattServerCallback)
 //        bluetoothGattServer?.addService(bluetoothGattService)
@@ -209,7 +251,10 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
             val setting = initSettingAdvertising()
             while (true) {
                 bluetoothAdapter?.bluetoothLeAdvertiser?.let {
-                    val currentTime = System.currentTimeMillis()
+                    val currentTime = exoPlayer?.currentPosition ?: 0L
+                    Log.d(
+                        "TAG", "startAdvertising: viewVideo.currentPosition = " + "$currentTime"
+                    )
                     it.startAdvertising(setting, initDataAdvertise(currentTime.toString()), advertiseCallback)
                     setTime(currentTime)
                     delay(1_000)
@@ -253,48 +298,52 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
         bluetoothGatt = device.connectGatt(context, false, bluetoothGattCallback)
     }
 
-    @RequiresApi(Build.VERSION_CODES.S)
     private fun initBluetooth() {
-        Log.e("TAG", "initBluetooth: All permission granted", )
+        Log.e("TAG", "initBluetooth: All permission granted")
         bluetoothManager = activity?.getSystemService(BluetoothManager::class.java)
         bluetoothAdapter = bluetoothManager?.adapter ?: return
         enableBluetooth()
     }
 
     private fun initPermission() {
-        Log.e("TAG", "initPermission: request permission", )
+        Log.e("TAG", "initPermission: request permission")
+        val bluetoothPermissions = mutableListOf(
+            ACCESS_FINE_LOCATION,
+            BLUETOOTH,
+            BLUETOOTH_ADMIN,
+        )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            Dexter
-                .withContext(context)
-                .withPermissions(
+            bluetoothPermissions.addAll(
+                listOf(
+                    BLUETOOTH_ADVERTISE,
                     BLUETOOTH_SCAN,
                     BLUETOOTH_CONNECT,
-                    ACCESS_FINE_LOCATION,
-                    BLUETOOTH,
-                    BLUETOOTH_ADMIN,
-                    BLUETOOTH_ADVERTISE
-                ).withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                        if (p0?.areAllPermissionsGranted() == true) {
-                            Log.e("TAG", "onPermissionsChecked: all permission granted", )
-                            initBluetooth()
-                            initGattServer()
-                            return
-                        }
-                        Log.e("TAG", "onPermissionsChecked: ${p0?.deniedPermissionResponses?.map { it.permissionName }}", )
-                        Log.e("TAG", "onPermissionsChecked: fail", )
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                        p0: MutableList<PermissionRequest>?,
-                        p1: PermissionToken?
-                    ) {
-                        Log.e("TAG", "onPermissionRationaleShouldBeShown: ", )
-                        p1?.continuePermissionRequest()
-                    }
-                }).onSameThread()
-                .check()
+                )
+            )
         }
+        Dexter.withContext(context).withPermissions(bluetoothPermissions)
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    if (p0?.areAllPermissionsGranted() == true) {
+                        Log.e("TAG", "onPermissionsChecked: all permission granted")
+                        initBluetooth()
+                        initGattServer()
+                        return
+                    }
+                    Log.e(
+                        "TAG",
+                        "onPermissionsChecked: ${p0?.deniedPermissionResponses?.map { it.permissionName }}",
+                    )
+                    Log.e("TAG", "onPermissionsChecked: fail")
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?, p1: PermissionToken?
+                ) {
+                    Log.e("TAG", "onPermissionRationaleShouldBeShown: ")
+                    p1?.continuePermissionRequest()
+                }
+            }).onSameThread().check()
     }
 
     @SuppressLint("MissingPermission")
@@ -330,7 +379,6 @@ class HomeBluetoothFragment : BaseFragment(R.layout.fragment_home_bluetooth) {
     }
 
     private fun setTime(time: Long) {
-        calendar.timeInMillis = time
-        (viewDataBinding as? FragmentHomeBluetoothBinding)?.textViewTime?.text = calendar.time.toString()
+        (viewDataBinding as? FragmentHomeBluetoothBinding)?.textViewTime?.text = time.toString()
     }
 }

@@ -11,8 +11,8 @@ android {
     defaultConfig {
         applicationId "com.kira.android_base"
         minSdkVersion 23
-        compileSdk 33
-        targetSdkVersion 33
+        compileSdk 34
+        targetSdkVersion 34
         multiDexEnabled true
         versionCode 1
         versionName "1.0"
@@ -171,4 +171,8 @@ dependencies {
 
     //Dexter
     implementation "com.karumi:dexter:$lib_versions.dexter"
+
+    implementation "androidx.media3:media3-exoplayer:1.2.1"
+    implementation "androidx.media3:media3-exoplayer-dash:1.2.1"
+    implementation "androidx.media3:media3-ui:1.2.1"
 }
