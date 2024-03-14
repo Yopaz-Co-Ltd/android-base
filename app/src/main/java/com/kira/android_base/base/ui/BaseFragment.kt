@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.kira.android_base.main.MainActivity
 
-abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
+abstract class BaseFragment<VB: ViewDataBinding>(private val layoutResId: Int) : Fragment() {
 
-    var mainActivity: MainActivity? = null
-    var viewDataBinding: ViewDataBinding? = null
+    protected var mainActivity: MainActivity? = null
+    private var _binding: VB? = null
+    protected val binding: VB get() = _binding!!
+
+    protected abstract val viewModel: BaseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +28,10 @@ abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        DataBindingUtil.inflate<ViewDataBinding>(
+        DataBindingUtil.inflate<VB>(
             inflater, layoutResId, container, false
         ).apply {
-            viewDataBinding = this
+            _binding = this
             return root
         }
     }
@@ -46,9 +50,27 @@ abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
         handleObservables()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        _binding = null
+    }
+
     abstract fun initViews()
 
-    open fun handleObservables() {}
+    open fun handleObservables() {
+        viewModel.loadingLiveData.observe(viewLifecycleOwner) {
+            mainActivity?.showLoadingDialog(it == true)
+        }
+
+        viewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            mainActivity?.showErrorDialog(error?.message ?: return@observe)
+        }
+
+        viewModel.toastLiveData.observe(viewLifecycleOwner) {
+            Toast.makeText(context, it ?: return@observe, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     /*
     * this function is call onViewCreated and onHiddenChanged (hidden = false)

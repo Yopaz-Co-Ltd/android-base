@@ -8,16 +8,16 @@ import com.kira.android_base.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment(R.layout.fragment_login) {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     companion object {
         val TAG: String = this::class.java.simpleName
     }
 
-    private val viewModel by viewModels<LoginViewModel>()
+    override val viewModel: LoginViewModel by viewModels()
 
     override fun initViews() {
-        (viewDataBinding as FragmentLoginBinding?)?.apply {
+        binding.apply {
             this.viewModel = this@LoginFragment.viewModel
             lifecycleOwner = this@LoginFragment
         }
@@ -25,18 +25,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     override fun handleObservables() {
         super.handleObservables()
-
-        viewModel.loadingLiveData.observe(viewLifecycleOwner) {
-            mainActivity?.showLoadingDialog(it == true)
-        }
-
-        viewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
-            mainActivity?.showErrorDialog(error?.message ?: return@observe)
-        }
-
-        viewModel.toastLiveData.observe(viewLifecycleOwner) {
-            Toast.makeText(context, it ?: return@observe, Toast.LENGTH_SHORT).show()
-        }
 
         viewModel.isLoggedInLiveData.observe(viewLifecycleOwner) {
             if (it != true) return@observe

@@ -13,19 +13,20 @@ import com.kira.android_base.R
 import com.kira.android_base.base.ui.widgets.ErrorDialog
 import com.kira.android_base.base.ui.widgets.LoadingDialog
 
-abstract class BaseActivity(
+abstract class BaseActivity<VB: ViewDataBinding>(
     @LayoutRes
     private val activityLayoutRes: Int
 ) : AppCompatActivity() {
 
-    private var activityViewDataBinding: ViewDataBinding? = null
+    private var _binding: VB? = null
+    protected val binding get() = _binding!!
     private val errorDialog = ErrorDialog()
     private val loadingDialog = LoadingDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activityViewDataBinding = DataBindingUtil.setContentView(this, activityLayoutRes)
+        _binding = DataBindingUtil.setContentView(this, activityLayoutRes)
 
         initViews()
         handleObservables()
@@ -50,6 +51,12 @@ abstract class BaseActivity(
 
     open fun handleObservables() {}
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        _binding = null
+    }
+
     fun showErrorDialog(
         errorMessage: String,
         title: String = getString(R.string.error),
@@ -68,6 +75,4 @@ abstract class BaseActivity(
         if (isShow) loadingDialog.show(this, minTime, loadingTypeSprite, loadingColor)
         else loadingDialog.dismiss()
     }
-
-    fun getDataBiding() = activityViewDataBinding
 }

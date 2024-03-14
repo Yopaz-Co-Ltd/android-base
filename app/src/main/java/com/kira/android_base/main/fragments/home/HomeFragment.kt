@@ -10,13 +10,13 @@ import com.kira.android_base.main.fragments.login.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private val mainViewModel: MainViewModel by activityViewModels()
+    override val viewModel: MainViewModel by activityViewModels()
 
     override fun initViews() {
-        (viewDataBinding as? FragmentHomeBinding)?.run {
-            mainViewModel = this@HomeFragment.mainViewModel
+        binding.run {
+            mainViewModel = this@HomeFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
 
             brvHome.apply {
@@ -28,6 +28,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
             }
         }
-        mainViewModel.getLocalUser()
+        viewModel.getLocalUser()
     }
 }
